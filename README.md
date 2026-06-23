@@ -1,0 +1,1 @@
+# splatoon3archipelago.github.io
