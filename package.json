@@ -1,0 +1,24 @@
+{
+  "name": "lilbean64-hue.github.io",
+  "version": "1.0.0",
+  "description": "Yippe yippe yippee",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LilBean64-hue/lilbean64-hue.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/LilBean64-hue/lilbean64-hue.github.io/issues"
+  },
+  "homepage": "https://github.com/LilBean64-hue/lilbean64-hue.github.io#readme",
+  "dependencies": {
+    "archipelago.js": "^2.1.0"
+  }
+}
