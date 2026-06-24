@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    align-items: center;
     background-color: #f4f4f9;
     padding: 50px;
 }
@@ -17,4 +18,48 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+.action-log-wrapper {
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background-color: #121212;
+    color: #f5f5f5;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+}
+
+.action-log-header {
+    padding: 10px 15px;
+    background-color: #1f1f1f;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+}
+
+.action-log-body {
+    height: 100px; /* Forces vertical scrolling */
+    overflow-y: auto; /* Enables the scrollbar */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    scroll-behavior: smooth; /* Smooth scroll when new items are added */
+}
+
+.log-item {
+    font-size: 14px;
+    line-height: 1.4;
+    display: flex;
+    gap: 10px;
+}
+
+.log-timestamp {
+    color: #888;
+}
+
+.log-message {
+    color: #00ff66; /* Terminal green accent */
 }
