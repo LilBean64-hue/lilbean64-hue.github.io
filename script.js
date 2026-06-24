@@ -5,10 +5,9 @@ const actionButton = document.getElementById('magicButton');
 
 // Add an event listener to run code whenever the button is clicked
 actionButton.addEventListener('click', () => {
-    // Change the text content of the header
-    siteTitle.textContent = "The Magic Worked!";
+    connectArchi("archipelago.gg:55054","Lucy");
     
-    connectArchi("archipelago.gg:55054","Lucy")
+    siteTitle.textContent = "The Magic Worked!";
     // Change the color of the text dynamically
     siteTitle.style.color = "#28a745";
 });
