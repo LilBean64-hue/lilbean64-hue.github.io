@@ -3,6 +3,7 @@ import { Client } from "/node_modules/archipelago.js/dist/archipelago.min.js"
 const siteTitle = document.getElementById('title');
 const connectButton = document.getElementById('submitButton');
 const archiBox = document.getElementById("archiChat");
+const dropdown = document.getElementById("locationSelect");
 
 export const client = new Client();
 
@@ -64,6 +65,7 @@ function connectArchi(Port, SlotName){
             document.getElementById("introPort").style.display = "none";
             document.getElementById("introName").style.display = "none";
             archiBox.style.display = "flex";
+            dropdown.style.display = "block";
         })
         .catch(() => {
             console.error;
