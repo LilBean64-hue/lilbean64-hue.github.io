@@ -64,6 +64,7 @@ function connectArchi(Port, SlotName){
             document.getElementById("slotNameInput").style.display = "none";
             document.getElementById("introPort").style.display = "none";
             document.getElementById("introName").style.display = "none";
+            document.getElementById('inputSection').style.display = 'none';
             archiBox.style.display = "flex";
             dropdown.style.display = "block";
         })

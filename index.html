@@ -9,13 +9,23 @@
 </head>
 <body>
     <h1 id="title">Splatoon 3 Archipelago Hub</h1>
-    <p id="connectInstructions">Input Server Port and Port Name</p><br>
-    <!-- Take input for Port, Slot name, and Password-->
-    <label id="introPort">Port: </label>
-    <input id="portInput"><br><br>
-    <label id="introName">Slot Name: </label>
-    <input id="slotNameInput"><br><br>
-    <button id="submitButton">Connect</button><br>
+    
+    <!--Taking away those brakes-->
+    <div id="inputSection">
+        <p id="connectInstructions">Input Server Port and Port Name</p>
+        
+        <!-- Take input for Port, Slot name, and Password-->
+        <label id="introPort">Port: </label>
+        <input id="portInput">
+        
+        <label id="introName">Slot Name: </label>
+        <input id="slotNameInput">
+        
+        <button id="submitButton">Connect</button>
+    </div>
+    
+    <!--Select Container-->
+    <div class="select-container">
     <select style="display: none;" id="locationSelect">
         <option value="crater">The Crater (5 checks)</option>
         <option value="area1">Site 1 (18 checks)</option>
@@ -26,6 +36,7 @@
         <option value="area6">Site 6 (30 checks)</option>
         <option value="scrolls">Sunken Sea Scrolls (24 Checks)</option>
     </select><br>
+    </div>
     
     <!--Archipelago Output-->
     <div style="display: none;" id="archiChat" class="action-log-wrapper">

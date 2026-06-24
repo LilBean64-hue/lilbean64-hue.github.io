@@ -30,6 +30,7 @@ button:hover {
     font-family: 'Courier New', Courier, monospace;
     display: flex;
     flex-direction: column;
+    margin: 0px auto;
 }
 
 .action-log-header {
@@ -62,4 +63,23 @@ button:hover {
 
 .log-message {
     color: #00ff66; /* Terminal green accent */
+}
+
+.select-container {
+    width: 100%;            /* Full width on smaller screens */
+    max-width: 400px;       /* Limits the width on larger screens */
+    margin: 0 auto;         /* Centers the container */
+    display: block;         
+}
+
+#inputSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the inputs if you want them centered */
+    gap: 15px;           /* This replaces the <br><br> spacing perfectly */
+    margin-bottom: 25px; /* Adds space between this section and the select container */
+}
+
+#inputSection input {
+    margin-bottom: 5px;
 }
