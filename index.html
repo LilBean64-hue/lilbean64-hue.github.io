@@ -25,18 +25,16 @@
     </div>
     
     <!--Select Container-->
-    <div class="select-container">
-        <select style="display: none;" id="locationSelect">
-            <option value="crater">The Crater (5 checks)</option>
-            <option value="area1">Site 1 (18 checks)</option>
-            <option value="area2">Site 2 (20 checks)</option>
-            <option value="area3">Site 3 (20 checks)</option>
-            <option value="area4">Site 4 (33 checks)</option>
-            <option value="area5">Site 5 (34 checks)</option>
-            <option value="area6">Site 6 (30 checks)</option>
-            <option value="scrolls">Sunken Sea Scrolls (24 Checks)</option>
-        </select><br>
-    </div>
+    <select style="display: none;" id="locationSelect" class="select-container">
+        <option id="craterSelect" value="crater" class="available-location">The Crater (5 checks)</option>
+        <option id="area1Select" value="area1" class="available-location">Site 1 (18 checks)</option>
+        <option id="area2Select" value="area2" class="available-location">Site 2 (20 checks)</option>
+        <option id="area3Select" value="area3" class="available-location">Site 3 (20 checks)</option>
+        <option id="area4Select" value="area4" class="available-location">Site 4 (33 checks)</option>
+        <option id="area5Select" value="area5" class="available-location">Site 5 (34 checks)</option>
+        <option id="area6Select" value="area6" class="available-location">Site 6 (30 checks)</option>
+        <option id="scrollsSelect" value="scrolls" class="available-location">Sunken Sea Scrolls (24 Checks)</option>
+    </select><br>
     
     <!--Location Tracker-->
     <div style="display: none;" id="locationTracker" class="location-tracker-wrapper">
@@ -44,61 +42,102 @@
         <div id="locations" class="location-tracker-body">
             <div id="craterDisplay" class="crater-locations" style="display: none;">
                 <label>Crater-1</label>
-                <button id="c0101">Send!</button><br>
+                <button id="c0101" class="green-location">Hero Gear</button><br>
 
                 <label>Crater-2</label>
-                <button id="c0201">Send!</button><br>
+                <button id="c0201" class="green-location">Hero Gear</button><br>
 
                 <label>Crater-3</label>
-                <button id="c0301">Send!</button><br>
+                <button id="c0301" class="green-location">Hero Gear</button><br>
 
                 <label>Crater-4</label>
-                <button id="c0401">Send!</button><br>
+                <button id="c0401" class="green-location">Hero Gear</button><br>
 
                 <label>Crater-Boss</label>
-                <button id="c0B01">Send!</button><br>
+                <button id="c0b01" class="green-location">Hero Gear</button><br>
             </div>
             <div id="area1Display" class="area1-locations" style="display: none;">
                 <label>Site 1-1</label>
-                <button id="10101">Hero Gear</button><br>
-
+                <button id="10101" class="green-location">Hero Gear</button><br>
                 <label>Site 1-2</label>
-                <button id="10201">Hero Gear</button><button id="10202">Splat Brella</button><button id="10203">Heavy Splatling</button><br>
-
+                <button id="10201" class="green-location">Hero Gear</button><button id="10202" class="green-location">Splat Brella</button><button id="10203" class="green-location">Heavy Splatling</button><br>
                 <label>Site 1-3</label>
-                <button id="10301">Hero Gear</button><button id="10302">Undercover Brella</button><button id="10303">Blaster</button><br>
-
+                <button id="10301" class="green-location">Hero Gear</button><button id="10302" class="green-location">Undercover Brella</button><button id="10303" class="green-location">Blaster</button><br>
                 <label>Site 1-4</label>
-                <button id="10401">Hero Gear</button><br>
-
+                <button id="10401" class="green-location">Hero Gear</button><br>
                 <label>Site 1-5</label>
-                <button id="10501">Explosher</button><br>
-
+                <button id="10501" class="green-location">Explosher</button><br>
                 <label>Site 1-6</label>
-                <button id="10601">Zipcaster</button><br>
-
+                <button id="10601" class="green-location">Zipcaster</button><br>
                 <label>Site 1-7</label>
-                <button id="10701">Smallfry</button><br>
-
+                <button id="10701" class="green-location">Smallfry</button><br>
                 <label>Site 1-8</label>
-                <button id="10801">E-Liter 4K</button><button id="10802">E-Liter 4K Scope</button><br>
-
+                <button id="10801" class="green-location">E-Liter 4K</button><button id="10802" class="green-location">E-Liter 4K Scope</button><br>
                 <label>Site 1-9</label>
-                <button id="10901">Tri-Stringer</button><br>
-
+                <button id="10901" class="green-location">Tri-Stringer</button><br>
                 <label>Site 1-10</label>
-                <button id="11001">No Weapon</button><br>
+                <button id="11001" class="green-location">No Weapon</button><br>
+                <label>Site 1 Map</label>
+                <button id="1sardine" class="green-location">Sardinium</button><button id="1music" class="green-location">Music Discs</button><button id="1capsules" class="green-location">Furniture Capsules</button>
+            </div>
+            <div id="area2Display" class="area2-locations" style="display: none;">
+                <label>Site 2-1</label>
+                <button id="20101" class="green-location">Hero Gear</button><button id="20102" class="green-location">Mini Splatling</button><button id="20103" class="green-location">Range Blaster</button><br>
+                <label>Site 2-2</label>
+                <button id="20201" class="green-location">Hero Gear</button><button id="20202" class="green-location">Dualie Squelchers</button><button id="20203" class="green-location">Bamboozler 14 Mk 1</button><br>
+                <label>Site 2-3</label>
+                <button id="20301" class="green-location">Hero Gear</button><button id="20302" class="green-location">Bloblobber</button><button id="20303" class="green-location">Octo Brush</button><br>
+                <label>Site 2-4</label>
+                <button id="20401" class="green-location">Jet Squelcher</button><button id="20402" class="green-location">Slosher</button><button id="20403" class="green-location">Nautilus 47</button><br>
+                <label>Site 2-5</label>
+                <button id="20501" class="green-location">Crab Tank</button><br>
+                <label>Site 2-6</label>
+                <button id="20601" class="green-location">.96 Gal</button><br>
+                <label>Site 2-7</label>
+                <button id="20701" class="green-location">Range Blaster</button><br>
+                <label>Site 2-8</label>
+                <button id="20801" class="green-location">Splattershot Pro</button><br>
+                <label>Site 2-Boss</label>
+                <button id="20b01" class="green-location">Hero Gear</button><br>
+                <label>Site 2 Map</label>
+                <button id="2sardine" class="green-location">Sardinium</button><button id="2music" class="green-location">Music Discs</button><button id="2capsules" class="green-location">Furniture Capsules</button>
+            </div>
+            <div id="area3Display" class="area3-locations" style="display: none;">
+                <label>Site 3-1</label>
+                <button id="30101" class="green-location">Hero Gear</button><button id="30102" class="green-location">Splat Dualies</button><button id="30103" class="green-location">Hydra Splatling</button><br>
+                <label>Site 3-2</label>
+                <button id="30201" class="green-location">Hero Gear</button><button id="30202" class="green-location">Carbon Roller</button><button id="30203" class="green-location">L-3 Nozzlenose</button><br>
+                <label>Site 3-3</label>
+                <button id="30301" class="green-location">Hero Gear</button><button id="30302" class="green-location">Tri-Slosher</button><br>
+                <label>Site 3-4</label>
+                <button id="30401" class="green-location">Curling Bomb</button><br>
+                <label>Site 3-5</label>
+                <button id="30501" class="green-location">Slosher</button><button id="30502" class="green-location">Ink Brush</button><button id="30503" class="green-location">Flingza Roller</button><br>
+                <label>Site 3-6</label>
+                <button id="30601" class="green-location">Squeezer</button><button id="30602" class="green-location">H-3 Nozzlenose</button><button id="30603" class="green-location">Squiffer</button><br>
+                <label>Site 3-7</label>
+                <button id="30701" class="green-location">Rapid Blaster Pro</button><button id="30702" class="green-location">Splattershot</button><br>
+                <label>Site 3 Map</label>
+                <button id="3sardine" class="green-location">Sardinium</button><button id="3music" class="green-location">Music Discs</button><button id="3capsules" class="green-location">Furniture Capsules</button>
             </div>
         </div>
     </div>
 
     <!--Archipelago Output-->
-    <div style="display: none;" id="archiChat" class="action-log-wrapper">
-        <div class="action-log-header">Archipelago Chat</div>
-        <div id="actionLog" class="action-log-body">
-            <!-- Logs will be dynamically inserted here -->
+    <dix style="display: none;" id="lowerBox" class="lower-box">
+        <div style="display: none;" id="archiChat" class="action-log-wrapper">
+            <div class="action-log-header">Archipelago Chat</div>
+            <div id="actionLog" class="action-log-body">
+                <!-- Logs will be dynamically inserted here -->
+            </div>
         </div>
-    </div>
+        <div style="display: none;" id="accessTracker" class="location-tracker-wrapper">
+            <div class="access-tracker-header">Access Tracker</div>
+            <div id="accessTracker" class="access-tracker-body">
+
+            </div>
+        </div>
+    </dix>
 
     <!-- Link the JavaScript file safely at the bottom -->
     <script type="module" src="script.js"></script>

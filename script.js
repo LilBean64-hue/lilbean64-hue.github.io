@@ -4,8 +4,10 @@ import {crater,area1,area2,area3,area4,area5,area6,scrolls} from "/data.js"
 const siteTitle = document.getElementById('title');
 const connectButton = document.getElementById('submitButton');
 const archiBox = document.getElementById("archiChat");
+const lowBox = document.getElementById("lowerBox");
+const accessTracker = document.getElementById("accessTracker");
 // location tracker stuff
-const tracker = document.getElementById("locationTracker");
+const locationTracker = document.getElementById("locationTracker");
 const currentArea = document.getElementById("areaName");
 const locations = document.getElementById("locations")
 // dropdown to select area
@@ -13,6 +15,8 @@ const dropdown = document.getElementById("locationSelect");
 // assign area locations
 const craterDisplay = document.getElementById("craterDisplay");
 const area1Display = document.getElementById("area1Display");
+const area2Display = document.getElementById("area2Display");
+const area3Display = document.getElementById("area3Display");
 
 export const client = new Client();
 
@@ -74,9 +78,12 @@ function connectArchi(Port, SlotName){
             document.getElementById("introPort").style.display = "none";
             document.getElementById("introName").style.display = "none";
             document.getElementById('inputSection').style.display = 'none';
+            lowBox.style.display = "grid"
             archiBox.style.display = "flex";
-            tracker.style.display = "flex";
+            accessTracker.style.display = "flex";
+            locationTracker.style.display = "flex";
             dropdown.style.display = "block";
+            document.getElementById("c0b01").className = "red-location"
             requestAnimationFrame(update);
         })
         .catch(() => {
@@ -101,8 +108,10 @@ function calculateArea(){
         switchDisplay(area1Display);
         currentArea.textContent = "Site 1"
     } else if (dropdown.value == "area2" && currentArea.textContent != "Site 2") {
+        switchDisplay(area2Display);
         currentArea.textContent = "Site 2"
     } else if (dropdown.value == "area3" && currentArea.textContent != "Site 3") {
+        switchDisplay(area3Display);
         currentArea.textContent = "Site 3"
     } else if (dropdown.value == "area4" && currentArea.textContent != "Site 4") {
         currentArea.textContent = "Site 4"
@@ -118,13 +127,12 @@ function calculateArea(){
 function switchDisplay(intendedDisplay){
     craterDisplay.style.display = "none";
     area1Display.style.display = "none";
-    /*
     area2Display.style.display = "none";
     area3Display.style.display = "none";
-    area4Display.style.display = "none";
-    area5Display.style.display = "none";
-    area6Display.style.display = "none";
-    scrollsDisplay.style.display = "none";
-    */
+//    area4Display.style.display = "none";
+//    area5Display.style.display = "none";
+//    area6Display.style.display = "none";
+//    scrollsDisplay.style.display = "none";
+
     intendedDisplay.style.display = "block";
 }
