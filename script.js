@@ -1,9 +1,18 @@
 import { Client } from "/node_modules/archipelago.js/dist/archipelago.min.js"
+import {crater,area1,area2,area3,area4,area5,area6,scrolls} from "/data.js"
 // Target the title and button elements from the HTML
 const siteTitle = document.getElementById('title');
 const connectButton = document.getElementById('submitButton');
 const archiBox = document.getElementById("archiChat");
+// location tracker stuff
+const tracker = document.getElementById("locationTracker");
+const currentArea = document.getElementById("areaName");
+const locations = document.getElementById("locations")
+// dropdown to select area
 const dropdown = document.getElementById("locationSelect");
+// assign area locations
+const craterDisplay = document.getElementById("craterDisplay");
+const area1Display = document.getElementById("area1Display");
 
 export const client = new Client();
 
@@ -66,7 +75,9 @@ function connectArchi(Port, SlotName){
             document.getElementById("introName").style.display = "none";
             document.getElementById('inputSection').style.display = 'none';
             archiBox.style.display = "flex";
+            tracker.style.display = "flex";
             dropdown.style.display = "block";
+            requestAnimationFrame(update);
         })
         .catch(() => {
             console.error;
@@ -74,4 +85,46 @@ function connectArchi(Port, SlotName){
             siteTitle.style.color = "#ff0000"
             document.getElementById("connectInstructions").textContent = "Try again?"
         });
+}
+
+// Set up checks
+function update() {
+    calculateArea() /* updates the header of the location tracker */
+    requestAnimationFrame(update);
+}
+
+function calculateArea(){
+    if (dropdown.value == "crater" && currentArea.textContent != "The Crater") {
+        switchDisplay(craterDisplay);
+        currentArea.textContent = "The Crater"
+    } else if (dropdown.value == "area1" && currentArea.textContent != "Site 1") {
+        switchDisplay(area1Display);
+        currentArea.textContent = "Site 1"
+    } else if (dropdown.value == "area2" && currentArea.textContent != "Site 2") {
+        currentArea.textContent = "Site 2"
+    } else if (dropdown.value == "area3" && currentArea.textContent != "Site 3") {
+        currentArea.textContent = "Site 3"
+    } else if (dropdown.value == "area4" && currentArea.textContent != "Site 4") {
+        currentArea.textContent = "Site 4"
+    } else if (dropdown.value == "area5" && currentArea.textContent != "Site 5") {
+        currentArea.textContent = "Site 5"
+    } else if (dropdown.value == "area6" && currentArea.textContent != "Site 6") {
+        currentArea.textContent = "Site 6"
+    } else if (dropdown.value == "scrolls" && currentArea.textContent != "Sunken Sea Scrolls") {
+        currentArea.textContent = "Sunken Sea Scrolls"
+    }
+}
+
+function switchDisplay(intendedDisplay){
+    craterDisplay.style.display = "none";
+    area1Display.style.display = "none";
+    /*
+    area2Display.style.display = "none";
+    area3Display.style.display = "none";
+    area4Display.style.display = "none";
+    area5Display.style.display = "none";
+    area6Display.style.display = "none";
+    scrollsDisplay.style.display = "none";
+    */
+    intendedDisplay.style.display = "block";
 }

@@ -20,6 +20,47 @@ button:hover {
     background-color: #0056b3;
 }
 
+.location-tracker-wrapper {
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background-color: #121212;
+    color: #f5f5f5;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    margin: 0px auto;
+}
+
+.location-tracker-header {
+    padding: 10px 15px;
+    background-color: #1f1f1f;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+}
+
+.location-tracker-body {
+    height: 200px; /* Forces vertical scrolling */
+    overflow-y: auto; /* Enables the scrollbar */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    scroll-behavior: smooth; /* Smooth scroll when new items are added */
+}
+
+.tracker-item {
+    font-size: 14px;
+    line-height: 1.4;
+    display: flex;
+    gap: 10px;
+}
+
+.tracker-message {
+    color: #00ff66; /* Terminal green accent */
+}
+
 .action-log-wrapper {
     width: 100%;
     max-width: 600px;
@@ -69,7 +110,8 @@ button:hover {
     width: 100%;            /* Full width on smaller screens */
     max-width: 400px;       /* Limits the width on larger screens */
     margin: 0 auto;         /* Centers the container */
-    display: block;         
+    display: block;
+    color: #ff4646
 }
 
 #inputSection {

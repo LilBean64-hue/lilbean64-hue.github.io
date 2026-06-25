@@ -26,18 +26,72 @@
     
     <!--Select Container-->
     <div class="select-container">
-    <select style="display: none;" id="locationSelect">
-        <option value="crater">The Crater (5 checks)</option>
-        <option value="area1">Site 1 (18 checks)</option>
-        <option value="area2">Site 2 (20 checks)</option>
-        <option value="area3">Site 3 (20 checks)</option>
-        <option value="area4">Site 4 (33 checks)</option>
-        <option value="area5">Site 5 (34 checks)</option>
-        <option value="area6">Site 6 (30 checks)</option>
-        <option value="scrolls">Sunken Sea Scrolls (24 Checks)</option>
-    </select><br>
+        <select style="display: none;" id="locationSelect">
+            <option value="crater">The Crater (5 checks)</option>
+            <option value="area1">Site 1 (18 checks)</option>
+            <option value="area2">Site 2 (20 checks)</option>
+            <option value="area3">Site 3 (20 checks)</option>
+            <option value="area4">Site 4 (33 checks)</option>
+            <option value="area5">Site 5 (34 checks)</option>
+            <option value="area6">Site 6 (30 checks)</option>
+            <option value="scrolls">Sunken Sea Scrolls (24 Checks)</option>
+        </select><br>
     </div>
     
+    <!--Location Tracker-->
+    <div style="display: none;" id="locationTracker" class="location-tracker-wrapper">
+        <div id="areaName" class="location-tracker-header">No Location!</div>
+        <div id="locations" class="location-tracker-body">
+            <div id="craterDisplay" class="crater-locations" style="display: none;">
+                <label>Crater-1</label>
+                <button id="c0101">Send!</button><br>
+
+                <label>Crater-2</label>
+                <button id="c0201">Send!</button><br>
+
+                <label>Crater-3</label>
+                <button id="c0301">Send!</button><br>
+
+                <label>Crater-4</label>
+                <button id="c0401">Send!</button><br>
+
+                <label>Crater-Boss</label>
+                <button id="c0B01">Send!</button><br>
+            </div>
+            <div id="area1Display" class="area1-locations" style="display: none;">
+                <label>Site 1-1</label>
+                <button id="10101">Hero Gear</button><br>
+
+                <label>Site 1-2</label>
+                <button id="10201">Hero Gear</button><button id="10202">Splat Brella</button><button id="10203">Heavy Splatling</button><br>
+
+                <label>Site 1-3</label>
+                <button id="10301">Hero Gear</button><button id="10302">Undercover Brella</button><button id="10303">Blaster</button><br>
+
+                <label>Site 1-4</label>
+                <button id="10401">Hero Gear</button><br>
+
+                <label>Site 1-5</label>
+                <button id="10501">Explosher</button><br>
+
+                <label>Site 1-6</label>
+                <button id="10601">Zipcaster</button><br>
+
+                <label>Site 1-7</label>
+                <button id="10701">Smallfry</button><br>
+
+                <label>Site 1-8</label>
+                <button id="10801">E-Liter 4K</button><button id="10802">E-Liter 4K Scope</button><br>
+
+                <label>Site 1-9</label>
+                <button id="10901">Tri-Stringer</button><br>
+
+                <label>Site 1-10</label>
+                <button id="11001">No Weapon</button><br>
+            </div>
+        </div>
+    </div>
+
     <!--Archipelago Output-->
     <div style="display: none;" id="archiChat" class="action-log-wrapper">
         <div class="action-log-header">Archipelago Chat</div>
