@@ -27,12 +27,12 @@
     <!--Select Container-->
     <select style="display: none;" id="locationSelect" class="select-container-yuh">
         <option id="craterSelect" value="crater" class="available-location">The Crater (5 checks)</option>
-        <option id="area1Select" value="area1" class="unavailable-location">Site 1 (18 checks)</option>
-        <option id="area2Select" value="area2" class="unavailable-location">Site 2 (20 checks)</option>
-        <option id="area3Select" value="area3" class="unavailable-location">Site 3 (20 checks)</option>
-        <option id="area4Select" value="area4" class="unavailable-location">Site 4 (33 checks)</option>
-        <option id="area5Select" value="area5" class="unavailable-location">Site 5 (34 checks)</option>
-        <option id="area6Select" value="area6" class="unavailable-location">Site 6 (30 checks)</option>
+        <option id="area1Select" value="area1" class="unavailable-location" disabled>Site 1 (18 checks)</option>
+        <option id="area2Select" value="area2" class="unavailable-location" disabled>Site 2 (20 checks)</option>
+        <option id="area3Select" value="area3" class="unavailable-location" disabled>Site 3 (20 checks)</option>
+        <option id="area4Select" value="area4" class="unavailable-location" disabled>Site 4 (33 checks)</option>
+        <option id="area5Select" value="area5" class="unavailable-location" disabled>Site 5 (34 checks)</option>
+        <option id="area6Select" value="area6" class="unavailable-location" disabled>Site 6 (30 checks)</option>
         <option id="scrollsSelect" value="scrolls" class="available-location">Sunken Sea Scrolls (24 Checks)</option>
     </select><br>
     
@@ -56,9 +56,9 @@
                 <label>Site 1-1</label>
                 <button id="10101" class="green-location">Hero Gear</button><br>
                 <label>Site 1-2</label>
-                <button id="10201" class="green-location">Hero Gear</button><button id="10202" class="green-location">Splat Brella</button><button id="10203" class="green-location">Heavy Splatling</button><br>
+                <button id="10201" class="green-location">Hero Gear</button><button id="10202" class="red-location">Splat Brella</button><button id="10203" class="red-location">Heavy Splatling</button><br>
                 <label>Site 1-3</label>
-                <button id="10301" class="green-location">Hero Gear</button><button id="10302" class="green-location">Undercover Brella</button><button id="10303" class="green-location">Blaster</button><br>
+                <button id="10301" class="green-location">Hero Gear</button><button id="10302" class="red-location">Undercover Brella</button><button id="10303" class="red-location">Blaster</button><br>
                 <label>Site 1-4</label>
                 <button id="10401" class="green-location">Hero Gear</button><br>
                 <label>Site 1-5</label>
@@ -68,7 +68,7 @@
                 <label>Site 1-7</label>
                 <button id="10701" class="green-location">Smallfry</button><br>
                 <label>Site 1-8</label>
-                <button id="10801" class="green-location">E-Liter 4K</button><button id="10802" class="green-location">E-Liter 4K Scope</button><br>
+                <button id="10801" class="green-location">E-Liter 4K</button><button id="10802" class="red-location">E-Liter 4K Scope</button><br>
                 <label>Site 1-9</label>
                 <button id="10901" class="green-location">Tri-Stringer</button><br>
                 <label>Site 1-10</label>
@@ -78,13 +78,13 @@
             </div>
             <div id="area2Display" class="area2-locations" style="display: none;">
                 <label>Site 2-1</label>
-                <button id="20101" class="green-location">Hero Gear</button><button id="20102" class="green-location">Mini Splatling</button><button id="20103" class="green-location">Range Blaster</button><br>
+                <button id="20101" class="green-location">Hero Gear</button><button id="20102" class="red-location">Mini Splatling</button><button id="20103" class="red-location">Range Blaster</button><br>
                 <label>Site 2-2</label>
-                <button id="20201" class="green-location">Hero Gear</button><button id="20202" class="green-location">Dualie Squelchers</button><button id="20203" class="green-location">Bamboozler 14 Mk 1</button><br>
+                <button id="20201" class="green-location">Hero Gear</button><button id="20202" class="red-location">Dualie Squelchers</button><button id="20203" class="red-location">Bamboozler 14 Mk I</button><br>
                 <label>Site 2-3</label>
-                <button id="20301" class="green-location">Hero Gear</button><button id="20302" class="green-location">Bloblobber</button><button id="20303" class="green-location">Octo Brush</button><br>
+                <button id="20301" class="green-location">Hero Gear</button><button id="20302" class="red-location">Bloblobber</button><button id="20303" class="red-location">Octo Brush</button><br>
                 <label>Site 2-4</label>
-                <button id="20401" class="green-location">Jet Squelcher</button><button id="20402" class="green-location">Slosher</button><button id="20403" class="green-location">Nautilus 47</button><br>
+                <button id="20401" class="red-location">Jet Squelcher</button><button id="20402" class="green-location">Slosher</button><button id="20403" class="red-location">Nautilus 47</button><br>
                 <label>Site 2-5</label>
                 <button id="20501" class="green-location">Crab Tank</button><br>
                 <label>Site 2-6</label>
@@ -94,33 +94,173 @@
                 <label>Site 2-8</label>
                 <button id="20801" class="green-location">Splattershot Pro</button><br>
                 <label>Site 2-Boss</label>
-                <button id="20b01" class="green-location">Hero Gear</button><br>
+                <button id="20b01" class="red-location">Hero Gear</button><br>
                 <label>Site 2 Map</label>
                 <button id="2sardine" class="green-location">Sardinium</button><button id="2music" class="green-location">Music Discs</button><button id="2capsules" class="green-location">Furniture Capsules</button>
             </div>
             <div id="area3Display" class="area3-locations" style="display: none;">
                 <label>Site 3-1</label>
-                <button id="30101" class="green-location">Hero Gear</button><button id="30102" class="green-location">Splat Dualies</button><button id="30103" class="green-location">Hydra Splatling</button><br>
+                <button id="30101" class="green-location">Hero Gear</button><button id="30102" class="red-location">Splat Dualies</button><button id="30103" class="red-location">Hydra Splatling</button><br>
                 <label>Site 3-2</label>
-                <button id="30201" class="green-location">Hero Gear</button><button id="30202" class="green-location">Carbon Roller</button><button id="30203" class="green-location">L-3 Nozzlenose</button><br>
+                <button id="30201" class="green-location">Hero Gear</button><button id="30202" class="red-location">Carbon Roller</button><button id="30203" class="red-location">L-3 Nozzlenose</button><br>
                 <label>Site 3-3</label>
-                <button id="30301" class="green-location">Hero Gear</button><button id="30302" class="green-location">Tri-Slosher</button><br>
+                <button id="30301" class="green-location">Hero Gear</button><button id="30302" class="red-location">Tri-Slosher</button><br>
                 <label>Site 3-4</label>
                 <button id="30401" class="green-location">Curling Bomb</button><br>
                 <label>Site 3-5</label>
-                <button id="30501" class="green-location">Slosher</button><button id="30502" class="green-location">Ink Brush</button><button id="30503" class="green-location">Flingza Roller</button><br>
+                <button id="30501" class="red-location">Slosher</button><button id="30502" class="green-location">Ink Brush</button><button id="30503" class="red-location">Flingza Roller</button><br>
                 <label>Site 3-6</label>
-                <button id="30601" class="green-location">Squeezer</button><button id="30602" class="green-location">H-3 Nozzlenose</button><button id="30603" class="green-location">Squiffer</button><br>
+                <button id="30601" class="green-location">Squeezer</button><button id="30602" class="red-location">H-3 Nozzlenose</button><button id="30603" class="red-location">Squiffer</button><br>
                 <label>Site 3-7</label>
-                <button id="30701" class="green-location">Rapid Blaster Pro</button><button id="30702" class="green-location">Splattershot</button><br>
+                <button id="30701" class="red-location">Rapid Blaster Pro</button><button id="30702" class="green-location">Splattershot</button><br>
                 <label>Site 3 Map</label>
                 <button id="3sardine" class="green-location">Sardinium</button><button id="3music" class="green-location">Music Discs</button><button id="3capsules" class="green-location">Furniture Capsules</button>
+            </div>
+            <div id="area4Display" class="area4-locations" style="display: none;">
+                <label>Site 4-1</label>
+                <button id="40101" class="green-location">Hero Gear</button><button id="40102" class="red-location">Nautilus 47</button><button id="40103" class="red-location">Goo Tuber</button><br>
+                <label>Site 4-2</label>
+                <button id="40201" class="green-location">Hero Gear</button><button id="40202" class="red-location">Slosher</button><button id="40203" class="red-location">Dark Tetra Dualies</button><br>
+                <label>Site 4-3</label>
+                <button id="40301" class="green-location">Hero Gear</button><button id="40302" class="red-location">Squiffer</button><button id="40303" class="red-location">Octo Brush</button><br>
+                <label>Site 4-4</label>
+                <button id="40401" class="green-location">Sploosh o' Matic</button><button id="40402" class="red-location">Tri-Stringer</button><br>
+                <label>Site 4-5</label>
+                <button id="40501" class="green-location">Squeezer</button><button id="40502" class="red-location">Sloshing Machine</button><button id="40503" class="red-location">Splat Charger</button><br>
+                <label>Site 4-6</label>
+                <button id="40601" class="red-location">Nautilus 47</button><button id="40602" class="green-location">Dapple Dualies</button><button id="40603" class="red-location">Squiffer</button><br>
+                <label>Site 4-7</label>
+                <button id="40701" class="green-location">Goo Tuber</button><br>
+                <label>Site 4-8</label>
+                <button id="40801" class="red-location">Jet Squelcher</button><button id="40802" class="green-location">Rapid Blaster Pro</button><button id="40803" class="red-location">Hyrda Splatling</button><br>
+                <label>Site 4-9</label>
+                <button id="40901" class="green-location">N-Zap '85</button><button id="40902" class="red-location">Splat Roller</button><button id="40903" class="red-location">Squiffer</button><br>
+                <label>Site 4-10</label>
+                <button id="41001" class="red-location">Splattershot Pro</button><button id="41002" class="green-location">Squiffer</button><br>
+                <label>Site 4-11</label>
+                <button id="41101" class="green-location">Splatana Stamper</button><br>
+                <label>Site 4-12</label>
+                <button id="41201" class="green-location">Octo Brush</button><button id="41202" class="red-location">Ink Brush</button><br>
+                <label>Site 4-Boss</label>
+                <button id="40b01" class="red-location">Hero Gear</button><br>
+                <label>Site 4 Map</label>
+                <button id="4sardine" class="green-location">Sardinium</button><button id="4music" class="green-location">Music Discs</button><button id="4capsules" class="green-location">Furniture Capsules</button>
+            </div>
+            <div id="area5Display" class="area5-locations" style="display: none;">
+                <label>Site 5-1</label>
+                <button id="50101" class="green-location">Hero Gear</button><button id="50102" class="red-location">H-3 Nozzlenose</button><button id="50103" class="red-location">Glooga Dualies</button><br>
+                <label>Site 5-2</label>
+                <button id="50201" class="green-location">Hero Gear</button><button id="50202" class="red-location">Splat Roller</button><button id="50203" class="red-location">Dapple Dualies</button><br>
+                <label>Site 5-3</label>
+                <button id="50301" class="green-location">Hero Gear</button><button id="50302" class="red-location">Tenta Brella</button><button id="50303" class="red-location">Sploosh o' Matic</button><br>
+                <label>Site 5-4</label>
+                <button id="50401" class="green-location">Hero Gear</button><button id="50402" class="red-location">Tri-Stringer</button><button id="50403" class="red-location">Sloshing Machine</button><br>
+                <label>Site 5-5</label>
+                <button id="50501" class="red-location">Sploosh o' Matic</button><button id="50502" class="green-location">Ink Brush</button><button id="50503" class="red-location">E-Liter 4K</button><br>
+                <label>Site 5-6</label>
+                <button id="50601" class="green-location">Zipcaster</button><br>
+                <label>Site 5-7</label>
+                <button id="50701" class="red-location">Heavy Splatling</button><button id="50702" class="red-location">Rapid Blaster</button><button id="50703" class="green-location">Tri-Stringer</button><br>
+                <label>Site 5-8</label>
+                <button id="50801" class="green-location">Triple Splashdown</button><br>
+                <label>Site 5-9</label>
+                <button id="50901" class="green-location">.52 Gal</button><button id="50902" class="red-location">Splat Brella</button><button id="50903" class="red-location">Dynamo Roller</button><br>
+                <label>Site 5-10</label>
+                <button id="51001" class="red-location">Jet Squelcher</button><button id="51002" class="red-location">Tri-Stringer</button><button id="51003" class="green-location">Bamboozler 14 Mk I</button><br>
+                <label>Site 5-11</label>
+                <button id="51101" class="green-location">Zipcaster</button><br>
+                <label>Site 5-12</label>
+                <button id="51201" class="green-location">Explosher</button><button id="51202" class="red-location">Ballpoint Splatling</button><button id="51203" class="red-location">Dynamo Roller</button><br>
+                <label>Site 5-13</label>
+                <button id="51301" class="green-location">Sploosh o' Matic</button><br>
+                <label>Site 5 Map</label>
+                <button id="5sardine" class="green-location">Sardinium</button><button id="5music" class="green-location">Music Discs</button><button id="5capsules" class="green-location">Furniture Capsules</button>
+            </div>
+            <div id="area6Display" class="area6-locations" style="display: none;">
+                <label>Site 6-1</label>
+                <button id="60101" class="green-location">Hero Gear</button><button id="60102" class="red-location">Clash Blaster</button><button id="60103" class="red-location">Splatana Stamper</button><br>
+                <label>Site 6-2</label>
+                <button id="60201" class="green-location">Hero Gear</button><button id="60202" class="red-location">Squiffer</button><button id="60203" class="red-location">Flingza Roller</button><br>
+                <label>Site 6-3</label>
+                <button id="60301" class="green-location">Hero Gear</button><button id="60302" class="red-location">Luna Blaster</button><button id="60303" class="red-location">Splattershot Jr.</button><br>
+                <label>Site 6-4</label>
+                <button id="60401" class="green-location">Splash o' Matic</button><br>
+                <label>Site 6-5</label>
+                <button id="60501" class="green-location">Curling Bomb</button><br>
+                <label>Site 6-6</label>
+                <button id="60601" class="green-location">Splat Roller</button><button id="60602" class="red-location">Carbon Roller</button><br>
+                <label>Site 6-7</label>
+                <button id="60701" class="green-location">Sploosh o' Matic</button><button id="60702" class="red-location">Carbon Roller</button><button id="60703" class="red-location">Mini Splatling</button><br>
+                <label>Site 6-8</label>
+                <button id="60801" class="red-location">Tri-Stringer</button><button id="60802" class="red-location">N-ZAP '85</button><button id="60803" class="green-location">Sloshing Machine</button><br>
+                <label>Site 6-9</label>
+                <button id="60901" class="green-location">Aerospray MG</button><br>
+                <label>Site 6-10</label>
+                <button id="61001" class="green-location">Ink Jet</button><br>
+                <label>Site 6-11</label>
+                <button id="61101" class="green-location">Splattershot</button><button id="61102" class="red-location">Splat Charger</button><button id="61101" class="red-location">Bloblobber</button><br>
+                <label>Site 6-12</label>
+                <button id="61201" class="green-location">Ultra Stamp</button><button id="61202" class="red-location">No Weapon</button><br>
+                <label>Site 6-Boss</label>
+                <button id="60b01" class="red-location">Hero Gear</button><br>
+                <label>Site 6 Map</label>
+                <button id="6sardine" class="green-location">Sardinium</button><button id="6music" class="green-location">Music Discs</button><button id="6capsules" class="green-location">Furniture Capsules</button>
+            </div>
+            <div id="scrollsDisplay" class="scrolls-locations" style="display: none;">
+                <label>Scroll 1</label>
+                <button id="s1" class="green-location">Send!</button>
+                <label>Scroll 2</label>
+                <button id="s2" class="green-location">Send!</button>
+                <label>Scroll 3</label>
+                <button id="s3" class="green-location">Send!</button>
+                <label>Scroll 4</label>
+                <button id="s4" class="green-location">Send!</button><br>
+                <label>Scroll 5</label>
+                <button id="s5" class="green-location">Send!</button>
+                <label>Scroll 6</label>
+                <button id="s6" class="green-location">Send!</button>
+                <label>Scroll 7</label>
+                <button id="s7" class="green-location">Send!</button>
+                <label>Scroll 8</label>
+                <button id="s8" class="green-location">Send!</button><br>
+                <label>Scroll 9</label>
+                <button id="s9" class="green-location">Send!</button>
+                <label>Scroll 10</label>
+                <button id="s10" class="green-location">Send!</button>
+                <label>Scroll 11</label>
+                <button id="s11" class="green-location">Send!</button>
+                <label>Scroll 12</label>
+                <button id="s12" class="green-location">Send!</button><br>
+                <label>Scroll 13</label>
+                <button id="s13" class="green-location">Send!</button>
+                <label>Scroll 14</label>
+                <button id="s14" class="green-location">Send!</button>
+                <label>Scroll 15</label>
+                <button id="s15" class="green-location">Send!</button>
+                <label>Scroll 16</label>
+                <button id="s16" class="green-location">Send!</button><br>
+                <label>Scroll 17</label>
+                <button id="s17" class="green-location">Send!</button>
+                <label>Scroll 18</label>
+                <button id="s18" class="green-location">Send!</button>
+                <label>Scroll 19</label>
+                <button id="s19" class="green-location">Send!</button>
+                <label>Scroll 20</label>
+                <button id="s20" class="green-location">Send!</button><br>
+                <label>Scroll 21</label>
+                <button id="s21" class="green-location">Send!</button>
+                <label>Scroll 22</label>
+                <button id="s22" class="green-location">Send!</button>
+                <label>Scroll 23</label>
+                <button id="s23" class="green-location">Send!</button>
+                <label>Scroll 24</label>
+                <button id="s24" class="green-location">Send!</button>
             </div>
         </div>
     </div>
 
     <!--Archipelago Output-->
-    <dix style="display: none;" id="lowerBox" class="lower-box">
+    <div style="display: none;" id="lowerBox" class="lower-box">
         <div style="display: none;" id="archiChat" class="action-log-wrapper">
             <div class="action-log-header">Archipelago Chat</div>
             <div id="actionLog" class="action-log-body">
@@ -130,10 +270,18 @@
         <div style="display: none;" id="accessTracker" class="location-tracker-wrapper">
             <div class="access-tracker-header">Access Tracker</div>
             <div id="accessTracker" class="access-tracker-body">
-
+                <div id="areaHeader" class="tracker-header">Areas:</div>
+                <div id="craterAllowed" class="location-allowed">> The Crater</div>
+                <div id="area1Allowed" class="location-disallowed">> Site 1</div>
+                <div id="area2Allowed" class="location-disallowed">> Site 2</div>
+                <div id="area3Allowed" class="location-disallowed">> Site 3</div>
+                <div id="area4Allowed" class="location-disallowed">> Site 4</div>
+                <div id="area5Allowed" class="location-disallowed">> Site 5</div>
+                <div id="area6Allowed" class="location-disallowed">> Site 6</div>
+                <div id="rocketContainer", class="location-disallowed">> Rocket Stages: <span id="r1" class="hash-unavailble">#</span><span id="r2" class="hash-unavailble">#</span><span id="r3" class="hash-unavailble">#</span><span id="r4" class="hash-unavailble">#</span><span id="r5" class="hash-unavailble">#</span><span id="r6" class="hash-unavailble">#</span><button id="ending1" class="red-location">Rocket Ending</button></div>
             </div>
         </div>
-    </dix>
+    </div>
 
     <!-- Link the JavaScript file safely at the bottom -->
     <script type="module" src="script.js"></script>

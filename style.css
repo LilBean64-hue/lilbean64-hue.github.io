@@ -38,6 +38,16 @@ button:hover {
 .red-location:hover {
     background-color: rgb(200, 7, 7);
 }
+.gray-location {
+    padding: 6px 12px;
+    font-size: 12px;
+    background-color: rgb(100, 100, 100);
+    margin: 5px;
+}
+.gray-location:hover {
+    background-color: rgb(100, 100, 100);
+}
+
 .location-tracker-wrapper {
     width: 100%;
     max-width: 800px;
@@ -88,6 +98,7 @@ button:hover {
     font-family: 'Courier New', Courier, monospace;
     display: grid;
     grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
     margin: 0px auto;
     row-gap: 0px;
 }
@@ -167,6 +178,28 @@ button:hover {
     scroll-behavior: smooth; /* Smooth scroll when new items are added */
 }
 
+.tracker-header{
+    text-align: left;
+    font-size: 14px;
+}
+.location-allowed{
+    text-align: left;
+    font-size: 14px;
+    color: #00ff66;
+}
+.location-disallowed{
+    text-align: left;
+    font-size: 14px;
+    color: #ff0066;
+}
+.hash-available {
+    font-size: 14px;
+    color:#00ff66;
+}
+.hash-unavailable {
+    font-size: 14px;
+    color: #ff0066;
+}
 .select-container-yuh {
     width: 100%;            /* Full width on smaller screens */
     max-width: 200px;       /* Limits the width on larger screens */
@@ -188,6 +221,8 @@ button:hover {
 .unavailable-location {
     background-color: rgb(230, 7, 7);
 }
+
+
 
 #inputSection {
     display: flex;
