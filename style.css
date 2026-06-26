@@ -172,21 +172,21 @@ button:hover {
     max-width: 200px;       /* Limits the width on larger screens */
     margin: 0 auto;         /* Centers the container */
     display: block;
-    background-color: rgb(19, 147, 19);
+    background-color: rgb(19, 177, 19);
 }
 .select-container-nuh {
     width: 100%;            /* Full width on smaller screens */
     max-width: 200px;       /* Limits the width on larger screens */
     margin: 0 auto;         /* Centers the container */
     display: block;
-    background-color: rgb(200, 7, 7);
+    background-color: rgb(230, 7, 7);
 }
 
 .available-location {
-    background-color: rgb(19, 147, 19);
+    background-color: rgb(19, 177, 19);
 }
 .unavailable-location {
-    background-color: rgb(200, 7, 7);
+    background-color: rgb(230, 7, 7);
 }
 
 #inputSection {
