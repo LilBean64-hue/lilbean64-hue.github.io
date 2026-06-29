@@ -1,6 +1,6 @@
-export const crater = [0, 0, 0, 0, 0];
-export const area1 = [
-    /* levels(weapons) */
+export const ArchipelagoLocations = [
+    0, 0, 0, 0, 0,
+    /* levels(weapons) Site 1 */
     0,
     0,0,0,
     0,0,0,
@@ -11,87 +11,78 @@ export const area1 = [
     0,0,
     0,
     0,
-    /*map completion*/
-    0,0,0
+    /*map completion Site 1 */
+    0,0,0,
+    /* levels(weapons) Site 2 */
+    0,0,0,
+    0,0,0,
+    0,0,0,
+    0,0,0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    /* map completion Site 2 */
+    0,0,0,
+    /* levels(weapons) Site 3 */
+    0,0,0,
+    0,0,0,
+    0,0,
+    0,
+    0,0,0,
+    0,0,0,
+    0,0,
+    /* map completion Site 3 */
+    0,0,0,
+    /* levels(weapons) Site 4 */
+    0,0,0,
+    0,0,0,
+    0,0,0,
+    0,0,
+    0,0,0,
+    0,0,0,
+    0,
+    0,0,0,
+    0,0,0,
+    0,0,
+    0,
+    0,0,
+    0,
+    /* map completion Site 4 */
+    0,0,0,
+    /* levels(weapons) Site 5 */
+    0,0,0,
+    0,0,0,
+    0,0,0,
+    0,0,0,
+    0,0,0,
+    0,
+    0,0,0,
+    0,
+    0,0,0,
+    0,0,0,
+    0,
+    0,0,0,
+    0,
+    /* map completion Site 5 */
+    0,0,0,
+    /* levels(weapons) Site 6*/
+    0,0,0,
+    0,0,0,
+    0,0,0,
+    0,
+    0,
+    0,0,
+    0,0,0,
+    0,0,0,
+    0,
+    0,
+    0,0,0,
+    0,0,
+    0,
+    /* map completion Site 6 */
+    0,0,0,
+    /* Sunken Sea Scrolls */
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 ];
-export const area2 = [
-    /* levels(weapons) */
-    0,0,0,
-    0,0,0,
-    0,0,0,
-    0,0,0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    /* map completion */
-    0,0,0
-];
-export const area3 = [
-    /* levels(weapons) */
-    0,0,0,
-    0,0,0,
-    0,0,
-    0,
-    0,0,0,
-    0,0,0,
-    0,0,
-    /* map completion */
-    0,0,0
-];
-export const area4 = [
-    /* levels(weapons) */
-    0,0,0,
-    0,0,0,
-    0,0,0,
-    0,0,
-    0,0,0,
-    0,0,0,
-    0,
-    0,0,0,
-    0,0,0,
-    0,0,
-    0,
-    0,0,
-    0,
-    /* map completion */
-    0,0,0
-]
-export const area5 = [
-    /* levels(weapons) */
-    0,0,0,
-    0,0,0,
-    0,0,0,
-    0,0,0,
-    0,0,0,
-    0,
-    0,0,0,
-    0,
-    0,0,0,
-    0,0,0,
-    0,
-    0,0,0,
-    0,
-    /* map completion */
-    0,0,0
-]
-export const area6 = [
-    /* levels(weapons) */
-    0,0,0,
-    0,0,0,
-    0,0,0,
-    0,
-    0,
-    0,0,
-    0,0,0,
-    0,0,0,
-    0,
-    0,
-    0,0,0,
-    0,0,
-    0,
-    /* map completion */
-    0,0,0
-]
-export const scrolls = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
