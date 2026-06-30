@@ -6,7 +6,9 @@ const siteTitle = document.getElementById('title');
 const connectButton = document.getElementById('submitButton');
 const archiBox = document.getElementById("archiChat");
 const lowBox = document.getElementById("lowerBox");
+const upBox = document.getElementById("upperBox");
 const accessTracker = document.getElementById("accessTracker");
+const heroGear = document.getElementById("heroGear");
 // location tracker stuff
 const locationTracker = document.getElementById("locationTracker");
 const currentArea = document.getElementById("areaName");
@@ -21,16 +23,17 @@ const b = [
     document.getElementById("60101"), document.getElementById("60102"), document.getElementById("60103"), document.getElementById("60201"), document.getElementById("60202"), document.getElementById("60203"), document.getElementById("60301"), document.getElementById("60302"), document.getElementById("60303"), document.getElementById("60401"), document.getElementById("60501"), document.getElementById("60601"), document.getElementById("60602"), document.getElementById("60701"), document.getElementById("60702"), document.getElementById("60703"), document.getElementById("60801"), document.getElementById("60802"), document.getElementById("60803"), document.getElementById("60901"), document.getElementById("61001"), document.getElementById("61101"), document.getElementById("61102"), document.getElementById("61103"), document.getElementById("61201"), document.getElementById("61202"), document.getElementById("60b01"), document.getElementById("6sardine"), document.getElementById("6music"), document.getElementById("6capsules"), /* Site 6 */
     document.getElementById("s1"), document.getElementById("s2"), document.getElementById("s3"), document.getElementById("s4"), document.getElementById("s5"), document.getElementById("s6"), document.getElementById("s7"), document.getElementById("s8"), document.getElementById("s9"), document.getElementById("s10"), document.getElementById("s11"), document.getElementById("s12"), document.getElementById("s13"), document.getElementById("s14"), document.getElementById("s15"), document.getElementById("s16"), document.getElementById("s17"), document.getElementById("s18"), document.getElementById("s19"), document.getElementById("s20"), document.getElementById("s21"), document.getElementById("s22"), document.getElementById("s23"), document.getElementById("s24")
 ];
+/*
 const blimited = [
-    document.getElementById("10202"), document.getElementById("10203"), document.getElementById("10302"), document.getElementById("10303"), document.getElementById("10802"), /**Site one */
-    document.getElementById("20102"), document.getElementById("20103"), document.getElementById("20202"), document.getElementById("20203"), document.getElementById("20302"), document.getElementById("20303"), document.getElementById("20401"), document.getElementById("20403"), /* Site 2 */
-    document.getElementById("30102"), document.getElementById("30103"), document.getElementById("30202"), document.getElementById("30203"), document.getElementById("30302"), document.getElementById("30501"), document.getElementById("30503"), document.getElementById("30602"), document.getElementById("30603"), document.getElementById("30701"), /* Site 3 */
-    document.getElementById("40102"), document.getElementById("40103"), document.getElementById("40202"), document.getElementById("40203"), document.getElementById("40302"), document.getElementById("40303"), document.getElementById("40402"), document.getElementById("40502"), document.getElementById("40503"), document.getElementById("40601"), document.getElementById("40603"), document.getElementById("40801"), document.getElementById("40803"), document.getElementById("40902"), document.getElementById("40903"), document.getElementById("41001"), document.getElementById("41202"), /* Site 4 */
-    document.getElementById("50102"), document.getElementById("50103"), document.getElementById("50202"), document.getElementById("50203"), document.getElementById("50302"), document.getElementById("50303"), document.getElementById("50402"), document.getElementById("50403"), document.getElementById("50501"), document.getElementById("50503"), document.getElementById("50701"), document.getElementById("50702"), document.getElementById("50902"), document.getElementById("50903"), document.getElementById("51001"), document.getElementById("51002"), document.getElementById("51202"), document.getElementById("51203"), /* Site 5 */
-    document.getElementById("60102"), document.getElementById("60103"), document.getElementById("60202"), document.getElementById("60203"), document.getElementById("60302"), document.getElementById("60303"), document.getElementById("60602"), document.getElementById("60702"), document.getElementById("60703"), document.getElementById("60801"), document.getElementById("60802"), document.getElementById("61102"), document.getElementById("61103"), document.getElementById("61202") /* Site 6 */
+    document.getElementById("10202"), document.getElementById("10203"), document.getElementById("10302"), document.getElementById("10303"), document.getElementById("10802"), /**Site one /
+    document.getElementById("20102"), document.getElementById("20103"), document.getElementById("20202"), document.getElementById("20203"), document.getElementById("20302"), document.getElementById("20303"), document.getElementById("20401"), document.getElementById("20403"), /* Site 2 /
+    document.getElementById("30102"), document.getElementById("30103"), document.getElementById("30202"), document.getElementById("30203"), document.getElementById("30302"), document.getElementById("30501"), document.getElementById("30503"), document.getElementById("30602"), document.getElementById("30603"), document.getElementById("30701"), /* Site 3 /
+    document.getElementById("40102"), document.getElementById("40103"), document.getElementById("40202"), document.getElementById("40203"), document.getElementById("40302"), document.getElementById("40303"), document.getElementById("40402"), document.getElementById("40502"), document.getElementById("40503"), document.getElementById("40601"), document.getElementById("40603"), document.getElementById("40801"), document.getElementById("40803"), document.getElementById("40902"), document.getElementById("40903"), document.getElementById("41001"), document.getElementById("41202"), /* Site 4 /
+    document.getElementById("50102"), document.getElementById("50103"), document.getElementById("50202"), document.getElementById("50203"), document.getElementById("50302"), document.getElementById("50303"), document.getElementById("50402"), document.getElementById("50403"), document.getElementById("50501"), document.getElementById("50503"), document.getElementById("50701"), document.getElementById("50702"), document.getElementById("50902"), document.getElementById("50903"), document.getElementById("51001"), document.getElementById("51002"), document.getElementById("51202"), document.getElementById("51203"), /* Site 5 /
+    document.getElementById("60102"), document.getElementById("60103"), document.getElementById("60202"), document.getElementById("60203"), document.getElementById("60302"), document.getElementById("60303"), document.getElementById("60602"), document.getElementById("60702"), document.getElementById("60703"), document.getElementById("60801"), document.getElementById("60802"), document.getElementById("61102"), document.getElementById("61103"), document.getElementById("61202") /* Site 6 /
 ];
-
-const checksRemaining = [5,18,20,20,33,34,30,24]; /* Crater, Area 1, Area 2, Area 3, Area 4, Area 5, Area 6, Scrolls */
+*/
+const checksRemaining = [5,17,15,13,20,21,20]; /* Crater, Area 1, Area 2, Area 3, Area 4, Area 5, Area 6 */
 
 // dropdown to select area
 const dropdown = document.getElementById("locationSelect");
@@ -867,8 +870,10 @@ function connectArchi(Port, SlotName) {
             document.getElementById("introPort").style.display = "none";
             document.getElementById("introName").style.display = "none";
             document.getElementById('inputSection').style.display = 'none';
-            lowBox.style.display = "grid"
+            upBox.style.display = "grid";
+            lowBox.style.display = "grid";
             archiBox.style.display = "flex";
+            heroGear.style.display = "flex";
             accessTracker.style.display = "flex";
             locationTracker.style.display = "flex";
             dropdown.style.display = "block";
@@ -1019,11 +1024,13 @@ function trackerUpdate() {
             b[i].className = "gray-location";
         }
     }
+    /*
     for (let i = 0; i < weaponsAccess.length; i++) {
         if (weaponsAccess[i] > 0 && blimited[i].className != "gray-location") {
             blimited[i].className = "green-location";
         }
     }
+    */
 }
 function buttonsUpdate() {
 
