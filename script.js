@@ -1,6 +1,6 @@
-import { Client } from "/node_modules/archipelago.js/dist/archipelago.min.js"
+import { Client, ItemsManager } from "/node_modules/archipelago.js/dist/archipelago.min.js"
 import { ArchipelagoLocations } from "/data.js"
-import { mapAccess, weaponsAccess } from "/access.js";
+import { mapAccess } from "/access.js";
 // Target the title and button elements from the HTML
 const siteTitle = document.getElementById('title');
 const connectButton = document.getElementById('submitButton');
@@ -15,12 +15,12 @@ const currentArea = document.getElementById("areaName");
 const locations = document.getElementById("locations");
 const b = [
     document.getElementById("c0101"), document.getElementById("c0201"), document.getElementById("c0301"), document.getElementById("c0401"), document.getElementById("c0b01"),
-    document.getElementById("10101"), document.getElementById("10201"), document.getElementById("10202"), document.getElementById("10203"), document.getElementById("10301"), document.getElementById("10302"), document.getElementById("10303"), document.getElementById("10401"), document.getElementById("10501"), document.getElementById("10601"), document.getElementById("10701"), document.getElementById("10801"), document.getElementById("10802"), document.getElementById("10901"), document.getElementById("11001"), document.getElementById("1sardine"), document.getElementById("1music"), document.getElementById("1capsules"),  /**Site one */
-    document.getElementById("20101"), document.getElementById("20102"), document.getElementById("20103"), document.getElementById("20201"), document.getElementById("20202"), document.getElementById("20203"), document.getElementById("20301"), document.getElementById("20302"), document.getElementById("20303"), document.getElementById("20401"), document.getElementById("20402"), document.getElementById("20403"), document.getElementById("20501"), document.getElementById("20601"), document.getElementById("20701"), document.getElementById("20801"), document.getElementById("20b01"), document.getElementById("2sardine"), document.getElementById("2music"), document.getElementById("2capsules"), /* Site 2 */
-    document.getElementById("30101"), document.getElementById("30102"), document.getElementById("30103"), document.getElementById("30201"), document.getElementById("30202"), document.getElementById("30203"), document.getElementById("30301"), document.getElementById("30302"), document.getElementById("30401"), document.getElementById("30501"), document.getElementById("30502"), document.getElementById("30503"), document.getElementById("30601"), document.getElementById("30602"), document.getElementById("30603"), document.getElementById("30701"), document.getElementById("30702"), document.getElementById("3sardine"), document.getElementById("3music"), document.getElementById("3capsules"), /* Site 3 */
-    document.getElementById("40101"), document.getElementById("40102"), document.getElementById("40103"), document.getElementById("40201"), document.getElementById("40202"), document.getElementById("40203"), document.getElementById("40301"), document.getElementById("40302"), document.getElementById("40303"), document.getElementById("40401"), document.getElementById("40402"), document.getElementById("40501"), document.getElementById("40502"), document.getElementById("40503"), document.getElementById("40601"), document.getElementById("40602"), document.getElementById("40603"), document.getElementById("40701"), document.getElementById("40801"), document.getElementById("40802"), document.getElementById("40803"), document.getElementById("40901"), document.getElementById("40902"), document.getElementById("40903"), document.getElementById("41001"), document.getElementById("41002"), document.getElementById("41101"), document.getElementById("41201"), document.getElementById("41202"), document.getElementById("40b01"), document.getElementById("4sardine"), document.getElementById("4music"), document.getElementById("4capsules"), /* Site 4 */
-    document.getElementById("50101"), document.getElementById("50102"), document.getElementById("50103"), document.getElementById("50201"), document.getElementById("50202"), document.getElementById("50203"), document.getElementById("50301"), document.getElementById("50302"), document.getElementById("50303"), document.getElementById("50401"), document.getElementById("50402"), document.getElementById("50403"), document.getElementById("50501"), document.getElementById("50502"), document.getElementById("50503"), document.getElementById("50601"), document.getElementById("50701"), document.getElementById("50702"), document.getElementById("50703"), document.getElementById("50801"), document.getElementById("50901"), document.getElementById("50902"), document.getElementById("50903"), document.getElementById("51001"), document.getElementById("51002"), document.getElementById("51003"), document.getElementById("51101"), document.getElementById("51201"), document.getElementById("51202"), document.getElementById("51203"), document.getElementById("51301"), document.getElementById("5sardine"), document.getElementById("5music"), document.getElementById("5capsules"), /* Site 5 */
-    document.getElementById("60101"), document.getElementById("60102"), document.getElementById("60103"), document.getElementById("60201"), document.getElementById("60202"), document.getElementById("60203"), document.getElementById("60301"), document.getElementById("60302"), document.getElementById("60303"), document.getElementById("60401"), document.getElementById("60501"), document.getElementById("60601"), document.getElementById("60602"), document.getElementById("60701"), document.getElementById("60702"), document.getElementById("60703"), document.getElementById("60801"), document.getElementById("60802"), document.getElementById("60803"), document.getElementById("60901"), document.getElementById("61001"), document.getElementById("61101"), document.getElementById("61102"), document.getElementById("61103"), document.getElementById("61201"), document.getElementById("61202"), document.getElementById("60b01"), document.getElementById("6sardine"), document.getElementById("6music"), document.getElementById("6capsules"), /* Site 6 */
+    document.getElementById("10101"), document.getElementById("10201"), document.getElementById("10301"), document.getElementById("10401"), document.getElementById("10501"), document.getElementById("10601"), document.getElementById("10701"), document.getElementById("10801"), document.getElementById("10901"), document.getElementById("11001"), document.getElementById("1sardine"), document.getElementById("1music"), document.getElementById("1capsules"),  /**Site one */
+    document.getElementById("20101"), document.getElementById("20201"), document.getElementById("20301"), document.getElementById("20401"), document.getElementById("20501"), document.getElementById("20601"), document.getElementById("20701"), document.getElementById("20801"), document.getElementById("20b01"), document.getElementById("2sardine"), document.getElementById("2music"), document.getElementById("2capsules"), /* Site 2 */
+    document.getElementById("30101"), document.getElementById("30201"), document.getElementById("30301"), document.getElementById("30401"), document.getElementById("30501"), document.getElementById("30601"), document.getElementById("30701"), document.getElementById("3sardine"), document.getElementById("3music"), document.getElementById("3capsules"), /* Site 3 */
+    document.getElementById("40101"), document.getElementById("40201"), document.getElementById("40301"), document.getElementById("40401"), document.getElementById("40501"), document.getElementById("40601"), document.getElementById("40701"), document.getElementById("40801"), document.getElementById("40901"), document.getElementById("41001"), document.getElementById("41101"), document.getElementById("41201"), document.getElementById("40b01"), document.getElementById("4sardine"), document.getElementById("4music"), document.getElementById("4capsules"), /* Site 4 */
+    document.getElementById("50101"), document.getElementById("50201"), document.getElementById("50301"), document.getElementById("50401"), document.getElementById("50501"), document.getElementById("50601"), document.getElementById("50701"), document.getElementById("50801"), document.getElementById("50901"), document.getElementById("51001"), document.getElementById("51101"), document.getElementById("51201"), document.getElementById("51301"), document.getElementById("5sardine"), document.getElementById("5music"), document.getElementById("5capsules"), /* Site 5 */
+    document.getElementById("60101"), document.getElementById("60201"), document.getElementById("60301"), document.getElementById("60401"), document.getElementById("60501"), document.getElementById("60601"), document.getElementById("60701"), document.getElementById("60801"), document.getElementById("60901"), document.getElementById("61001"), document.getElementById("61101"), document.getElementById("61201"), document.getElementById("60b01"), document.getElementById("6sardine"), document.getElementById("6music"), document.getElementById("6capsules"), /* Site 6 */
     document.getElementById("s1"), document.getElementById("s2"), document.getElementById("s3"), document.getElementById("s4"), document.getElementById("s5"), document.getElementById("s6"), document.getElementById("s7"), document.getElementById("s8"), document.getElementById("s9"), document.getElementById("s10"), document.getElementById("s11"), document.getElementById("s12"), document.getElementById("s13"), document.getElementById("s14"), document.getElementById("s15"), document.getElementById("s16"), document.getElementById("s17"), document.getElementById("s18"), document.getElementById("s19"), document.getElementById("s20"), document.getElementById("s21"), document.getElementById("s22"), document.getElementById("s23"), document.getElementById("s24")
 ];
 /*
@@ -45,14 +45,15 @@ const area3Display = document.getElementById("area3Display");
 const area4Display = document.getElementById("area4Display");
 const area5Display = document.getElementById("area5Display");
 const area6Display = document.getElementById("area6Display");
-const scrollsDisplay = document.getElementById("scrollsDisplay");
 
 const testButton = document.getElementById("test");
 
 export const client = new Client();
+const items = new ItemsManager(client);
 
 let userPort;
 let userSlotName;
+let userGame;
 
 let connected = false;
 
@@ -61,9 +62,10 @@ connectButton.onclick = function () {
     // Assign user values to userPort and userSlotName
     userPort = document.getElementById("portInput").value;
     userSlotName = document.getElementById("slotNameInput").value;
+    userGame = ("Splatoon 3: " + document.getElementById("gameInput").value);
 
     // Connect to the server
-    connectArchi(userPort, userSlotName);
+    connectArchi(userPort, userSlotName, userGame);
 }
 
 testButton.onclick = function () {
@@ -86,22 +88,27 @@ locationTracker.addEventListener("click", (event) => {
 
     switch (id) {
         case 'c0101':
+            client.check(101);
             checksRemaining[0]--;
             dropdownUpdate("text");
             break;
         case 'c0201':
+            client.check(201);
             checksRemaining[0]--;
             dropdownUpdate("text");
             break;
         case 'c0301':
+            client.check(301);
             checksRemaining[0]--;
             dropdownUpdate("text");
             break;
         case 'c0401':
+            client.check(401);
             checksRemaining[0]--;
             dropdownUpdate("text");
             break;
         case 'c0b01':
+            client.check(501);
             checksRemaining[0]--;
             dropdownUpdate("text");
             break;
@@ -113,23 +120,7 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
-        case '10202':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '10203':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
         case '10301':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '10302':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '10303':
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
@@ -150,10 +141,6 @@ locationTracker.addEventListener("click", (event) => {
             dropdownUpdate("text");
             break;
         case '10801':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '10802':
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
@@ -181,23 +168,7 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
-        case '20102':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20103':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
         case '20201':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20202':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20203':
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
@@ -205,23 +176,7 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
-        case '20302':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20303':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
         case '20401':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20402':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20403':
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
@@ -261,31 +216,11 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
-        case '30102':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '30103':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
         case '30201':
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
-        case '30202':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '30203':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
         case '30301':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '30302':
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
@@ -297,31 +232,11 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
-        case '30502':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '30503':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
         case '30601':
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
-        case '30602':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '30603':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
         case '30701':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '30702':
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
@@ -341,23 +256,7 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
-        case '40102':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40103':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
         case '40201':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40202':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40203':
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
@@ -365,19 +264,7 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
-        case '40302':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40303':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
         case '40401':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40402':
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
@@ -385,23 +272,7 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
-        case '40502':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40503':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
         case '40601':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40602':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40603':
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
@@ -413,31 +284,11 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
-        case '40802':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40803':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
         case '40901':
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
-        case '40902':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40903':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
         case '41001':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '41002':
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
@@ -446,10 +297,6 @@ locationTracker.addEventListener("click", (event) => {
             dropdownUpdate("text");
             break;
         case '41201':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '41202':
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
@@ -473,23 +320,7 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
-        case '50102':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50103':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
         case '50201':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50202':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50203':
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
@@ -497,35 +328,11 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
-        case '50302':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50303':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
         case '50401':
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
-        case '50402':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50403':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
         case '50501':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50502':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50503':
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
@@ -537,14 +344,6 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
-        case '50702':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50703':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
         case '50801':
             checksRemaining[5]--;
             dropdownUpdate("text");
@@ -553,23 +352,7 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
-        case '50902':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50903':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
         case '51001':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '51002':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '51003':
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
@@ -578,14 +361,6 @@ locationTracker.addEventListener("click", (event) => {
             dropdownUpdate("text");
             break;
         case '51201':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '51202':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '51203':
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
@@ -609,35 +384,11 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
-        case '60102':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60103':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
         case '60201':
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
-        case '60202':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60203':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
         case '60301':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60302':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60303':
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
@@ -653,31 +404,11 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
-        case '60602':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
         case '60701':
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
-        case '60702':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60703':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
         case '60801':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60802':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60803':
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
@@ -693,19 +424,7 @@ locationTracker.addEventListener("click", (event) => {
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
-        case '61102':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '61103':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
         case '61201':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '61202':
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
@@ -726,99 +445,99 @@ locationTracker.addEventListener("click", (event) => {
             dropdownUpdate("text");
             break;
         case 's1':
-            checksRemaining[7]--;
+            checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case 's2':
-            checksRemaining[7]--;
+            checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case 's3':
-            checksRemaining[7]--;
+            checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case 's4':
-            checksRemaining[7]--;
+            checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case 's5':
-            checksRemaining[7]--;
+            checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case 's6':
-            checksRemaining[7]--;
+            checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case 's7':
-            checksRemaining[7]--;
+            checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case 's8':
-            checksRemaining[7]--;
+            checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case 's9':
-            checksRemaining[7]--;
+            checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case 's10':
-            checksRemaining[7]--;
+            checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case 's11':
-            checksRemaining[7]--;
+            checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case 's12':
-            checksRemaining[7]--;
+            checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case 's13':
-            checksRemaining[7]--;
+            checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case 's14':
-            checksRemaining[7]--;
+            checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case 's15':
-            checksRemaining[7]--;
+            checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case 's16':
-            checksRemaining[7]--;
+            checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case 's17':
-            checksRemaining[7]--;
+            checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case 's18':
-            checksRemaining[7]--;
+            checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case 's19':
-            checksRemaining[7]--;
+            checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case 's20':
-            checksRemaining[7]--;
+            checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case 's21':
-            checksRemaining[7]--;
+            checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case 's22':
-            checksRemaining[7]--;
+            checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case 's23':
-            checksRemaining[7]--;
+            checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case 's24':
-            checksRemaining[7]--;
+            checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         default:
@@ -855,8 +574,8 @@ function logAction(message) {
 
 // Login to the server. Replace `archipelago.gg:XXXXX` and `Phar` with the address/url and slot name for your room.
 // If no game is provided, client will connect in "TextOnly" mode, which is fine for this example.
-function connectArchi(Port, SlotName) {
-    client.login(Port, SlotName)
+function connectArchi(Port, SlotName, Game) {
+    client.login(Port, SlotName, Game)
         .then(() => {
             console.log("Connected to the Archipelago server!");
             siteTitle.textContent = "Connected to the Archipelago server!";
@@ -867,8 +586,10 @@ function connectArchi(Port, SlotName) {
             document.getElementById("connectInstructions").style.display = "none";
             document.getElementById("portInput").style.display = "none";
             document.getElementById("slotNameInput").style.display = "none";
+            document.getElementById("gameInput").style.display = "none";
             document.getElementById("introPort").style.display = "none";
             document.getElementById("introName").style.display = "none";
+            document.getElementById("introGame").style.display = "none";
             document.getElementById('inputSection').style.display = 'none';
             upBox.style.display = "grid";
             lowBox.style.display = "grid";
@@ -877,6 +598,8 @@ function connectArchi(Port, SlotName) {
             accessTracker.style.display = "flex";
             locationTracker.style.display = "flex";
             dropdown.style.display = "block";
+
+
             requestAnimationFrame(update);
         })
         .catch(() => {
@@ -1015,7 +738,6 @@ function dropdownUpdate(type) {
         document.getElementById("area4Select").textContent = ("Site 4 (" + checksRemaining[4] + " checks)");
         document.getElementById("area5Select").textContent = ("Site 5 (" + checksRemaining[5] + " checks)");
         document.getElementById("area6Select").textContent = ("Site 6 (" + checksRemaining[6] + " checks)");
-        document.getElementById("scrollsSelect").textContent = ("Sunken Sea Scrolls (" + checksRemaining[7] + " checks)");
     }
 }
 function trackerUpdate() {
@@ -1035,6 +757,471 @@ function trackerUpdate() {
 function buttonsUpdate() {
 
 }
+function loadSave(){
+    const itemsList = items.received
+    for (let i = 0; i < itemsList.length; i++){
+        if (itemList[i].locationGame != "Splatoon 3: Return of the Mammalians")
+            return;
+        const apID = itemList[i].locationId
+        switch (apID) {
+        case '101':
+            client.check(101);
+            checksRemaining[0]--;
+            dropdownUpdate("text");
+            break;
+        case '201':
+            client.check(201);
+            checksRemaining[0]--;
+            dropdownUpdate("text");
+            break;
+        case '301':
+            client.check(301);
+            checksRemaining[0]--;
+            dropdownUpdate("text");
+            break;
+        case '401':
+            client.check(401);
+            checksRemaining[0]--;
+            dropdownUpdate("text");
+            break;
+        case '501':
+            client.check(501);
+            checksRemaining[0]--;
+            dropdownUpdate("text");
+            break;
+        case '10101':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case '10201':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case '10301':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case '10401':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case '10501':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case '10601':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case '10701':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case '10801':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case '10901':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case '11001':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case '1sardine':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case '1music':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case '1capsules':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case '20101':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case '20201':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case '20301':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case '20401':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case '20501':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case '20601':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case '20701':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case '20801':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case '20b01':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case '2sardine':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case '2music':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case '2capsules':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case '30101':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case '30201':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case '30301':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case '30401':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case '30501':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case '30601':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case '30701':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case '3sardine':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case '3music':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case '3capsules':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case '40101':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '40201':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '40301':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '40401':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '40501':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '40601':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '40701':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '40801':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '40901':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '41001':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '41101':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '41201':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '40b01':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '4sardine':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '4music':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '4capsules':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case '50101':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '50201':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '50301':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '50401':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '50501':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '50601':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '50701':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '50801':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '50901':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '51001':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '51101':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '51201':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '51301':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '5sardine':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '5music':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '5capsules':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case '60101':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '60201':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '60301':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '60401':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '60501':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '60601':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '60701':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '60801':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '60901':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '61001':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '61101':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '61201':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '60b01':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '6sardine':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '6music':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case '6capsules':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case 's1':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case 's2':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case 's3':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case 's4':
+            checksRemaining[1]--;
+            dropdownUpdate("text");
+            break;
+        case 's5':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case 's6':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case 's7':
+            checksRemaining[2]--;
+            dropdownUpdate("text");
+            break;
+        case 's8':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case 's9':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case 's10':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case 's11':
+            checksRemaining[3]--;
+            dropdownUpdate("text");
+            break;
+        case 's12':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case 's13':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case 's14':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case 's15':
+            checksRemaining[4]--;
+            dropdownUpdate("text");
+            break;
+        case 's16':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case 's17':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case 's18':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case 's19':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case 's20':
+            checksRemaining[5]--;
+            dropdownUpdate("text");
+            break;
+        case 's21':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case 's22':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case 's23':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        case 's24':
+            checksRemaining[6]--;
+            dropdownUpdate("text");
+            break;
+        default:
+            console.log("No handler");
+        }
+    }
+}
 
 function switchDisplay(intendedDisplay) {
     craterDisplay.style.display = "none";
@@ -1044,7 +1231,6 @@ function switchDisplay(intendedDisplay) {
     area4Display.style.display = "none";
     area5Display.style.display = "none";
     area6Display.style.display = "none";
-    scrollsDisplay.style.display = "none";
 
     intendedDisplay.style.display = "block";
 }
