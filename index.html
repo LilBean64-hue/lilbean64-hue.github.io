@@ -26,8 +26,9 @@
         <label id="introGame">Game: </label>
         <select id="gameInput">
             <option>Return of the Mammalians</option>
-            <option>Side Order (non functional)</option>
+            <option>Side Order</option>
         </select>
+        <button id="submitGame">Submit Game</button>
 
         <button id="submitButton">Connect</button>
     </div>
@@ -274,6 +275,25 @@
                 <div><button id="trapUse" class="trap-button">Remove Trap</button></div>
             </div>
         </div>
+        <div style="display: none;" id="paletteTracker" class="location-tracker-wrapper">
+            <div class="location-tracker-header"><label id="paletteName">No Palette!</label>
+                <!--Select Container-->
+                <select style="display: none;" id="paletteSelect" class="select-container-yuh">
+                    <option id="pearlSelect" value="crater" class="available-location">The Crater (5 checks)</option>
+                    <option id="marinaSelect" value="area1" class="available-location">Site 1 (18 checks)</option>
+                    <option id="agent4Select" value="area2" class="available-location">Site 2 (20 checks)</option>
+                    <option id="callieSelect" value="area3" class="unavailable-location" disabled>Site 3 (20 checks)</option>
+                    <option id="marieSelect" value="area4" class="unavailable-location" disabled>Site 4 (33 checks)</option>
+                    <option id="shiverSelect" value="area5" class="unavailable-location" disabled>Site 5 (34 checks)</option>
+                    <option id="fryeSelect" value="area6" class="unavailable-location" disabled>Site 6 (30 checks)</option>
+                    <option id="bigManSelect" value="crater" class="available-location">The Crater (5 checks)</option>
+                    <option id="murchSelect" value="area1" class="available-location">Site 1 (18 checks)</option>
+                    <option id="sheldonSelect" value="area2" class="available-location">Site 2 (20 checks)</option>
+                    <option id="djOctavioSelect" value="area3" class="unavailable-location" disabled>Site 3 (20 checks)</option>
+                    <option id="eightSelect" value="area4" class="unavailable-location" disabled>Site 4 (33 checks)</option>
+                </select>
+            </div>
+        </div>
     </div>
 
 
@@ -295,18 +315,23 @@
                 <div id="area3Allowed" class="location-disallowed">> Site 3</div>
                 <div class="location-allowed"><span id="area4Allowed" class="location-disallowed">> Site 4 </span><span id="area4boss" class="location-disallowed">(Boss)</span></div>
                 <div id="area5Allowed" class="location-disallowed">> Site 5</div>
-                <div class="location-allowed"><span  id="area6Allowed" class="location-disallowed">> Site 6 </span><span id="area6boss" class="location-disallowed">(Boss)</span></div>
+                <div class="location-allowed"><span  id="area6Allowed" class="location-disallowed">> Site 6 </span><span id="area6boss" class="location-disallowed">(Boss)</span></div><br>
+                <div id="endingsHeader" class="tracker-header">Endings:</div>
                 <div id="rocketContainer" class="location-disallowed">> Rocket Stages: <span id="r1"
                         class="hash-unavailble">#</span><span id="r2" class="hash-unavailble">#</span><span id="r3"
                         class="hash-unavailble">#</span><span id="r4" class="hash-unavailble">#</span><span id="r5"
-                        class="hash-unavailble">#</span><span id="r6" class="hash-unavailble">#</span><button
+                        class="hash-unavailble">#</span><span id="r6" class="hash-unavailble">#</span><br><button
                         id="ending1" class="red-location">Rocket Ending</button></div>
+                <div style="display: none;" id="afterAlternaContainer" class="location-disallowed">> After Alterna Stages: <span id="a1"
+                        class="hash-unavailble">#</span><span id="a2" class="hash-unavailble">#</span><span id="a3"
+                        class="hash-unavailble">#</span><span id="a4" class="hash-unavailble">#</span><br><button
+                        id="ending2" class="red-location">After Alterna Ending</button></div>
             </div>
         </div>
     </div>
 
     <!-- Link the JavaScript file safely at the bottom -->
-    <script type="module" src="script.js"></script>
+    <script id="clientSource" type="module" src="script.js"></script>
 </body>
 
 </html>
