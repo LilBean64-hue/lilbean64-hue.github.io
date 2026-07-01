@@ -19,6 +19,15 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+.trap-button {
+    padding: 6px 12px;
+    font-size: 12px;
+    background-color: rgb(19, 19, 177);
+    margin: 5px;
+}
+.trap-button:hover {
+    background-color: rgb(19, 19, 147);
+}
 /*location tracker buttons*/
 .green-location {
     padding: 6px 12px;

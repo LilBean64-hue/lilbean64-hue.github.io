@@ -1,6 +1,5 @@
 import { Client, ItemsManager } from "/node_modules/archipelago.js/dist/archipelago.min.js"
-import { ArchipelagoLocations } from "/data.js"
-import { mapAccess } from "/access.js";
+import { mapAccess, gearAccess } from "/access.js";
 // Target the title and button elements from the HTML
 const siteTitle = document.getElementById('title');
 const connectButton = document.getElementById('submitButton');
@@ -9,10 +8,12 @@ const lowBox = document.getElementById("lowerBox");
 const upBox = document.getElementById("upperBox");
 const accessTracker = document.getElementById("accessTracker");
 const heroGear = document.getElementById("heroGear");
+const trapRemove = document.getElementById("trapUse");
 // location tracker stuff
 const locationTracker = document.getElementById("locationTracker");
 const currentArea = document.getElementById("areaName");
 const locations = document.getElementById("locations");
+const endingButton = document.getElementById("ending1");
 const b = [
     document.getElementById("c0101"), document.getElementById("c0201"), document.getElementById("c0301"), document.getElementById("c0401"), document.getElementById("c0b01"),
     document.getElementById("10101"), document.getElementById("10201"), document.getElementById("10301"), document.getElementById("10401"), document.getElementById("10501"), document.getElementById("10601"), document.getElementById("10701"), document.getElementById("10801"), document.getElementById("10901"), document.getElementById("11001"), document.getElementById("1sardine"), document.getElementById("1music"), document.getElementById("1capsules"),  /**Site one */
@@ -33,7 +34,8 @@ const blimited = [
     document.getElementById("60102"), document.getElementById("60103"), document.getElementById("60202"), document.getElementById("60203"), document.getElementById("60302"), document.getElementById("60303"), document.getElementById("60602"), document.getElementById("60702"), document.getElementById("60703"), document.getElementById("60801"), document.getElementById("60802"), document.getElementById("61102"), document.getElementById("61103"), document.getElementById("61202") /* Site 6 /
 ];
 */
-const checksRemaining = [5,17,15,13,20,21,20]; /* Crater, Area 1, Area 2, Area 3, Area 4, Area 5, Area 6 */
+const checksRemaining = [5, 17, 15, 14, 20, 21, 20]; /* Crater, Area 1, Area 2, Area 3, Area 4, Area 5, Area 6 */
+const heroGearArray = [0, 0, 0] //Sardinium, Skill Points, Traps
 
 // dropdown to select area
 const dropdown = document.getElementById("locationSelect");
@@ -67,9 +69,13 @@ connectButton.onclick = function () {
     // Connect to the server
     connectArchi(userPort, userSlotName, userGame);
 }
-
-testButton.onclick = function () {
-    receiveItem("mapAccess");
+trapRemove.onclick = function () {
+    if (heroGearArray[2] > 0) heroGearArray[2]--;
+    dropdownUpdate("text");
+}
+endingButton.onclick = function () {
+    console.log("yippee: Ending")
+    client.goal();
 }
 
 locationTracker.addEventListener("click", (event) => {
@@ -113,430 +119,537 @@ locationTracker.addEventListener("click", (event) => {
             dropdownUpdate("text");
             break;
         case '10101':
+            client.check(10101);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case '10201':
+            client.check(10201);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case '10301':
+            client.check(10301);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case '10401':
+            client.check(10401);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case '10501':
+            client.check(10501);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case '10601':
+            client.check(10601);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case '10701':
+            client.check(10701);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case '10801':
+            client.check(10801);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case '10901':
+            client.check(10901);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case '11001':
+            client.check(11001);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case '1sardine':
+            client.check(10011);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case '1music':
+            client.check(10012);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case '1capsules':
+            client.check(10013);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case '20101':
+            client.check(20101);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case '20201':
+            client.check(20201);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case '20301':
+            client.check(20301);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case '20401':
+            client.check(20401);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case '20501':
+            client.check(20501);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case '20601':
+            client.check(20601);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case '20701':
+            client.check(20701);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case '20801':
+            client.check(20801);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case '20b01':
+            client.check(20901);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case '2sardine':
+            client.check(20011);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case '2music':
+            client.check(20012);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case '2capsules':
+            client.check(20013);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case '30101':
+            client.check(30101);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case '30201':
+            client.check(30201);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case '30301':
+            client.check(30301);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case '30401':
+            client.check(30401);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case '30501':
+            client.check(30501);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case '30601':
+            client.check(30601);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case '30701':
+            client.check(30701);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case '3sardine':
+            client.check(30011);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case '3music':
+            client.check(30012);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case '3capsules':
+            client.check(30013);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case '40101':
+            client.check(40101);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '40201':
+            client.check(40201);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '40301':
+            client.check(40301);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '40401':
+            client.check(40401);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '40501':
+            client.check(40501);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '40601':
+            client.check(40601);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '40701':
+            client.check(40701);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '40801':
+            client.check(40801);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '40901':
+            client.check(40901);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '41001':
+            client.check(41001);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '41101':
+            client.check(41101);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '41201':
+            client.check(41201);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '40b01':
+            client.check(41301);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '4sardine':
+            client.check(40011);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '4music':
+            client.check(40012);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '4capsules':
+            client.check(40013);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case '50101':
+            client.check(50101);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '50201':
+            client.check(50201);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '50301':
+            client.check(50301);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '50401':
+            client.check(50401);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '50501':
+            client.check(50501);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '50601':
+            client.check(50601);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '50701':
+            client.check(50701);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '50801':
+            client.check(50801);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '50901':
+            client.check(50901);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '51001':
+            client.check(51001);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '51101':
+            client.check(51101);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '51201':
+            client.check(51201);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '51301':
+            client.check(51301);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '5sardine':
+            client.check(50011);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '5music':
+            client.check(50012);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '5capsules':
+            client.check(50013);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case '60101':
+            client.check(60101);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '60201':
+            client.check(60201);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '60301':
+            client.check(60301);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '60401':
+            client.check(60401);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '60501':
+            client.check(60501);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '60601':
+            client.check(60601);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '60701':
+            client.check(60701);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '60801':
+            client.check(60801);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '60901':
+            client.check(60901);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '61001':
+            client.check(61001);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '61101':
+            client.check(61101);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '61201':
+            client.check(61201);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '60b01':
+            client.check(61301);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '6sardine':
+            client.check(60011);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '6music':
+            client.check(60012);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case '6capsules':
+            client.check(60013);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case 's1':
+            client.check(1);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case 's2':
+            client.check(2);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case 's3':
+            client.check(3);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case 's4':
+            client.check(4);
             checksRemaining[1]--;
             dropdownUpdate("text");
             break;
         case 's5':
+            client.check(5);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case 's6':
+            client.check(6);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case 's7':
+            client.check(7);
             checksRemaining[2]--;
             dropdownUpdate("text");
             break;
         case 's8':
+            client.check(8);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case 's9':
+            client.check(9);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case 's10':
+            client.check(10);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case 's11':
+            client.check(11);
             checksRemaining[3]--;
             dropdownUpdate("text");
             break;
         case 's12':
+            client.check(12);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case 's13':
+            client.check(13);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case 's14':
+            client.check(14);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case 's15':
+            client.check(15);
             checksRemaining[4]--;
             dropdownUpdate("text");
             break;
         case 's16':
+            client.check(16);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case 's17':
+            client.check(17);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case 's18':
+            client.check(18);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case 's19':
+            client.check(19);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case 's20':
+            client.check(20);
             checksRemaining[5]--;
             dropdownUpdate("text");
             break;
         case 's21':
+            client.check(21);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case 's22':
+            client.check(22);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case 's23':
+            client.check(23);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
         case 's24':
+            client.check(24);
             checksRemaining[6]--;
             dropdownUpdate("text");
             break;
@@ -551,6 +664,614 @@ client.messages.on("message", (content) => {
     console.log(content);
     if (connected) {
         logAction(content);
+    }
+});
+items.on("itemsReceived", (content) => {
+    if (connected) {
+        for (let i = 0; i < content.length; i++) {
+            if (content[i].locationGame != "Splatoon 3: Return of the Mammalians") {
+                return;
+            }
+            const apID = content[i].locationId;
+            switch (apID) {
+                case 101:
+                    checksRemaining[0]--;
+                    dropdownUpdate("text");
+                    b[0].className = "gray-location";
+                    break;
+                case 201:
+                    checksRemaining[0]--;
+                    dropdownUpdate("text");
+                    b[1].className = "gray-location";
+                    break;
+                case 301:
+                    checksRemaining[0]--;
+                    dropdownUpdate("text");
+                    b[2].className = "gray-location";
+                    break;
+                case 401:
+                    checksRemaining[0]--;
+                    dropdownUpdate("text");
+                    b[3].className = "gray-location";
+                    break;
+                case 501:
+                    checksRemaining[0]--;
+                    dropdownUpdate("text");
+                    b[4].className = "gray-location";
+                    break;
+                case 10101:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[5].className = "gray-location";
+                    break;
+                case 10201:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[6].className = "gray-location";
+                    break;
+                case 10301:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[7].className = "gray-location";
+                    break;
+                case 10401:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[8].className = "gray-location";
+                    break;
+                case 10501:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[9].className = "gray-location";
+                    break;
+                case 10601:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[10].className = "gray-location";
+                    break;
+                case 10701:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[11].className = "gray-location";
+                    break;
+                case 10801:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[12].className = "gray-location";
+                    break;
+                case 10901:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[13].className = "gray-location";
+                    break;
+                case 11001:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[14].className = "gray-location";
+                    break;
+                case 10011:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[15].className = "gray-location";
+                    break;
+                case 10012:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[16].className = "gray-location";
+                    break;
+                case 10013:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[17].className = "gray-location";
+                    break;
+                case 20101:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[18].className = "gray-location";
+                    break;
+                case 20201:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[19].className = "gray-location";
+                    break;
+                case 20301:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[20].className = "gray-location";
+                    break;
+                case 20401:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[21].className = "gray-location";
+                    break;
+                case 20501:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[22].className = "gray-location";
+                    break;
+                case 20601:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[23].className = "gray-location";
+                    break;
+                case 20701:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[24].className = "gray-location";
+                    break;
+                case 20801:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[25].className = "gray-location";
+                    break;
+                case 20901:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[26].className = "gray-location";
+                    break;
+                case 20011:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[27].className = "gray-location";
+                    break;
+                case 20012:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[28].className = "gray-location";
+                    break;
+                case 20013:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[29].className = "gray-location";
+                    break;
+                case 30101:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[30].className = "gray-location";
+                    break;
+                case 30201:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[31].className = "gray-location";
+                    break;
+                case 30301:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[32].className = "gray-location";
+                    break;
+                case 30401:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[33].className = "gray-location";
+                    break;
+                case 30501:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[34].className = "gray-location";
+                    break;
+                case 30601:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[35].className = "gray-location";
+                    break;
+                case 30701:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[36].className = "gray-location";
+                    break;
+                case 30011:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[37].className = "gray-location";
+                    break;
+                case 30012:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[38].className = "gray-location";
+                    break;
+                case 30013:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[39].className = "gray-location";
+                    break;
+                case 40101:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[40].className = "gray-location";
+                    break;
+                case 40201:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[41].className = "gray-location";
+                    break;
+                case 40301:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[42].className = "gray-location";
+                    break;
+                case 40401:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[43].className = "gray-location";
+                    break;
+                case 40501:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[44].className = "gray-location";
+                    break;
+                case 40601:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[45].className = "gray-location";
+                    break;
+                case 40701:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[46].className = "gray-location";
+                    break;
+                case 40801:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[47].className = "gray-location";
+                    break;
+                case 40901:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[48].className = "gray-location";
+                    break;
+                case 41001:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[49].className = "gray-location";
+                    break;
+                case 41101:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[50].className = "gray-location";
+                    break;
+                case 41201:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[51].className = "gray-location";
+                    break;
+                case 41301:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[52].className = "gray-location";
+                    break;
+                case 40011:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[53].className = "gray-location";
+                    break;
+                case 40012:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[54].className = "gray-location";
+                    break;
+                case 40013:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[55].className = "gray-location";
+                    break;
+                case 50101:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[56].className = "gray-location";
+                    break;
+                case 50201:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[57].className = "gray-location";
+                    break;
+                case 50301:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[58].className = "gray-location";
+                    break;
+                case 50401:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[59].className = "gray-location";
+                    break;
+                case 50501:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[60].className = "gray-location";
+                    break;
+                case 50601:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[61].className = "gray-location";
+                    break;
+                case 50701:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[62].className = "gray-location";
+                    break;
+                case 50801:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[63].className = "gray-location";
+                    break;
+                case 50901:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[64].className = "gray-location";
+                    break;
+                case 51001:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[65].className = "gray-location";
+                    break;
+                case 51101:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[66].className = "gray-location";
+                    break;
+                case 51201:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[67].className = "gray-location";
+                    break;
+                case 51301:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[68].className = "gray-location";
+                    break;
+                case 50011:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[69].className = "gray-location";
+                    break;
+                case 50012:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[70].className = "gray-location";
+                    break;
+                case 50013:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[71].className = "gray-location";
+                    break;
+                case 60101:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[72].className = "gray-location";
+                    break;
+                case 60201:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[73].className = "gray-location";
+                    break;
+                case 60301:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[74].className = "gray-location";
+                    break;
+                case 60401:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[75].className = "gray-location";
+                    break;
+                case 60501:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[76].className = "gray-location";
+                    break;
+                case 60601:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[77].className = "gray-location";
+                    break;
+                case 60701:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[78].className = "gray-location";
+                    break;
+                case 60801:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[79].className = "gray-location";
+                    break;
+                case 60901:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[80].className = "gray-location";
+                    break;
+                case 61001:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[81].className = "gray-location";
+                    break;
+                case 61101:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[82].className = "gray-location";
+                    break;
+                case 61201:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[83].className = "gray-location";
+                    break;
+                case 61301:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[84].className = "gray-location";
+                    break;
+                case 60011:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[85].className = "gray-location";
+                    break;
+                case 60012:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[86].className = "gray-location";
+                    break;
+                case 60013:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[87].className = "gray-location";
+                    break;
+                case 1:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[88].className = "gray-location";
+                    break;
+                case 2:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[89].className = "gray-location";
+                    break;
+                case 3:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[90].className = "gray-location";
+                    break;
+                case 4:
+                    checksRemaining[1]--;
+                    dropdownUpdate("text");
+                    b[91].className = "gray-location";
+                    break;
+                case 5:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[92].className = "gray-location";
+                    break;
+                case 6:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[93].className = "gray-location";
+                    break;
+                case 7:
+                    checksRemaining[2]--;
+                    dropdownUpdate("text");
+                    b[94].className = "gray-location";
+                    break;
+                case 8:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[95].className = "gray-location";
+                    break;
+                case 9:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[96].className = "gray-location";
+                    break;
+                case 10:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[97].className = "gray-location";
+                    break;
+                case 11:
+                    checksRemaining[3]--;
+                    dropdownUpdate("text");
+                    b[98].className = "gray-location";
+                    break;
+                case 12:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[99].className = "gray-location";
+                    break;
+                case 13:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[100].className = "gray-location";
+                    break;
+                case 14:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[101].className = "gray-location";
+                    break;
+                case 15:
+                    checksRemaining[4]--;
+                    dropdownUpdate("text");
+                    b[102].className = "gray-location";
+                    break;
+                case 16:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[103].className = "gray-location";
+                    break;
+                case 17:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[104].className = "gray-location";
+                    break;
+                case 18:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[105].className = "gray-location";
+                    break;
+                case 19:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[106].className = "gray-location";
+                    break;
+                case 20:
+                    checksRemaining[5]--;
+                    dropdownUpdate("text");
+                    b[107].className = "gray-location";
+                    break;
+                case 21:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[108].className = "gray-location";
+                    break;
+                case 22:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[109].className = "gray-location";
+                    break;
+                case 23:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[110].className = "gray-location";
+                    break;
+                case 24:
+                    checksRemaining[6]--;
+                    dropdownUpdate("text");
+                    b[111].className = "gray-location";
+                    break;
+                default:
+                    console.log("No handler");
+            }
+        }
+        for (let i = 0; i < content.length; i++) {
+            if (content[i].game != "Splatoon 3: Return of the Mammalians") {
+                return;
+            }
+            const apID = content[i].id;
+            switch (apID) {
+                case 1:
+                    receiveItem("mapAccess");
+                    break;
+                case 2:
+                    receiveItem("bossAccess");
+                    break;
+                case 3:
+                    receiveItem("rocketAccess");
+                    break;
+                case 4:
+                    console.log("you shouldn't be here");
+                    break;
+                case 11:
+                    heroGearArray[1]++;
+                    dropdownUpdate("text");
+                    break;
+                case 12:
+                    heroGearArray[0]++;
+                    dropdownUpdate("text");
+                    break;
+                case 13:
+                    heroGearArray[2]++;
+                    dropdownUpdate("text");
+                    break;
+                default:
+                    console.log("Receive No Handler");
+            }
+        }
     }
 });
 // Log an Archipelago message to the box
@@ -599,7 +1320,7 @@ function connectArchi(Port, SlotName, Game) {
             locationTracker.style.display = "flex";
             dropdown.style.display = "block";
 
-
+            loadSave();
             requestAnimationFrame(update);
         })
         .catch(() => {
@@ -660,7 +1381,7 @@ const lArea6 = document.getElementById("area6Allowed")
 
 function dropdownUpdate(type) {
     if (type == "areas") {
-        if (mapAccess.at(0) > 5) {
+        if (mapAccess.at(0) > 1) {
             area6Select.className = "available-location";
             lArea6.className = "location-allowed";
             area6Select.removeAttribute("disabled");
@@ -679,58 +1400,21 @@ function dropdownUpdate(type) {
             area1Select.className = "available-location";
             lArea1.className = "location-allowed";
             area1Select.removeAttribute("disabled");
-        } else if (mapAccess.at(0) > 4) {
-            area5Select.className = "available-location";
-            lArea5.className = "location-allowed";
-            area5Select.removeAttribute("disabled");
-            area4Select.className = "available-location";
-            lArea4.className = "location-allowed";
-            area4Select.removeAttribute("disabled");
-            area3Select.className = "available-location";
-            lArea3.className = "location-allowed";
-            area3Select.removeAttribute("disabled");
-            area2Select.className = "available-location";
-            lArea2.className = "location-allowed";
-            area2Select.removeAttribute("disabled");
-            area1Select.className = "available-location";
-            lArea1.className = "location-allowed";
-            area1Select.removeAttribute("disabled");
-        } else if (mapAccess.at(0) > 3) {
-            area4Select.className = "available-location";
-            lArea4.className = "location-allowed";
-            area4Select.removeAttribute("disabled");
-            area3Select.className = "available-location";
-            lArea3.className = "location-allowed";
-            area3Select.removeAttribute("disabled");
-            area2Select.className = "available-location";
-            lArea2.className = "location-allowed";
-            area2Select.removeAttribute("disabled");
-            area1Select.className = "available-location";
-            lArea1.className = "location-allowed";
-            area1Select.removeAttribute("disabled");
-        } else if (mapAccess.at(0) > 2) {
-            area3Select.className = "available-location";
-            lArea3.className = "location-allowed";
-            area3Select.removeAttribute("disabled");
-            area2Select.className = "available-location";
-            lArea2.className = "location-allowed";
-            area2Select.removeAttribute("disabled");
-            area1Select.className = "available-location";
-            lArea1.className = "location-allowed";
-            area1Select.removeAttribute("disabled");
-        } else if (mapAccess.at(0) > 1) {
-            area2Select.className = "available-location";
-            lArea2.className = "location-allowed";
-            area2Select.removeAttribute("disabled");
-            area1Select.className = "available-location";
-            lArea1.className = "location-allowed";
-            area1Select.removeAttribute("disabled");
         } else if (mapAccess.at(0) > 0) {
+            area4Select.className = "available-location";
+            lArea4.className = "location-allowed";
+            area4Select.removeAttribute("disabled");
+            area3Select.className = "available-location";
+            lArea3.className = "location-allowed";
+            area3Select.removeAttribute("disabled");
+            area2Select.className = "available-location";
+            lArea2.className = "location-allowed";
+            area2Select.removeAttribute("disabled");
             area1Select.className = "available-location";
             lArea1.className = "location-allowed";
             area1Select.removeAttribute("disabled");
         }
-    } else if (type == "text"){
+    } else if (type == "text") {
         document.getElementById("craterSelect").textContent = ("The Crater (" + checksRemaining[0] + " checks)");
         document.getElementById("area1Select").textContent = ("Site 1 (" + checksRemaining[1] + " checks)");
         document.getElementById("area2Select").textContent = ("Site 2 (" + checksRemaining[2] + " checks)");
@@ -738,487 +1422,668 @@ function dropdownUpdate(type) {
         document.getElementById("area4Select").textContent = ("Site 4 (" + checksRemaining[4] + " checks)");
         document.getElementById("area5Select").textContent = ("Site 5 (" + checksRemaining[5] + " checks)");
         document.getElementById("area6Select").textContent = ("Site 6 (" + checksRemaining[6] + " checks)");
+
+        document.getElementById("sardinium").textContent = ("> Sardinium: " + heroGearArray[0]);
+        document.getElementById("skillPoints").textContent = ("> Skill Points: " + heroGearArray[1]);
+        document.getElementById("traps").textContent = ("> Stick Traps: " + heroGearArray[2]);
     }
 }
-function trackerUpdate() {
-    for (let i = 0; i < ArchipelagoLocations.length; i++){
-        if (ArchipelagoLocations[i] > 0) {
-            b[i].className = "gray-location";
+function trackerUpdate(type) {
+    if (type == "bosses") {
+        if (mapAccess[1] > 2) {
+            document.getElementById("area2boss").className = "location-allowed";
+            document.getElementById("20b01").className = document.getElementById("20b01").className == "red-location" ? "green-location" : document.getElementById("20b01").className
+            document.getElementById("area4boss").className = "location-allowed";
+            document.getElementById("40b01").className = document.getElementById("40b01").className == "red-location" ? "green-location" : document.getElementById("40b01").className
+            document.getElementById("area6boss").className = "location-allowed";
+            document.getElementById("60b01").className = document.getElementById("60b01").className == "red-location" ? "green-location" : document.getElementById("60b01").className
+        } else if (mapAccess[1] > 1) {
+            document.getElementById("area2boss").className = "location-allowed";
+            document.getElementById("20b01").className = document.getElementById("20b01").className == "red-location" ? "green-location" : document.getElementById("20b01").className
+            document.getElementById("area4boss").className = "location-allowed";
+            document.getElementById("40b01").className = document.getElementById("40b01").className == "red-location" ? "green-location" : document.getElementById("40b01").className
+        } else if (mapAccess[1] > 0) {
+            document.getElementById("area2boss").className = "location-allowed";
+            document.getElementById("20b01").className = document.getElementById("20b01").className == "red-location" ? "green-location" : document.getElementById("20b01").className
+        }
+    } else if (type == "rocket") {
+        if (mapAccess[2] > 5) {
+            document.getElementById("r1").className = "hash-available";
+            document.getElementById("r2").className = "hash-available";
+            document.getElementById("r3").className = "hash-available";
+            document.getElementById("r4").className = "hash-available";
+            document.getElementById("r5").className = "hash-available";
+            document.getElementById("r6").className = "hash-available";
+            document.getElementById("rocketContainer").className = "location-allowed";
+            document.getElementById("ending1").className = document.getElementById("ending1").className == "red-location" ? "green-location" : "gray-location";
+        } else if (mapAccess[2] > 4) {
+            document.getElementById("r1").className = "hash-available";
+            document.getElementById("r2").className = "hash-available";
+            document.getElementById("r3").className = "hash-available";
+            document.getElementById("r4").className = "hash-available";
+            document.getElementById("r5").className = "hash-available";
+        } else if (mapAccess[2] > 3) {
+            document.getElementById("r1").className = "hash-available";
+            document.getElementById("r2").className = "hash-available";
+            document.getElementById("r3").className = "hash-available";
+            document.getElementById("r4").className = "hash-available";
+        } else if (mapAccess[2] > 2) {
+            document.getElementById("r1").className = "hash-available";
+            document.getElementById("r2").className = "hash-available";
+            document.getElementById("r3").className = "hash-available";
+        } else if (mapAccess[2] > 1) {
+            document.getElementById("r1").className = "hash-available";
+            document.getElementById("r2").className = "hash-available";
+        } else if (mapAccess[2] > 0) {
+            document.getElementById("r1").className = "hash-available";
         }
     }
-    /*
-    for (let i = 0; i < weaponsAccess.length; i++) {
-        if (weaponsAccess[i] > 0 && blimited[i].className != "gray-location") {
-            blimited[i].className = "green-location";
-        }
-    }
-    */
-}
-function buttonsUpdate() {
 
 }
-function loadSave(){
-    const itemsList = items.received
-    for (let i = 0; i < itemsList.length; i++){
-        if (itemList[i].locationGame != "Splatoon 3: Return of the Mammalians")
+function loadSave() {
+    const itemsList = items.received;
+    console.log(itemsList);
+    for (let i = 0; i < itemsList.length; i++) {
+        if (itemsList[i].locationGame != "Splatoon 3: Return of the Mammalians") {
             return;
-        const apID = itemList[i].locationId
+        }
+        const apID = itemsList[i].locationId;
         switch (apID) {
-        case '101':
-            client.check(101);
-            checksRemaining[0]--;
-            dropdownUpdate("text");
-            break;
-        case '201':
-            client.check(201);
-            checksRemaining[0]--;
-            dropdownUpdate("text");
-            break;
-        case '301':
-            client.check(301);
-            checksRemaining[0]--;
-            dropdownUpdate("text");
-            break;
-        case '401':
-            client.check(401);
-            checksRemaining[0]--;
-            dropdownUpdate("text");
-            break;
-        case '501':
-            client.check(501);
-            checksRemaining[0]--;
-            dropdownUpdate("text");
-            break;
-        case '10101':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '10201':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '10301':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '10401':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '10501':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '10601':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '10701':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '10801':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '10901':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '11001':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '1sardine':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '1music':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '1capsules':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case '20101':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20201':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20301':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20401':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20501':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20601':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20701':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20801':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '20b01':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '2sardine':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '2music':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '2capsules':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case '30101':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '30201':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '30301':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '30401':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '30501':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '30601':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '30701':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '3sardine':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '3music':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '3capsules':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case '40101':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40201':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40301':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40401':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40501':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40601':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40701':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40801':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40901':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '41001':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '41101':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '41201':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '40b01':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '4sardine':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '4music':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '4capsules':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case '50101':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50201':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50301':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50401':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50501':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50601':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50701':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50801':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '50901':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '51001':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '51101':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '51201':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '51301':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '5sardine':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '5music':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '5capsules':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case '60101':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60201':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60301':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60401':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60501':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60601':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60701':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60801':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60901':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '61001':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '61101':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '61201':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '60b01':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '6sardine':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '6music':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case '6capsules':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case 's1':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case 's2':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case 's3':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case 's4':
-            checksRemaining[1]--;
-            dropdownUpdate("text");
-            break;
-        case 's5':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case 's6':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case 's7':
-            checksRemaining[2]--;
-            dropdownUpdate("text");
-            break;
-        case 's8':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case 's9':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case 's10':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case 's11':
-            checksRemaining[3]--;
-            dropdownUpdate("text");
-            break;
-        case 's12':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case 's13':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case 's14':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case 's15':
-            checksRemaining[4]--;
-            dropdownUpdate("text");
-            break;
-        case 's16':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case 's17':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case 's18':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case 's19':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case 's20':
-            checksRemaining[5]--;
-            dropdownUpdate("text");
-            break;
-        case 's21':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case 's22':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case 's23':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        case 's24':
-            checksRemaining[6]--;
-            dropdownUpdate("text");
-            break;
-        default:
-            console.log("No handler");
+            case 101:
+                checksRemaining[0]--;
+                dropdownUpdate("text");
+                b[0].className = "gray-location";
+                break;
+            case 201:
+                checksRemaining[0]--;
+                dropdownUpdate("text");
+                b[1].className = "gray-location";
+                break;
+            case 301:
+                checksRemaining[0]--;
+                dropdownUpdate("text");
+                b[2].className = "gray-location";
+                break;
+            case 401:
+                checksRemaining[0]--;
+                dropdownUpdate("text");
+                b[3].className = "gray-location";
+                break;
+            case 501:
+                checksRemaining[0]--;
+                dropdownUpdate("text");
+                b[4].className = "gray-location";
+                break;
+            case 10101:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[5].className = "gray-location";
+                break;
+            case 10201:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[6].className = "gray-location";
+                break;
+            case 10301:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[7].className = "gray-location";
+                break;
+            case 10401:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[8].className = "gray-location";
+                break;
+            case 10501:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[9].className = "gray-location";
+                break;
+            case 10601:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[10].className = "gray-location";
+                break;
+            case 10701:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[11].className = "gray-location";
+                break;
+            case 10801:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[12].className = "gray-location";
+                break;
+            case 10901:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[13].className = "gray-location";
+                break;
+            case 11001:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[14].className = "gray-location";
+                break;
+            case 10011:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[15].className = "gray-location";
+                break;
+            case 10012:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[16].className = "gray-location";
+                break;
+            case 10013:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[17].className = "gray-location";
+                break;
+            case 20101:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[18].className = "gray-location";
+                break;
+            case 20201:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[19].className = "gray-location";
+                break;
+            case 20301:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[20].className = "gray-location";
+                break;
+            case 20401:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[21].className = "gray-location";
+                break;
+            case 20501:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[22].className = "gray-location";
+                break;
+            case 20601:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[23].className = "gray-location";
+                break;
+            case 20701:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[24].className = "gray-location";
+                break;
+            case 20801:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[25].className = "gray-location";
+                break;
+            case 20901:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[26].className = "gray-location";
+                break;
+            case 20011:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[27].className = "gray-location";
+                break;
+            case 20012:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[28].className = "gray-location";
+                break;
+            case 20013:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[29].className = "gray-location";
+                break;
+            case 30101:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[30].className = "gray-location";
+                break;
+            case 30201:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[31].className = "gray-location";
+                break;
+            case 30301:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[32].className = "gray-location";
+                break;
+            case 30401:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[33].className = "gray-location";
+                break;
+            case 30501:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[34].className = "gray-location";
+                break;
+            case 30601:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[35].className = "gray-location";
+                break;
+            case 30701:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[36].className = "gray-location";
+                break;
+            case 30011:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[37].className = "gray-location";
+                break;
+            case 30012:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[38].className = "gray-location";
+                break;
+            case 30013:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[39].className = "gray-location";
+                break;
+            case 40101:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[40].className = "gray-location";
+                break;
+            case 40201:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[41].className = "gray-location";
+                break;
+            case 40301:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[42].className = "gray-location";
+                break;
+            case 40401:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[43].className = "gray-location";
+                break;
+            case 40501:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[44].className = "gray-location";
+                break;
+            case 40601:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[45].className = "gray-location";
+                break;
+            case 40701:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[46].className = "gray-location";
+                break;
+            case 40801:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[47].className = "gray-location";
+                break;
+            case 40901:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[48].className = "gray-location";
+                break;
+            case 41001:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[49].className = "gray-location";
+                break;
+            case 41101:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[50].className = "gray-location";
+                break;
+            case 41201:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[51].className = "gray-location";
+                break;
+            case 41301:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[52].className = "gray-location";
+                break;
+            case 40011:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[53].className = "gray-location";
+                break;
+            case 40012:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[54].className = "gray-location";
+                break;
+            case 40013:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[55].className = "gray-location";
+                break;
+            case 50101:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[56].className = "gray-location";
+                break;
+            case 50201:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[57].className = "gray-location";
+                break;
+            case 50301:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[58].className = "gray-location";
+                break;
+            case 50401:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[59].className = "gray-location";
+                break;
+            case 50501:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[60].className = "gray-location";
+                break;
+            case 50601:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[61].className = "gray-location";
+                break;
+            case 50701:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[62].className = "gray-location";
+                break;
+            case 50801:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[63].className = "gray-location";
+                break;
+            case 50901:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[64].className = "gray-location";
+                break;
+            case 51001:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[65].className = "gray-location";
+                break;
+            case 51101:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[66].className = "gray-location";
+                break;
+            case 51201:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[67].className = "gray-location";
+                break;
+            case 51301:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[68].className = "gray-location";
+                break;
+            case 50011:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[69].className = "gray-location";
+                break;
+            case 50012:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[70].className = "gray-location";
+                break;
+            case 50013:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[71].className = "gray-location";
+                break;
+            case 60101:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[72].className = "gray-location";
+                break;
+            case 60201:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[73].className = "gray-location";
+                break;
+            case 60301:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[74].className = "gray-location";
+                break;
+            case 60401:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[75].className = "gray-location";
+                break;
+            case 60501:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[76].className = "gray-location";
+                break;
+            case 60601:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[77].className = "gray-location";
+                break;
+            case 60701:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[78].className = "gray-location";
+                break;
+            case 60801:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[79].className = "gray-location";
+                break;
+            case 60901:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[80].className = "gray-location";
+                break;
+            case 61001:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[81].className = "gray-location";
+                break;
+            case 61101:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[82].className = "gray-location";
+                break;
+            case 61201:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[83].className = "gray-location";
+                break;
+            case 61301:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[84].className = "gray-location";
+                break;
+            case 60011:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[85].className = "gray-location";
+                break;
+            case 60012:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[86].className = "gray-location";
+                break;
+            case 60013:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[87].className = "gray-location";
+                break;
+            case 1:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[88].className = "gray-location";
+                break;
+            case 2:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[89].className = "gray-location";
+                break;
+            case 3:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[90].className = "gray-location";
+                break;
+            case 4:
+                checksRemaining[1]--;
+                dropdownUpdate("text");
+                b[91].className = "gray-location";
+                break;
+            case 5:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[92].className = "gray-location";
+                break;
+            case 6:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[93].className = "gray-location";
+                break;
+            case 7:
+                checksRemaining[2]--;
+                dropdownUpdate("text");
+                b[94].className = "gray-location";
+                break;
+            case 8:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[95].className = "gray-location";
+                break;
+            case 9:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[96].className = "gray-location";
+                break;
+            case 10:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[97].className = "gray-location";
+                break;
+            case 11:
+                checksRemaining[3]--;
+                dropdownUpdate("text");
+                b[98].className = "gray-location";
+                break;
+            case 12:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[99].className = "gray-location";
+                break;
+            case 13:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[100].className = "gray-location";
+                break;
+            case 14:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[101].className = "gray-location";
+                break;
+            case 15:
+                checksRemaining[4]--;
+                dropdownUpdate("text");
+                b[102].className = "gray-location";
+                break;
+            case 16:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[103].className = "gray-location";
+                break;
+            case 17:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[104].className = "gray-location";
+                break;
+            case 18:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[105].className = "gray-location";
+                break;
+            case 19:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[106].className = "gray-location";
+                break;
+            case 20:
+                checksRemaining[5]--;
+                dropdownUpdate("text");
+                b[107].className = "gray-location";
+                break;
+            case 21:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[108].className = "gray-location";
+                break;
+            case 22:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[109].className = "gray-location";
+                break;
+            case 23:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[110].className = "gray-location";
+                break;
+            case 24:
+                checksRemaining[6]--;
+                dropdownUpdate("text");
+                b[111].className = "gray-location";
+                break;
+            default:
+                console.log("No handler");
+        }
+    }
+    for (let i = 0; i < itemsList.length; i++) {
+        if (itemsList[i].game != "Splatoon 3: Return of the Mammalians") {
+            return;
+        }
+        const apID = itemsList[i].id;
+        switch (apID) {
+            case 1:
+                receiveItem("mapAccess");
+                break;
+            case 2:
+                receiveItem("bossAccess");
+                break;
+            case 3:
+                receiveItem("rocketAccess");
+                break;
+            case 4:
+                console.log("you shouldn't be here");
+                break;
+            case 11:
+                heroGearArray[1]++;
+                dropdownUpdate("text");
+                break;
+            case 12:
+                heroGearArray[0]++;
+                dropdownUpdate("text");
+                break;
+            case 13:
+                console.log("Trap skipped!")
+                break;
+            default:
+                console.log("Receive No Handler");
         }
     }
 }
@@ -1236,15 +2101,16 @@ function switchDisplay(intendedDisplay) {
 }
 
 function receiveItem(type, id) {
-    if (type = "mapAccess") {
+    if (type == "mapAccess") {
         mapAccess[0]++;
         dropdownUpdate("areas");
-        trackerUpdate();
     }
-    if (type = "bossAccess") {
+    if (type == "bossAccess") {
         mapAccess[1]++;
+        trackerUpdate("bosses");
     }
-    if (type = "rocketAccess") {
+    if (type == "rocketAccess") {
         mapAccess[2]++;
+        trackerUpdate("rocket");
     }
 }

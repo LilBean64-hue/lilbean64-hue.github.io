@@ -31,7 +31,6 @@
 
         <button id="submitButton">Connect</button>
     </div>
-    <button id="test">Increment</button>
 
 
     <!--Location Tracker-->
@@ -41,9 +40,9 @@
                 <!--Select Container-->
                 <select style="display: none;" id="locationSelect" class="select-container-yuh">
                     <option id="craterSelect" value="crater" class="available-location">The Crater (5 checks)</option>
-                    <option id="area1Select" value="area1" class="available-location" disabled>Site 1 (18 checks)
+                    <option id="area1Select" value="area1" class="available-location">Site 1 (18 checks)
                     </option>
-                    <option id="area2Select" value="area2" class="available-location" disabled>Site 2 (20 checks)
+                    <option id="area2Select" value="area2" class="available-location">Site 2 (20 checks)
                     </option>
                     <option id="area3Select" value="area3" class="unavailable-location" disabled>Site 3 (20 checks)
                     </option>
@@ -268,7 +267,12 @@
         </div>
         <div style="display: none;" id="heroGear" class="hero-gear-wrapper">
             <div class="hero-gear-header">Hero Gear + Traps</div>
-            <div id="heroGear" class="hero-gear-body">Yip</div>
+            <div id="heroGear" class="hero-gear-body">
+                <div><span id="sardinium">> Sardinium: 0</span></div>
+                <div><span id="skillPoints">> Skill Points: 0</span></div>
+                <div><span id="traps">> Stick Traps: 0</span></div>
+                <div><button id="trapUse" class="trap-button">Remove Trap</button></div>
+            </div>
         </div>
     </div>
 
@@ -286,13 +290,13 @@
             <div id="accessTracker" class="access-tracker-body">
                 <div id="areaHeader" class="tracker-header">Areas:</div>
                 <div id="craterAllowed" class="location-allowed">> The Crater</div>
-                <div id="area1Allowed" class="location-disallowed">> Site 1</div>
-                <div id="area2Allowed" class="location-disallowed">> Site 2</div>
+                <div id="area1Allowed" class="location-allowed">> Site 1</div>
+                <div class="location-allowed"><span id="area2Allowed" class="location-allowed">> Site 2 </span><span id="area2boss" class="location-disallowed">(Boss)</span></div>
                 <div id="area3Allowed" class="location-disallowed">> Site 3</div>
-                <div id="area4Allowed" class="location-disallowed">> Site 4</div>
+                <div class="location-allowed"><span id="area4Allowed" class="location-disallowed">> Site 4 </span><span id="area4boss" class="location-disallowed">(Boss)</span></div>
                 <div id="area5Allowed" class="location-disallowed">> Site 5</div>
-                <div id="area6Allowed" class="location-disallowed">> Site 6</div>
-                <div id="rocketContainer" , class="location-disallowed">> Rocket Stages: <span id="r1"
+                <div class="location-allowed"><span  id="area6Allowed" class="location-disallowed">> Site 6 </span><span id="area6boss" class="location-disallowed">(Boss)</span></div>
+                <div id="rocketContainer" class="location-disallowed">> Rocket Stages: <span id="r1"
                         class="hash-unavailble">#</span><span id="r2" class="hash-unavailble">#</span><span id="r3"
                         class="hash-unavailble">#</span><span id="r4" class="hash-unavailble">#</span><span id="r5"
                         class="hash-unavailble">#</span><span id="r6" class="hash-unavailble">#</span><button
