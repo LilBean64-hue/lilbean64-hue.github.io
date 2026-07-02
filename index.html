@@ -279,19 +279,28 @@
             <div class="location-tracker-header"><label id="paletteName">No Palette!</label>
                 <!--Select Container-->
                 <select style="display: none;" id="paletteSelect" class="select-container-yuh">
-                    <option id="pearlSelect" value="crater" class="available-location">The Crater (5 checks)</option>
-                    <option id="marinaSelect" value="area1" class="available-location">Site 1 (18 checks)</option>
-                    <option id="agent4Select" value="area2" class="available-location">Site 2 (20 checks)</option>
-                    <option id="callieSelect" value="area3" class="unavailable-location" disabled>Site 3 (20 checks)</option>
-                    <option id="marieSelect" value="area4" class="unavailable-location" disabled>Site 4 (33 checks)</option>
-                    <option id="shiverSelect" value="area5" class="unavailable-location" disabled>Site 5 (34 checks)</option>
-                    <option id="fryeSelect" value="area6" class="unavailable-location" disabled>Site 6 (30 checks)</option>
-                    <option id="bigManSelect" value="crater" class="available-location">The Crater (5 checks)</option>
-                    <option id="murchSelect" value="area1" class="available-location">Site 1 (18 checks)</option>
-                    <option id="sheldonSelect" value="area2" class="available-location">Site 2 (20 checks)</option>
-                    <option id="djOctavioSelect" value="area3" class="unavailable-location" disabled>Site 3 (20 checks)</option>
-                    <option id="eightSelect" value="area4" class="unavailable-location" disabled>Site 4 (33 checks)</option>
+                    <option id="presetPaletteSelect" value="preset" class="available-location">Preset Palettes</option>
+                    <option id="randomPaletteSelect" value="random" class="available-location">Random Palettes</option>
                 </select>
+            </div>
+            <div id="orderLocations" class="location-tracker-body">
+                <div id="presetDisplay" class="order-locations" style="display: none;">
+                    <label>Pearl's Palette:</label>
+                    <button class="green-location">Floor 10</button>
+                    <button class="green-location">Floor 20</button>
+                    <button class="green-location">Floor 30</button>
+                    <label>Agent 4's Palette:</label>
+                    <button class="green-location">Floor 10</button>
+                    <button class="green-location">Floor 20</button>
+                    <button class="green-location">Floor 30</button>
+                    <label>Eight's Palette:</label>
+                    <button class="green-location">Floor 10</button>
+                    <button class="green-location">Floor 20</button>
+                    <button class="green-location">Floor 30</button>
+                </div>
+                <div id="randomDisplay" class="order-locations" style="display: none;">
+                    <label>Random Palette 1</label>
+                </div>
             </div>
         </div>
     </div>

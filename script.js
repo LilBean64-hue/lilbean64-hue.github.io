@@ -15,6 +15,10 @@ const upBox = document.getElementById("upperBox");
         const rotmLocations = document.getElementById("locations");
     const rotmHeroGear = document.getElementById("heroGear");
         const rotmTrapRemove = document.getElementById("trapUse");
+
+    const soLocationTracker = document.getElementById("paletteTracker");
+        const soCurrentArea = document.getElementById("paletteName");
+        const soLocations = document.getElementById("orderLocations")
 const lowBox = document.getElementById("lowerBox");
     const rotmArchiBox = document.getElementById("archiChat");
     const rotmAccessTracker = document.getElementById("accessTracker");
@@ -43,6 +47,7 @@ const heroGearArray = [0, 0, 0] //Sardinium, Skill Points, Traps
 
 // dropdown to select area
 const rotmDropdown = document.getElementById("locationSelect");
+const soDropdown = document.getElementById("paletteSelect")
 // assign area locations
 const craterDisplay = document.getElementById("craterDisplay");
 const area1Display = document.getElementById("area1Display");
@@ -51,6 +56,9 @@ const area3Display = document.getElementById("area3Display");
 const area4Display = document.getElementById("area4Display");
 const area5Display = document.getElementById("area5Display");
 const area6Display = document.getElementById("area6Display");
+
+const presetDisplay = document.getElementById("presetDisplay");
+const randomDisplay = document.getElementById("randomDisplay");
 
 
 export const client = new Client();
@@ -103,7 +111,7 @@ function archipelagoMessage(message, container) {
 // Login to the server. Replace `archipelago.gg:XXXXX` and `Phar` with the address/url and slot name for your room.
 // If no game is provided, client will connect in "TextOnly" mode, which is fine for this example.
 function connectArchi(Port, SlotName, Game) {
-    client.login(Port, SlotName, Game)
+    client.login(Port, SlotName)
         .then(() => {
             console.log("Connected to the Archipelago server!");
             siteTitle.textContent = "Connected to the Archipelago server!";
@@ -131,6 +139,9 @@ function connectArchi(Port, SlotName, Game) {
             rotmAccessTracker.style.display = "flex";
             rotmLocationTracker.style.display = "flex";
             rotmDropdown.style.display = "block";
+            } else if (so){
+                soLocationTracker.style.display = "flex";
+                soDropdown.style.display = "block";
             }
 
             loadSave();
@@ -1148,6 +1159,7 @@ rotmLocationTracker.addEventListener("click", (event) => {
 
 function update() {
     if (rotm) rotmCalculateArea(); /* updates the header of the location tracker */
+    if (so) soCalculateArea();
     if (rotm) rotmEndingButtons();
     requestAnimationFrame(update);
 }
@@ -1188,6 +1200,17 @@ function rotmCalculateArea() {
         rotmCurrentArea.textContent = "Sunken Sea Scrolls"
     }
 }
+function soCalculateArea(){
+    if (soDropdown.value == "preset" && soCurrentArea.textContent != "Preset Palettes") {
+        presetDisplay.style.display = "block";
+        randomDisplay.style.display = "none";
+        soCurrentArea.textContent = "Preset Palettes"
+    } else if (soDropdown.value == "random" && soCurrentArea.textContent != "Random Palettes") {
+        presetDisplay.style.display = "none";
+        randomDisplay.style.display = "block";
+        soCurrentArea.textContent = "Random Palettes"
+    }
+}
 
 const rotmArea1Select = document.getElementById("area1Select");
 const rotmArea2Select = document.getElementById("area2Select");
@@ -1201,6 +1224,18 @@ const rotmlArea3 = document.getElementById("area3Allowed")
 const rotmlArea4 = document.getElementById("area4Allowed")
 const rotmlArea5 = document.getElementById("area5Allowed")
 const rotmlArea6 = document.getElementById("area6Allowed")
+
+function rotmSwitchDisplay(intendedDisplay) {
+    craterDisplay.style.display = "none";
+    area1Display.style.display = "none";
+    area2Display.style.display = "none";
+    area3Display.style.display = "none";
+    area4Display.style.display = "none";
+    area5Display.style.display = "none";
+    area6Display.style.display = "none";
+
+    intendedDisplay.style.display = "block";
+}
 
 function rotmDropdownUpdate(type) {
     if (type == "areas") {
@@ -1935,18 +1970,6 @@ function loadSave() {
         }
     }
 }
-}
-
-function rotmSwitchDisplay(intendedDisplay) {
-    craterDisplay.style.display = "none";
-    area1Display.style.display = "none";
-    area2Display.style.display = "none";
-    area3Display.style.display = "none";
-    area4Display.style.display = "none";
-    area5Display.style.display = "none";
-    area6Display.style.display = "none";
-
-    intendedDisplay.style.display = "block";
 }
 
 function rotmReceiveItem(type, id) {
