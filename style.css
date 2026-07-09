@@ -93,9 +93,31 @@ button:hover {
     align-items: center;
     gap: 10px;
 }
+.location-tracker-header-grid1 {
+    height: 39px;
+    padding: 0;
+    background-color: #1f1f1f;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    gap: 0;
+}
+.location-tracker-header-grid2 {
+    height: 39px;
+    padding: 0;
+    background-color: #1f1f1f;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    align-items: center;
+    gap: 0;
+}
 
 .location-tracker-body {
-    height: 225px; /* Forces vertical scrolling */
+    max-height: 225px; /* Forces vertical scrolling */
     overflow-y: auto; /* Enables the scrollbar */
     padding: 15px;
     display: flex;
@@ -275,6 +297,98 @@ button:hover {
     background-color: rgb(230, 7, 7);
 }
 
+.header-select4 {
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    max-width: 100px;
+    gap: 0;
+    margin: 0;
+    display: grid;
+    background-color: #1f1f1f;
+}
+.header-select2 {
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    max-width: 200px;
+    gap: 0;
+    margin: 0;
+    display: grid;
+    background-color: #1f1f1f;
+}
+.header-select4:hover {
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    max-width: 100px;
+    gap: 0;
+    margin: 0;
+    display: grid;
+    background-color: #262626;
+}
+.header-select2:hover {
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    max-width: 200px;
+    gap: 0;
+    margin: 0;
+    display: grid;
+    background-color: #262626;
+}
+.header-select4-selected {
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    max-width: 100px;
+    gap: 0;
+    margin: 0;
+    display: grid;
+    background-color: #f1f1f1;
+    color: #1f1f1f;
+}
+.header-select4-selected:hover {
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    max-width: 100px;
+    gap: 0;
+    margin: 0;
+    display: grid;
+    background-color: #f1f1f1;
+    color: #1f1f1f;
+}
+.header-select2-selected {
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    max-width: 200px;
+    gap: 0;
+    margin: 0;
+    display: grid;
+    background-color: #f1f1f1;
+    color: #1f1f1f;
+}
+.header-select2-selected:hover {
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    max-width: 200px;
+    gap: 0;
+    margin: 0;
+    display: grid;
+    background-color: #f1f1f1;
+    color: #1f1f1f;
+}
 
 
 #inputSection {

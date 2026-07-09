@@ -28,13 +28,11 @@
             <option>Return of the Mammalians</option>
             <option>Side Order</option>
         </select>
-        <button id="submitGame">Submit Game</button>
-
         <button id="submitButton">Connect</button>
     </div>
 
 
-    <!--Location Tracker-->
+    <!--Upper Box-->
     <div style="display: none;" id="upperBox" class="upper-box">
         <div style="display: none;" id="locationTracker" class="location-tracker-wrapper">
             <div class="location-tracker-header"><label id="areaName">No Location!</label>
@@ -276,37 +274,225 @@
             </div>
         </div>
         <div style="display: none;" id="paletteTracker" class="location-tracker-wrapper">
-            <div class="location-tracker-header"><label id="paletteName">No Palette!</label>
-                <!--Select Container-->
-                <select style="display: none;" id="paletteSelect" class="select-container-yuh">
-                    <option id="presetPaletteSelect" value="preset" class="available-location">Preset Palettes</option>
-                    <option id="randomPaletteSelect" value="random" class="available-location">Random Palettes</option>
-                </select>
+            <div class="action-log-header"><label id="paletteName">The Spire of Order</label></div>
+            <div class="location-tracker-header-grid1" id="trackerButtons">
+                <button class="header-select2-selected" id="palettesButton" disabled>Palettes</button>
+                <button class="header-select2" id="fieldGuideButton">Jelleton Field Guide</button>
             </div>
             <div id="orderLocations" class="location-tracker-body">
-                <div id="presetDisplay" class="order-locations" style="display: none;">
-                    <label>Pearl's Palette:</label>
-                    <button class="green-location">Floor 10</button>
-                    <button class="green-location">Floor 20</button>
-                    <button class="green-location">Floor 30</button>
-                    <label>Agent 4's Palette:</label>
-                    <button class="green-location">Floor 10</button>
-                    <button class="green-location">Floor 20</button>
-                    <button class="green-location">Floor 30</button>
-                    <label>Eight's Palette:</label>
-                    <button class="green-location">Floor 10</button>
-                    <button class="green-location">Floor 20</button>
-                    <button class="green-location">Floor 30</button>
+                <div id="paletteDisplay" class="order-locations" style="display: block;">
+                    <label>Pearl's Palette:</label><br>
+                    <button id="110" class="green-location">Floor 10</button><br>
+                    <button id="120" class="green-location">Floor 20</button><br>
+                    <button id="130" class="green-location">Floor 30</button><br>
+                    <label>Agent 4's Palette:</label><br>
+                    <button id="210" class="red-location">Floor 10</button><br>
+                    <button id="220" class="red-location">Floor 20</button><br>
+                    <button id="230" class="red-location">Floor 30</button><br>
+                    <label>Random Palette 1:</label><br>
+                    <button id="310" class="red-location">Floor 10</button><br>
+                    <button id="320" class="red-location">Floor 20</button><br>
+                    <button id="330" class="red-location">Floor 30</button><br>
+                    <label>Random Palette 2:</label><br>
+                    <button id="410" class="red-location">Floor 10</button><br>
+                    <button id="420" class="red-location">Floor 20</button><br>
+                    <button id="430" class="red-location">Floor 30</button><br>
+                    <label>Random Palette 3:</label><br>
+                    <button id="510" class="red-location">Floor 10</button><br>
+                    <button id="520" class="red-location">Floor 20</button><br>
+                    <button id="530" class="red-location">Floor 30</button><br>
+                    <label>Random Palette 4:</label><br>
+                    <button id="610" class="red-location">Floor 10</button><br>
+                    <button id="620" class="red-location">Floor 20</button><br>
+                    <button id="630" class="red-location">Floor 30</button><br>
+                    <label>Random Palette 5:</label><br>
+                    <button id="710" class="red-location">Floor 10</button><br>
+                    <button id="720" class="red-location">Floor 20</button><br>
+                    <button id="730" class="red-location">Floor 30</button><br>
+                    <label>Random Palette 6:</label><br>
+                    <button id="810" class="red-location">Floor 10</button><br>
+                    <button id="820" class="red-location">Floor 20</button><br>
+                    <button id="830" class="red-location">Floor 30</button><br>
+                    <label>Random Palette 7:</label><br>
+                    <button id="910" class="red-location">Floor 10</button><br>
+                    <button id="920" class="red-location">Floor 20</button><br>
+                    <button id="930" class="red-location">Floor 30</button><br>
+                    <label>Random Palette 8:</label><br>
+                    <button id="1010" class="red-location">Floor 10</button><br>
+                    <button id="1020" class="red-location">Floor 20</button><br>
+                    <button id="1030" class="red-location">Floor 30</button><br>
+                    <label>Random Palette 9:</label><br>
+                    <button id="1110" class="red-location">Floor 10</button><br>
+                    <button id="1120" class="red-location">Floor 20</button><br>
+                    <button id="1130" class="red-location">Floor 30</button><br>
+                    <label>Eight's Palette:</label><br>
+                    <button id="1210" class="red-location">Floor 10</button><br>
+                    <button id="1220" class="red-location">Floor 20</button><br>
+                    <button id="1230" class="red-location">Ending</button><br>
                 </div>
-                <div id="randomDisplay" class="order-locations" style="display: none;">
-                    <label>Random Palette 1</label>
+                <div id="fieldGuideDisplay" class="order-locations" style="display: none;">
+                    <label>Swarming Languendo:</label><br>
+                    <button id="50" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="51" class="green-location">Marina's Notes (600)</button><br>
+                    <button id="52" class="green-location">Pearl's Notes (2,500)</button><br>
+                    <label>Marching Andante:</label><br>
+                    <button id="53" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="54" class="green-location">Marina's Notes (1,000)</button><br>
+                    <button id="55" class="green-location">Pearl's Notes (3,000)</button><br>
+                    <label>Battering Lento:</label><br>
+                    <button id="56" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="57" class="green-location">Marina's Notes (200)</button><br>
+                    <button id="58" class="green-location">Pearl's Notes (900)</button><br>
+                    <label>Portal:</label><br>
+                    <button id="59" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="60" class="green-location">Marina's Notes (50)</button><br>
+                    <button id="61" class="green-location">Pearl's Notes (250)</button><br>
+                    <label>Drizzling Capriccioso:</label><br>
+                    <button id="62" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="63" class="green-location">Marina's Notes (800)</button><br>
+                    <button id="64" class="green-location">Pearl's Notes (400)</button><br>
+                    <label>Panicking Alla Mambo:</label><br>
+                    <button id="65" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="66" class="green-location">Marina's Notes (20)</button><br>
+                    <button id="67" class="green-location">Pearl's Notes (100)</button><br>
+                    <label>Whirling Accelerando:</label><br>
+                    <button id="68" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="69" class="green-location">Marina's Notes (30)</button><br>
+                    <button id="70" class="green-location">Pearl's Notes (150)</button><br>
+                    <label>Springing Spiccato:</label><br>
+                    <button id="71" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="72" class="green-location">Marina's Notes (70)</button><br>
+                    <button id="73" class="green-location">Pearl's Notes (350)</button><br>
+                    <label>Gushing Trionfale:</label><br>
+                    <button id="74" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="75" class="green-location">Marina's Notes (70)</button><br>
+                    <button id="76" class="green-location">Pearl's Notes (350)</button><br>
+                    <label>Spawning Accordo:</label><br>
+                    <button id="77" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="78" class="green-location">Marina's Notes (20)</button><br>
+                    <button id="79" class="green-location">Pearl's Notes (100)</button><br>
+                    <label>Homing Arpeggio:</label><br>
+                    <button id="80" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="81" class="green-location">Marina's Notes (70)</button><br>
+                    <button id="82" class="green-location">Pearl's Notes (350)</button><br>
+                    <label>Towering Nobilmente:</label><br>
+                    <button id="83" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="84" class="green-location">Marina's Notes (30)</button><br>
+                    <button id="85" class="green-location">Pearl's Notes (150)</button><br>
+                    <label>Asynchronous Rondo:</label><br>
+                    <button id="86" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="87" class="green-location">Marina's Notes (3)</button><br>
+                    <button id="88" class="green-location">Pearl's Notes (8)</button><br>
+                    <label>Pinging Marciale:</label><br>
+                    <button id="89" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="90" class="green-location">Marina's Notes (3)</button><br>
+                    <button id="91" class="green-location">Pearl's Notes (8)</button><br>
+                    <label>Parallel Canon:</label><br>
+                    <button id="92" class="green-location">Acht's Notes (1)</button><br>
+                    <button id="93" class="green-location">Marina's Notes (3)</button><br>
+                    <button id="94" class="green-location">Pearl's Notes (8)</button><br>
+                    <label>Marina Agitando:</label><br>
+                    <button id="95" class="green-location">All Notes (1)</button><br>
+                    <label>Overlorder:</label><br>
+                    <button id="96" class="green-location">All Notes (1)</button><br>
                 </div>
             </div>
+        </div>
+        <div style="display: none;" id="cipherShop" class="location-tracker-wrapper">
+            <div class="action-log-header" id="shopHeader">Cipher's Siftings</div>
+            <div class="location-tracker-header-grid2" id="shopButtons">
+                <button class="header-select4-selected" id="decorations" disabled>Decorations</button>
+                <button class="header-select4" id="stickers">Stickers</button>
+                <button class="header-select4" id="banners">Banners</button>
+                <button class="header-select4" id="gear">Gear</button>
+            </div>
+            <div id="shopBody" class="location-tracker-body">
+            <div style="display: block;" id="decorationsDisplay">
+                <label>3 Keys:</label><br>
+                <button id="1" class="red-location">Marching Andante</button><br>
+                <button id="2" class="red-location">Swarming Languendo</button><br>
+                <button id="3" class="red-location">Battering Lento</button><br>
+                <button id="4" class="red-location">Celebratory Pancakes</button><br>
+                <label>6 Keys:</label><br>
+                <button id="5" class="red-location">Panicking Alla Mambo</button><br>
+                <button id="6" class="red-location">Drizzling Capriccioso</button><br>
+                <button id="7" class="red-location">Puzzle With Missing Piece</button><br>
+                <button id="8" class="red-location">Memorable Picture Book</button><br>
+                <label>12 Keys:</label><br>
+                <button id="9" class="red-location">Whirling Accelrando</button><br>
+                <button id="10" class="red-location">Springing Spiccato</button><br>
+                <button id="11" class="red-location">Dead-C Toy Piano</button><br>
+                <button id="12" class="red-location">Nostalgic Mobile</button><br>
+                <label>18 Keys:</label><br>
+                <button id="13" class="red-location">Spawning Accordo</button><br>
+                <button id="14" class="red-location">Homing Arpeggio</button><br>
+                <button id="15" class="red-location">Inseparable Anglerfish</button><br>
+                <label>27 Keys:</label><br>
+                <button id="16" class="red-location">Towering Nobilmente</button><br>
+                <button id="17" class="red-location">Gushing Trionfale</button><br>
+                <button id="18" class="red-location">Beloved Toy</button><br>
+            </div>
+            <div style="display: none;" id="stickersDisplay">
+                <label>3 Keys:</label><br>
+                <button id="25" class="red-location">Pearl Order Graffiti</button><br>
+                <button id="32" class="red-location">Pixel Callie</button><br>
+                <button id="41" class="red-location">Pearl Wallpaper</button><br>
+                <label>6 Keys:</label><br>
+                <button id="24" class="red-location">Marina Order Graffiti</button><br>
+                <button id="35" class="red-location">Pixel Marina</button><br>
+                <label>9 Keys:</label><br>
+                <button id="19" class="red-location">Dream Tapestry 01</button><br>
+                <label>12 Keys:</label><br>
+                <button id="26" class="red-location">Callie Order Graffiti</button><br>
+                <button id="27" class="red-location">Marie Order Graffiti</button><br>
+                <button id="31" class="red-location">Pixel Marie</button><br>
+                <button id="34" class="red-location">Pixel Pearl</button><br>
+                <button id="37" class="red-location">Pixel Agent 4</button><br>
+                <label>15 Keys:</label><br>
+                <button id="20" class="red-location">Dream Tapestry 02</button><br>
+                <label>18 Keys:</label><br>
+                <button id="33" class="red-location">Pixel Sheldon</button><br>
+                <button id="38" class="red-location">Pixel DJ Octavio</button><br>
+                <button id="39" class="red-location">Pixel Murch</button><br>
+                <label>21 Keys:</label><br>
+                <button id="21" class="red-location">Dream Tapestry 03</button><br>
+                <label>24 Keys:</label><br>
+                <button id="22" class="red-location">Dream Tapestry 04</button><br>
+                <label>27 Keys:</label><br>
+                <button id="28" class="red-location">Pixel Big Man</button><br>
+                <button id="29" class="red-location">Pixel Frye</button><br>
+                <button id="30" class="red-location">Pixel Shiver</button><br>
+                <label>33 Keys:</label><br>
+                <button id="23" class="red-location">Dream Tapestry 05</button><br>
+                <button id="36" class="red-location">Pixel Eight</button><br>
+                <button id="40" class="red-location">Jelleton Sticker</button><br>
+            </div>
+            <div style="display: none;" id="bannersDisplay">
+                <label>3 Keys:</label><br>
+                <button id="42" class="red-location">Order Sector Banner</button><br>
+                <label>9 Keys:</label><br>
+                <button id="43" class="red-location">Pearl Drone Banner</button><br>
+                <label>21 Keys:</label><br>
+                <button id="44" class="red-location">Graffiti Banner</button><br>
+                <label>33 Keys:</label><br>
+                <button id="45" class="red-location">Pixel Characters Banner</button><br>
+            </div>
+            <div style="display: none;" id="gearDisplay">
+                <label>9 Keys:</label><br>
+                <button id="46" class="red-location">Order Regulator Replica</button><br>
+                <label>15 Keys:</label><br>
+                <button id="47" class="red-location">Controller VM</button><br>
+                <label>24 Keys:</label><br>
+                <button id="48" class="red-location">Parallel Mask</button><br>
+                <label>33 Keys:</label><br>
+                <button id="49" class="red-location">Pearl Plushie</button><br>
+            </div>
+        </div>
         </div>
     </div>
 
 
-    <!--Archipelago Output-->
+    <!--Lower Box-->
     <div style="display: none;" id="lowerBox" class="lower-box">
         <div style="display: none;" id="archiChat" class="action-log-wrapper">
             <div class="action-log-header">Archipelago Chat</div>
@@ -316,6 +502,29 @@
         </div>
         <div style="display: none;" id="accessTracker" class="location-tracker-wrapper">
             <div class="access-tracker-header">Map Access + Endings</div>
+            <div id="accessTracker" class="access-tracker-body">
+                <div id="areaHeader" class="tracker-header">Areas:</div>
+                <div id="craterAllowed" class="location-allowed">> The Crater</div>
+                <div id="area1Allowed" class="location-allowed">> Site 1</div>
+                <div class="location-allowed"><span id="area2Allowed" class="location-allowed">> Site 2 </span><span id="area2boss" class="location-disallowed">(Boss)</span></div>
+                <div id="area3Allowed" class="location-disallowed">> Site 3</div>
+                <div class="location-allowed"><span id="area4Allowed" class="location-disallowed">> Site 4 </span><span id="area4boss" class="location-disallowed">(Boss)</span></div>
+                <div id="area5Allowed" class="location-disallowed">> Site 5</div>
+                <div class="location-allowed"><span  id="area6Allowed" class="location-disallowed">> Site 6 </span><span id="area6boss" class="location-disallowed">(Boss)</span></div><br>
+                <div id="endingsHeader" class="tracker-header">Endings:</div>
+                <div id="rocketContainer" class="location-disallowed">> Rocket Stages: <span id="r1"
+                        class="hash-unavailble">#</span><span id="r2" class="hash-unavailble">#</span><span id="r3"
+                        class="hash-unavailble">#</span><span id="r4" class="hash-unavailble">#</span><span id="r5"
+                        class="hash-unavailble">#</span><span id="r6" class="hash-unavailble">#</span><br><button
+                        id="ending1" class="red-location">Rocket Ending</button></div>
+                <div style="display: none;" id="afterAlternaContainer" class="location-disallowed">> After Alterna Stages: <span id="a1"
+                        class="hash-unavailble">#</span><span id="a2" class="hash-unavailble">#</span><span id="a3"
+                        class="hash-unavailble">#</span><span id="a4" class="hash-unavailble">#</span><br><button
+                        id="ending2" class="red-location">After Alterna Ending</button></div>
+            </div>
+        </div>
+        <div style="display: none;" id="soAccessTracker" class="location-tracker-wrapper">
+            <div class="access-tracker-header">Received + Access</div>
             <div id="accessTracker" class="access-tracker-body">
                 <div id="areaHeader" class="tracker-header">Areas:</div>
                 <div id="craterAllowed" class="location-allowed">> The Crater</div>

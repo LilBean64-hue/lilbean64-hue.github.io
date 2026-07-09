@@ -18,9 +18,12 @@ const upBox = document.getElementById("upperBox");
 
     const soLocationTracker = document.getElementById("paletteTracker");
         const soCurrentArea = document.getElementById("paletteName");
-        const soLocations = document.getElementById("orderLocations")
-const lowBox = document.getElementById("lowerBox");
-    const rotmArchiBox = document.getElementById("archiChat");
+        const soAreaSelect = document.getElementById("trackerButtons");
+        const soLocations = document.getElementById("orderLocations");
+    const soShop = document.getElementById("cipherShop");
+        const soShopButtons = document.getElementById("shopButtons");
+    const lowBox = document.getElementById("lowerBox");
+    const archiBox = document.getElementById("archiChat");
     const rotmAccessTracker = document.getElementById("accessTracker");
 
 let endGoal;
@@ -42,12 +45,13 @@ const rotmB = [
     document.getElementById("s1"), document.getElementById("s2"), document.getElementById("s3"), document.getElementById("s4"), document.getElementById("s5"), document.getElementById("s6"), document.getElementById("s7"), document.getElementById("s8"), document.getElementById("s9"), document.getElementById("s10"), document.getElementById("s11"), document.getElementById("s12"), document.getElementById("s13"), document.getElementById("s14"), document.getElementById("s15"), document.getElementById("s16"), document.getElementById("s17"), document.getElementById("s18"), document.getElementById("s19"), document.getElementById("s20"), document.getElementById("s21"), document.getElementById("s22"), document.getElementById("s23"), document.getElementById("s24")
 ];
 
+const shopButtons = [document.getElementById("decorations"),document.getElementById("stickers"),document.getElementById("banners"),document.getElementById("gear")]
+
 const rotmChecksRemaining = [5, 17, 15, 14, 20, 21, 20]; /* Crater, Area 1, Area 2, Area 3, Area 4, Area 5, Area 6 */
 const heroGearArray = [0, 0, 0] //Sardinium, Skill Points, Traps
 
 // dropdown to select area
 const rotmDropdown = document.getElementById("locationSelect");
-const soDropdown = document.getElementById("paletteSelect")
 // assign area locations
 const craterDisplay = document.getElementById("craterDisplay");
 const area1Display = document.getElementById("area1Display");
@@ -57,8 +61,8 @@ const area4Display = document.getElementById("area4Display");
 const area5Display = document.getElementById("area5Display");
 const area6Display = document.getElementById("area6Display");
 
-const presetDisplay = document.getElementById("presetDisplay");
-const randomDisplay = document.getElementById("randomDisplay");
+const paletteDisplay = document.getElementById("paletteDisplay");
+const guideDisplay = document.getElementById("fieldGuideDisplay");
 
 
 export const client = new Client();
@@ -111,7 +115,7 @@ function archipelagoMessage(message, container) {
 // Login to the server. Replace `archipelago.gg:XXXXX` and `Phar` with the address/url and slot name for your room.
 // If no game is provided, client will connect in "TextOnly" mode, which is fine for this example.
 function connectArchi(Port, SlotName, Game) {
-    client.login(Port, SlotName)
+    client.login(Port, SlotName, Game)
         .then(() => {
             console.log("Connected to the Archipelago server!");
             siteTitle.textContent = "Connected to the Archipelago server!";
@@ -133,20 +137,20 @@ function connectArchi(Port, SlotName, Game) {
             document.getElementById('inputSection').style.display = 'none';
             upBox.style.display = "grid";
             lowBox.style.display = "grid";
+            archiBox.style.display = "flex";
             if(rotm){
-            rotmArchiBox.style.display = "flex";
             rotmHeroGear.style.display = "flex";
             rotmAccessTracker.style.display = "flex";
             rotmLocationTracker.style.display = "flex";
             rotmDropdown.style.display = "block";
             } else if (so){
                 soLocationTracker.style.display = "flex";
-                soDropdown.style.display = "block";
+                soShop.style.display = "flex"
+                document.getElementById("soAccessTracker").style.display = "flex";
             }
 
             loadSave();
             player.fetchSlotData().then(function (result) {
-                // not calling
                 if (rotm) endGoal = result.end_goal;
             });
             if (endGoal = 1 && rotm) {
@@ -777,6 +781,22 @@ items.on("itemsReceived", (content) => {
             }
         }
     }
+    if (connected && so) {
+        for (let i = 0; i < content.length; i++) {
+            if (content[i].locationGame != "Splatoon 3: Side Order") {
+                return;
+            }
+            const apID = content[i].locationId;
+            document.getElementById(apID).className = "gray-location";
+        }
+        for (let i = 0; i < content.length; i++) {
+            if (content[i].game != "Splatoon 3: Side Order") {
+                return;
+            }
+            const id = content[i].id;
+            
+        }
+    }
 });
 
 rotmTrapRemove.onclick = function () {
@@ -1156,10 +1176,66 @@ rotmLocationTracker.addEventListener("click", (event) => {
             console.log("No handler");
     }
 });
+document.getElementById("paletteTracker").addEventListener("click", (event) => {
+    const button = event.target.closest('button');
 
+    if (!button) return;
+    const goy = button.className; //green or red
+    if (goy == "red-location" || goy == "gray-location") return;
+    if (goy == "header-select2" || goy == "header-select2-selected") return;
+
+    const id = button.id;
+    console.log("Button " + id + " pressed");
+
+    //remove the buttons on push
+    button.setAttribute("disabled", true);
+    button.setAttribute("class", "gray-location");
+    client.check(Math.floor(id));
+});
+soAreaSelect.addEventListener("click", (event) => {
+    const button = event.target.closest('button');
+
+    if (!button) return;
+
+    const id = button.id;
+    soAreaDisplay(id);
+    button.setAttribute("disabled", true)
+    button.setAttribute("class","header-select2-selected")
+});
+soShopButtons.addEventListener("click", (event) => {
+    const button = event.target.closest('button');
+
+    if (!button) return;
+
+    const id = button.id;
+    soShopDisplay(id);
+    button.setAttribute("disabled", true)
+    button.setAttribute("class","header-select4-selected")
+});
+function soAreaDisplay(section) {
+    document.getElementById("palettesButton").removeAttribute("disabled");
+    document.getElementById("fieldGuideButton").removeAttribute("disabled");
+    document.getElementById("palettesButton").setAttribute("class","header-select2");
+    document.getElementById("fieldGuideButton").setAttribute("class","header-select2");
+    document.getElementById("paletteDisplay").style.display = section == "palettesButton" ? "block" : "none";
+    document.getElementById("fieldGuideDisplay").style.display = section == "fieldGuideButton" ? "block" : "none";
+}
+function soShopDisplay(section) {
+    shopButtons[0].removeAttribute("disabled");
+    shopButtons[1].removeAttribute("disabled");
+    shopButtons[2].removeAttribute("disabled");
+    shopButtons[3].removeAttribute("disabled");
+    shopButtons[0].setAttribute("class","header-select4");
+    shopButtons[1].setAttribute("class","header-select4");
+    shopButtons[2].setAttribute("class","header-select4");
+    shopButtons[3].setAttribute("class","header-select4");
+    document.getElementById("decorationsDisplay").style.display = section == "decorations" ? "block" : "none";
+    document.getElementById("stickersDisplay").style.display = section == "stickers" ? "block" : "none";
+    document.getElementById("bannersDisplay").style.display = section == "banners" ? "block" : "none";
+    document.getElementById("gearDisplay").style.display = section == "gear" ? "block" : "none";
+}
 function update() {
     if (rotm) rotmCalculateArea(); /* updates the header of the location tracker */
-    if (so) soCalculateArea();
     if (rotm) rotmEndingButtons();
     requestAnimationFrame(update);
 }
@@ -1198,17 +1274,6 @@ function rotmCalculateArea() {
     } else if (rotmDropdown.value == "scrolls" && rotmCurrentArea.textContent != "Sunken Sea Scrolls") {
         rotmSwitchDisplay(scrollsDisplay);
         rotmCurrentArea.textContent = "Sunken Sea Scrolls"
-    }
-}
-function soCalculateArea(){
-    if (soDropdown.value == "preset" && soCurrentArea.textContent != "Preset Palettes") {
-        presetDisplay.style.display = "block";
-        randomDisplay.style.display = "none";
-        soCurrentArea.textContent = "Preset Palettes"
-    } else if (soDropdown.value == "random" && soCurrentArea.textContent != "Random Palettes") {
-        presetDisplay.style.display = "none";
-        randomDisplay.style.display = "block";
-        soCurrentArea.textContent = "Random Palettes"
     }
 }
 
@@ -1969,7 +2034,24 @@ function loadSave() {
                 console.log("Receive No Handler");
         }
     }
-}
+    }
+    if (so) {
+        for (let i = 0; i < itemsList.length; i++) {
+            if (itemsList[i].locationGame != "Splatoon 3: Side Order") {
+                return;
+            }
+            const apID = itemsList[i].locationId;
+            document.getElementById(apID).className = "gray-location";
+        }
+    }
+    if (so) {
+        for (let i = 0; i < itemsList.length; i++) {
+            if (itemsList[i].game != "Splatoon 3: Side Order") {
+                return;
+            }
+            const apID = itemsList[i].id;
+        }
+    }
 }
 
 function rotmReceiveItem(type, id) {
