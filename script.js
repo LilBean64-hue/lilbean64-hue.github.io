@@ -1,4 +1,4 @@
-import { Client, ItemsManager, PlayersManager, Player } from "/node_modules/archipelago.js/dist/archipelago.min.js"
+import { Client, ItemsManager, PlayersManager, RoomStateManager, Player } from "/node_modules/archipelago.js/dist/archipelago.min.js"
 import { mapAccess, gearAccess } from "/access.js";
 //Big important value
 const gameInput = document.getElementById("gameInput");
@@ -67,6 +67,7 @@ const guideDisplay = document.getElementById("fieldGuideDisplay");
 
 export const client = new Client();
 const items = new ItemsManager(client);
+const room = new RoomStateManager(client);
 const players = new PlayersManager(client);
 
 let userPort;
@@ -149,7 +150,6 @@ function connectArchi(Port, SlotName, Game) {
                 document.getElementById("soAccessTracker").style.display = "flex";
             }
 
-            loadSave();
             player.fetchSlotData().then(function (result) {
                 if (rotm) endGoal = result.end_goal;
             });
@@ -157,6 +157,8 @@ function connectArchi(Port, SlotName, Game) {
                 document.getElementById("ending1").textContent = "Rocket Completed";
                 document.getElementById("afterAlternaContainer").style.display = "block";
             }
+            
+            loadSave();
             requestAnimationFrame(update);
         })
         .catch(() => {
@@ -1421,14 +1423,13 @@ function trackerUpdate(type) {
 
 function loadSave() {
     const itemsList = items.received;
+    const locationList = room.checkedLocations
     console.log(itemsList);
+    console.log(locationList);
     if (rotm) {
-    for (let i = 0; i < itemsList.length; i++) {
-        if (itemsList[i].locationGame != "Splatoon 3: Return of the Mammalians") {
-            return;
-        }
-        const apID = itemsList[i].locationId;
-        switch (apID) {
+    for (let i = 0; i < locationList.length; i++) {
+        console.log(locationList[i]);
+        switch (locationList[i]) {
             case 101:
                 rotmChecksRemaining[0]--;
                 rotmDropdownUpdate("text");
