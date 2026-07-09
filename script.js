@@ -1239,6 +1239,7 @@ function soShopDisplay(section) {
 }
 function update() {
     if (rotm) rotmCalculateArea(); /* updates the header of the location tracker */
+    if (rotm) rotmDropdownUpdate("text");
     if (rotm) rotmEndingButtons();
     requestAnimationFrame(update);
 }
