@@ -748,6 +748,7 @@ items.on("itemsReceived", (content) => {
         }
         for (let i = 0; i < content.length; i++) {
             if (content[i].game != "Splatoon 3: Return of the Mammalians") {
+                console.log("Not yippee")
                 return;
             }
             const apID = content[i].id;
