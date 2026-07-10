@@ -53,7 +53,7 @@ const heroGearArray = [0, 0, 0]; //Sardinium, Skill Points, Traps
 let soPalettes = 0;
 const soFloorOptions = [0,0,0,0,0,0];
 const soHacks = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-let soKeys = 0;
+let soKeys = 3;
 const soFiller = [0,0,0,0];
 
 // dropdown to select area
