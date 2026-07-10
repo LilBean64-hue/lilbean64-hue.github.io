@@ -53,7 +53,7 @@ const heroGearArray = [0, 0, 0]; //Sardinium, Skill Points, Traps
 let soPalettes = 0;
 const soFloorOptions = [0,0,0,0,0,0];
 const soHacks = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-let soKeys = 3;
+let soKeys = 0;
 const soFiller = [0,0,0,0];
 
 // dropdown to select area
@@ -1611,6 +1611,15 @@ function trackerUpdate(type) {
             document.getElementById("48").className = document.getElementById("48").className == "red-location" ? "green-location" : document.getElementById("48").className;
             document.getElementById("49").className = document.getElementById("49").className == "red-location" ? "green-location" : document.getElementById("49").className;
             shopHints(10);
+            shopHints(9);
+            shopHints(8);
+            shopHints(7);
+            shopHints(6);
+            shopHints(5);
+            shopHints(4);
+            shopHints(3);
+            shopHints(2);
+            shopHints(1);
         } else if (soKeys >= 27){
             document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
             document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
@@ -1657,6 +1666,14 @@ function trackerUpdate(type) {
             document.getElementById("47").className = document.getElementById("47").className == "red-location" ? "green-location" : document.getElementById("47").className;
             document.getElementById("48").className = document.getElementById("48").className == "red-location" ? "green-location" : document.getElementById("48").className;
             shopHints(9);
+            shopHints(8);
+            shopHints(7);
+            shopHints(6);
+            shopHints(5);
+            shopHints(4);
+            shopHints(3);
+            shopHints(2);
+            shopHints(1);
         } else if (soKeys >= 24) {
             document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
             document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
@@ -1697,6 +1714,13 @@ function trackerUpdate(type) {
             document.getElementById("47").className = document.getElementById("47").className == "red-location" ? "green-location" : document.getElementById("47").className;
             document.getElementById("48").className = document.getElementById("48").className == "red-location" ? "green-location" : document.getElementById("48").className;
             shopHints(8);
+            shopHints(7);
+            shopHints(6);
+            shopHints(5);
+            shopHints(4);
+            shopHints(3);
+            shopHints(2);
+            shopHints(1);
         } else if (soKeys >= 21) {
             document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
             document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
@@ -1735,6 +1759,12 @@ function trackerUpdate(type) {
             document.getElementById("46").className = document.getElementById("46").className == "red-location" ? "green-location" : document.getElementById("46").className;
             document.getElementById("47").className = document.getElementById("47").className == "red-location" ? "green-location" : document.getElementById("47").className;
             shopHints(7);
+            shopHints(6);
+            shopHints(5);
+            shopHints(4);
+            shopHints(3);
+            shopHints(2);
+            shopHints(1);
         } else if (soKeys >= 18) {
             document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
             document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
@@ -1771,6 +1801,11 @@ function trackerUpdate(type) {
             document.getElementById("46").className = document.getElementById("46").className == "red-location" ? "green-location" : document.getElementById("46").className;
             document.getElementById("47").className = document.getElementById("47").className == "red-location" ? "green-location" : document.getElementById("47").className;
             shopHints(6);
+            shopHints(5);
+            shopHints(4);
+            shopHints(3);
+            shopHints(2);
+            shopHints(1);
         } else if (soKeys >= 15) {
             document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
             document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
@@ -1801,6 +1836,10 @@ function trackerUpdate(type) {
             document.getElementById("46").className = document.getElementById("46").className == "red-location" ? "green-location" : document.getElementById("46").className;
             document.getElementById("47").className = document.getElementById("47").className == "red-location" ? "green-location" : document.getElementById("47").className;
             shopHints(5);
+            shopHints(4);
+            shopHints(3);
+            shopHints(2);
+            shopHints(1);
         } else if (soKeys >= 12) {
             document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
             document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
@@ -1829,6 +1868,9 @@ function trackerUpdate(type) {
             document.getElementById("43").className = document.getElementById("43").className == "red-location" ? "green-location" : document.getElementById("43").className;
             document.getElementById("46").className = document.getElementById("46").className == "red-location" ? "green-location" : document.getElementById("46").className;
             shopHints(4);
+            shopHints(3);
+            shopHints(2);
+            shopHints(1);
         } else if (soKeys >= 9) {
             document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
             document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
@@ -1848,6 +1890,8 @@ function trackerUpdate(type) {
             document.getElementById("43").className = document.getElementById("43").className == "red-location" ? "green-location" : document.getElementById("43").className;
             document.getElementById("46").className = document.getElementById("46").className == "red-location" ? "green-location" : document.getElementById("46").className;
             shopHints(3);
+            shopHints(2);
+            shopHints(1);
         } else if (soKeys >= 6) {
             document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
             document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
@@ -1864,6 +1908,7 @@ function trackerUpdate(type) {
             document.getElementById("41").className = document.getElementById("41").className == "red-location" ? "green-location" : document.getElementById("41").className;
             document.getElementById("42").className = document.getElementById("42").className == "red-location" ? "green-location" : document.getElementById("42").className;
             shopHints(2);
+            shopHints(1);
         } else if (soKeys >= 3) {
             document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
             document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
