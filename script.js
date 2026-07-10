@@ -48,7 +48,13 @@ const rotmB = [
 const shopButtons = [document.getElementById("decorations"),document.getElementById("stickers"),document.getElementById("banners"),document.getElementById("gear")]
 
 const rotmChecksRemaining = [5, 17, 15, 14, 20, 21, 20]; /* Crater, Area 1, Area 2, Area 3, Area 4, Area 5, Area 6 */
-const heroGearArray = [0, 0, 0] //Sardinium, Skill Points, Traps
+const heroGearArray = [0, 0, 0]; //Sardinium, Skill Points, Traps
+
+let soPalettes = 0;
+const soFloorOptions = [0,0,0,0,0,0];
+const soHacks = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+let soKeys = 0;
+const soFiller = [0,0,0,0];
 
 // dropdown to select area
 const rotmDropdown = document.getElementById("locationSelect");
@@ -157,7 +163,6 @@ function connectArchi(Port, SlotName, Game) {
                 document.getElementById("ending1").textContent = "Rocket Completed";
                 document.getElementById("afterAlternaContainer").style.display = "block";
             }
-            
             loadSave();
             requestAnimationFrame(update);
         })
@@ -797,13 +802,33 @@ items.on("itemsReceived", (content) => {
                 return;
             }
             const id = content[i].id;
-            
+            soReceiveItem(id);
+            switch(id){
+                case 10001 :
+                    soFiller[0]++;
+                    break;
+                case 10002 :
+                    soFiller[1]++;
+                    break;
+                case 10003 :
+                    soFiller[2]++;
+                    break;
+                case 10004 :
+                    soFiller[3]++;
+                    break;
+            }
         }
     }
 });
 
 rotmTrapRemove.onclick = function () {
     if (heroGearArray[2] > 0) heroGearArray[2]--;
+    rotmDropdownUpdate("text");
+}
+document.getElementById("soRemoveTrap").onclick = function () {
+    if (soFiller[1] > 0) soFiller[1]--;
+    if (soFiller[2] > 0) soFiller[2]--;
+    if (soFiller[3] > 0) soFiller[3]--;
     rotmDropdownUpdate("text");
 }
 rotmEndingButton1.onclick = function () {
@@ -1194,6 +1219,29 @@ document.getElementById("paletteTracker").addEventListener("click", (event) => {
     button.setAttribute("disabled", true);
     button.setAttribute("class", "gray-location");
     client.check(Math.floor(id));
+    if(id == 1230){
+        client.goal();
+    }
+    if ((id - 100) > 0) {
+        soKeys++;
+    }
+});
+document.getElementById("shopBody").addEventListener("click", (event) => {
+    const button = event.target.closest('button');
+
+    if (!button) return;
+    const goy = button.className; //green or red
+    if (goy == "red-location" || goy == "gray-location") return;
+    if (goy == "header-select4" || goy == "header-select4-selected") return;
+
+    const id = button.id;
+    console.log("Button " + id + " pressed");
+
+    //remove the buttons on push
+    button.setAttribute("disabled", true);
+    button.setAttribute("class", "gray-location");
+    client.check(Math.floor(id));
+    document.getElementById(id+"h").textContent = "";
 });
 soAreaSelect.addEventListener("click", (event) => {
     const button = event.target.closest('button');
@@ -1244,6 +1292,11 @@ function update() {
     if (rotm) trackerUpdate("rocket");
     if (rotm) trackerUpdate("afterAlterna");
     if (rotm) rotmEndingButtons();
+    if(so) trackerUpdate("hacks");
+    if(so) trackerUpdate("floorOptions");
+    if(so) trackerUpdate("shop");
+    if(so) trackerUpdate("palette");
+    if(so) trackerUpdate("soFiller");
     requestAnimationFrame(update);
 }
 function rotmEndingButtons() {
@@ -1421,10 +1474,699 @@ function trackerUpdate(type) {
         } else if (mapAccess[3] > 0) {
             document.getElementById("a1").className = "hash-available";
         }
+    } else if (type == "hacks") {
+        const mlBar = "[" + "#".repeat(Math.min(soHacks[0],5)) + "-".repeat(5-(Math.min(soHacks[0],5))) + "]";
+        document.getElementById("ml").textContent = mlBar;
+        const drBar = "[" + "#".repeat(Math.min(soHacks[1],5)) + "-".repeat(5-(Math.min(soHacks[1],5))) + "]";
+        document.getElementById("dr").textContent = drBar;
+        const maBar = "[" + "#".repeat(Math.min(soHacks[2],3)) + "-".repeat(3-(Math.min(soHacks[2],3))) + "]";
+        document.getElementById("ma").textContent = maBar;
+        const bajBar = "[" + "#".repeat(Math.min(soHacks[3],4)) + "-".repeat(4-(Math.min(soHacks[3],4))) + "]";
+        document.getElementById("baj").textContent = bajBar;
+        const arBar = "[" + "#".repeat(Math.min(soHacks[4],4)) + "-".repeat(4-(Math.min(soHacks[4],4))) + "]";
+        document.getElementById("ar").textContent = arBar;
+        const basBar = "[" + "#".repeat(Math.min(soHacks[5],3)) + "-".repeat(3-(Math.min(soHacks[5],3))) + "]";
+        document.getElementById("bas").textContent = basBar;
+        const cBar = "[" + "#".repeat(Math.min(soHacks[6],5)) + "-".repeat(5-(Math.min(soHacks[6],5))) + "]";
+        document.getElementById("c").textContent = cBar;
+        const adBar = "[" + "#".repeat(Math.min(soHacks[7],5)) + "-".repeat(5-(Math.min(soHacks[7],5))) + "]";
+        document.getElementById("ad").textContent = adBar;
+        const frBar = "[" + "#".repeat(Math.min(soHacks[8],5)) + "-".repeat(5-(Math.min(soHacks[8],5))) + "]";
+        document.getElementById("fr").textContent = frBar;
+        const dcrBar = "[" + "#".repeat(Math.min(soHacks[9],5)) + "-".repeat(5-(Math.min(soHacks[9],5))) + "]";
+        document.getElementById("dcr").textContent = dcrBar;
+        const ccbBar = "[" + "#".repeat(Math.min(soHacks[10],1)) + "-".repeat(1-(Math.min(soHacks[10],1))) + "]";
+        document.getElementById("ccb").textContent = ccbBar;
+        const dasBar = "[" + "#".repeat(Math.min(soHacks[11],4)) + "-".repeat(4-(Math.min(soHacks[11],4))) + "]";
+        document.getElementById("das").textContent = dasBar;
+        const dgtcBar = "[" + "#".repeat(Math.min(soHacks[12],1)) + "-".repeat(1-(Math.min(soHacks[12],1))) + "]";
+        document.getElementById("dgtc").textContent = dgtcBar;
+        const dgscBar = "[" + "#".repeat(Math.min(soHacks[13],1)) + "-".repeat(1-(Math.min(soHacks[13],1))) + "]";
+        document.getElementById("dgsc").textContent = dgscBar;
+        const dimBar = "[" + "#".repeat(Math.min(soHacks[14],1)) + "-".repeat(1-(Math.min(soHacks[14],1))) + "]";
+        document.getElementById("dim").textContent = dimBar;
+        const dsBar = "[" + "#".repeat(Math.min(soHacks[15],1)) + "-".repeat(1-(Math.min(soHacks[15],1))) + "]";
+        document.getElementById("ds").textContent = dsBar;
+        const dbbBar = "[" + "#".repeat(Math.min(soHacks[16],1)) + "-".repeat(1-(Math.min(soHacks[16],1))) + "]";
+        document.getElementById("dbb").textContent = dbbBar;
+        const diBar = "[" + "#".repeat(Math.min(soHacks[17],1)) + "-".repeat(1-(Math.min(soHacks[17],1))) + "]";
+        document.getElementById("di").textContent = diBar;
+        const ditBar = "[" + "#".repeat(Math.min(soHacks[18],5)) + "-".repeat(1-(Math.min(soHacks[18],1))) + "]";
+        document.getElementById("dit").textContent = ditBar;
+        const r10BBar = "[" + "#".repeat(Math.min(soHacks[19],1)) + "-".repeat(1-(Math.min(soHacks[19],1))) + "]";
+        document.getElementById("r10B").textContent = r10BBar;
+        const r20BBar = "[" + "#".repeat(Math.min(soHacks[20],1)) + "-".repeat(1-(Math.min(soHacks[20],1))) + "]";
+        document.getElementById("r20B").textContent = r20BBar;
+        const weBar = "[" + "#".repeat(Math.min(soHacks[21],1)) + "-".repeat(1-(Math.min(soHacks[21],1))) + "]";
+        document.getElementById("we").textContent = weBar;
+        const vmdBar = "[" + "#".repeat(Math.min(soHacks[22],5)) + "-".repeat(5-(Math.min(soHacks[22],5))) + "]";
+        document.getElementById("vmd").textContent = vmdBar;
+        const vmrBar = "[" + "#".repeat(Math.min(soHacks[23],5)) + "-".repeat(5-(Math.min(soHacks[23],5))) + "]";
+        document.getElementById("vmr").textContent = vmrBar;
+        const vm15Bar = "[" + "#".repeat(Math.min(soHacks[24],1)) + "-".repeat(1-(Math.min(soHacks[24],1))) + "]";
+        document.getElementById("15vm").textContent = vm15Bar;
+        const vm25Bar = "[" + "#".repeat(Math.min(soHacks[25],1)) + "-".repeat(1-(Math.min(soHacks[25],1))) + "]";
+        document.getElementById("25vm").textContent = vm25Bar;
+        const mrBar = "[" + "#".repeat(Math.min(soHacks[26],5)) + "-".repeat(5-(Math.min(soHacks[26],5))) + "]";
+        document.getElementById("mr").textContent = mrBar;
+        const rrBar = "[" + "#".repeat(Math.min(soHacks[27],1)) + "-".repeat(1-(Math.min(soHacks[27],1))) + "]";
+        document.getElementById("rr").textContent = rrBar;
+    } else if (type == "floorOptions") {
+        let floor10options = "Top Option"
+        if (soFloorOptions[0] > 0 && soFloorOptions[1] == 0){
+            floor10options = "Top Option & Middle Option"
+        } else if (soFloorOptions[0] == 0 && soFloorOptions[1] > 0) {
+            floor10options = "Top Option & Bottom Option"
+        } else if (soFloorOptions[0] > 0 && soFloorOptions[1] > 0) {
+            floor10options = "All Options"
+        }
+        let floor20options = "Top Option"
+        if (soFloorOptions[2] > 0 && soFloorOptions[3] == 0){
+            floor20options = "Top Option & Middle Option"
+        } else if (soFloorOptions[2] == 0 && soFloorOptions[3] > 0) {
+            floor20options = "Top Option & Bottom Option"
+        } else if (soFloorOptions[2] > 0 && soFloorOptions[3] > 0) {
+            floor20options = "All Options"
+        }
+        let floor30options = "Top Option"
+        if (soFloorOptions[4] > 0 && soFloorOptions[5] == 0){
+            floor30options = "Top Option & Middle Option"
+        } else if (soFloorOptions[4] == 0 && soFloorOptions[5] > 0) {
+            floor30options = "Top Option & Bottom Option"
+        } else if (soFloorOptions[4] > 0 && soFloorOptions[5] > 0) {
+            floor30options = "All Options"
+        }
+        document.getElementById("floor10Options").textContent = floor10options;
+        document.getElementById("floor20Options").textContent = floor20options;
+        document.getElementById("floor30Options").textContent = floor30options;
+    } else if (type == "shop") {
+        if (soKeys >= 33) {
+            document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
+            document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
+            document.getElementById("3").className = document.getElementById("3").className == "red-location" ? "green-location" : document.getElementById("3").className;
+            document.getElementById("4").className = document.getElementById("4").className == "red-location" ? "green-location" : document.getElementById("4").className;
+            document.getElementById("5").className = document.getElementById("5").className == "red-location" ? "green-location" : document.getElementById("5").className;
+            document.getElementById("6").className = document.getElementById("6").className == "red-location" ? "green-location" : document.getElementById("6").className;
+            document.getElementById("7").className = document.getElementById("7").className == "red-location" ? "green-location" : document.getElementById("7").className;
+            document.getElementById("8").className = document.getElementById("8").className == "red-location" ? "green-location" : document.getElementById("8").className;
+            document.getElementById("9").className = document.getElementById("9").className == "red-location" ? "green-location" : document.getElementById("9").className;
+            document.getElementById("10").className = document.getElementById("10").className == "red-location" ? "green-location" : document.getElementById("10").className;
+            document.getElementById("11").className = document.getElementById("11").className == "red-location" ? "green-location" : document.getElementById("11").className;
+            document.getElementById("12").className = document.getElementById("12").className == "red-location" ? "green-location" : document.getElementById("12").className;
+            document.getElementById("13").className = document.getElementById("13").className == "red-location" ? "green-location" : document.getElementById("13").className;
+            document.getElementById("14").className = document.getElementById("14").className == "red-location" ? "green-location" : document.getElementById("14").className;
+            document.getElementById("15").className = document.getElementById("15").className == "red-location" ? "green-location" : document.getElementById("15").className;
+            document.getElementById("16").className = document.getElementById("16").className == "red-location" ? "green-location" : document.getElementById("16").className;
+            document.getElementById("17").className = document.getElementById("17").className == "red-location" ? "green-location" : document.getElementById("17").className;
+            document.getElementById("18").className = document.getElementById("18").className == "red-location" ? "green-location" : document.getElementById("18").className;
+            document.getElementById("19").className = document.getElementById("19").className == "red-location" ? "green-location" : document.getElementById("19").className;
+            document.getElementById("20").className = document.getElementById("20").className == "red-location" ? "green-location" : document.getElementById("20").className;
+            document.getElementById("21").className = document.getElementById("21").className == "red-location" ? "green-location" : document.getElementById("21").className;
+            document.getElementById("22").className = document.getElementById("22").className == "red-location" ? "green-location" : document.getElementById("22").className;
+            document.getElementById("23").className = document.getElementById("23").className == "red-location" ? "green-location" : document.getElementById("23").className;
+            document.getElementById("24").className = document.getElementById("24").className == "red-location" ? "green-location" : document.getElementById("24").className;
+            document.getElementById("25").className = document.getElementById("25").className == "red-location" ? "green-location" : document.getElementById("25").className;
+            document.getElementById("26").className = document.getElementById("26").className == "red-location" ? "green-location" : document.getElementById("26").className;
+            document.getElementById("27").className = document.getElementById("27").className == "red-location" ? "green-location" : document.getElementById("27").className;
+            document.getElementById("28").className = document.getElementById("28").className == "red-location" ? "green-location" : document.getElementById("28").className;
+            document.getElementById("29").className = document.getElementById("29").className == "red-location" ? "green-location" : document.getElementById("29").className;
+            document.getElementById("30").className = document.getElementById("30").className == "red-location" ? "green-location" : document.getElementById("30").className;
+            document.getElementById("31").className = document.getElementById("31").className == "red-location" ? "green-location" : document.getElementById("31").className;
+            document.getElementById("32").className = document.getElementById("32").className == "red-location" ? "green-location" : document.getElementById("32").className;
+            document.getElementById("33").className = document.getElementById("33").className == "red-location" ? "green-location" : document.getElementById("33").className;
+            document.getElementById("34").className = document.getElementById("34").className == "red-location" ? "green-location" : document.getElementById("34").className;
+            document.getElementById("35").className = document.getElementById("35").className == "red-location" ? "green-location" : document.getElementById("35").className;
+            document.getElementById("36").className = document.getElementById("36").className == "red-location" ? "green-location" : document.getElementById("36").className;
+            document.getElementById("37").className = document.getElementById("37").className == "red-location" ? "green-location" : document.getElementById("37").className;
+            document.getElementById("38").className = document.getElementById("38").className == "red-location" ? "green-location" : document.getElementById("38").className;
+            document.getElementById("39").className = document.getElementById("39").className == "red-location" ? "green-location" : document.getElementById("39").className;
+            document.getElementById("40").className = document.getElementById("40").className == "red-location" ? "green-location" : document.getElementById("40").className;
+            document.getElementById("41").className = document.getElementById("41").className == "red-location" ? "green-location" : document.getElementById("41").className;
+            document.getElementById("42").className = document.getElementById("42").className == "red-location" ? "green-location" : document.getElementById("42").className;
+            document.getElementById("43").className = document.getElementById("43").className == "red-location" ? "green-location" : document.getElementById("43").className;
+            document.getElementById("44").className = document.getElementById("44").className == "red-location" ? "green-location" : document.getElementById("44").className;
+            document.getElementById("45").className = document.getElementById("45").className == "red-location" ? "green-location" : document.getElementById("45").className;
+            document.getElementById("46").className = document.getElementById("46").className == "red-location" ? "green-location" : document.getElementById("46").className;
+            document.getElementById("47").className = document.getElementById("47").className == "red-location" ? "green-location" : document.getElementById("47").className;
+            document.getElementById("48").className = document.getElementById("48").className == "red-location" ? "green-location" : document.getElementById("48").className;
+            document.getElementById("49").className = document.getElementById("49").className == "red-location" ? "green-location" : document.getElementById("49").className;
+            shopHints(10);
+        } else if (soKeys >= 27){
+            document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
+            document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
+            document.getElementById("3").className = document.getElementById("3").className == "red-location" ? "green-location" : document.getElementById("3").className;
+            document.getElementById("4").className = document.getElementById("4").className == "red-location" ? "green-location" : document.getElementById("4").className;
+            document.getElementById("5").className = document.getElementById("5").className == "red-location" ? "green-location" : document.getElementById("5").className;
+            document.getElementById("6").className = document.getElementById("6").className == "red-location" ? "green-location" : document.getElementById("6").className;
+            document.getElementById("7").className = document.getElementById("7").className == "red-location" ? "green-location" : document.getElementById("7").className;
+            document.getElementById("8").className = document.getElementById("8").className == "red-location" ? "green-location" : document.getElementById("8").className;
+            document.getElementById("9").className = document.getElementById("9").className == "red-location" ? "green-location" : document.getElementById("9").className;
+            document.getElementById("10").className = document.getElementById("10").className == "red-location" ? "green-location" : document.getElementById("10").className;
+            document.getElementById("11").className = document.getElementById("11").className == "red-location" ? "green-location" : document.getElementById("11").className;
+            document.getElementById("12").className = document.getElementById("12").className == "red-location" ? "green-location" : document.getElementById("12").className;
+            document.getElementById("13").className = document.getElementById("13").className == "red-location" ? "green-location" : document.getElementById("13").className;
+            document.getElementById("14").className = document.getElementById("14").className == "red-location" ? "green-location" : document.getElementById("14").className;
+            document.getElementById("15").className = document.getElementById("15").className == "red-location" ? "green-location" : document.getElementById("15").className;
+            document.getElementById("16").className = document.getElementById("16").className == "red-location" ? "green-location" : document.getElementById("16").className;
+            document.getElementById("17").className = document.getElementById("17").className == "red-location" ? "green-location" : document.getElementById("17").className;
+            document.getElementById("18").className = document.getElementById("18").className == "red-location" ? "green-location" : document.getElementById("18").className;
+            document.getElementById("19").className = document.getElementById("19").className == "red-location" ? "green-location" : document.getElementById("19").className;
+            document.getElementById("20").className = document.getElementById("20").className == "red-location" ? "green-location" : document.getElementById("20").className;
+            document.getElementById("21").className = document.getElementById("21").className == "red-location" ? "green-location" : document.getElementById("21").className;
+            document.getElementById("22").className = document.getElementById("22").className == "red-location" ? "green-location" : document.getElementById("22").className;
+            document.getElementById("24").className = document.getElementById("24").className == "red-location" ? "green-location" : document.getElementById("24").className;
+            document.getElementById("25").className = document.getElementById("25").className == "red-location" ? "green-location" : document.getElementById("25").className;
+            document.getElementById("26").className = document.getElementById("26").className == "red-location" ? "green-location" : document.getElementById("26").className;
+            document.getElementById("27").className = document.getElementById("27").className == "red-location" ? "green-location" : document.getElementById("27").className;
+            document.getElementById("28").className = document.getElementById("28").className == "red-location" ? "green-location" : document.getElementById("28").className;
+            document.getElementById("29").className = document.getElementById("29").className == "red-location" ? "green-location" : document.getElementById("29").className;
+            document.getElementById("30").className = document.getElementById("30").className == "red-location" ? "green-location" : document.getElementById("30").className;
+            document.getElementById("31").className = document.getElementById("31").className == "red-location" ? "green-location" : document.getElementById("31").className;
+            document.getElementById("32").className = document.getElementById("32").className == "red-location" ? "green-location" : document.getElementById("32").className;
+            document.getElementById("33").className = document.getElementById("33").className == "red-location" ? "green-location" : document.getElementById("33").className;
+            document.getElementById("34").className = document.getElementById("34").className == "red-location" ? "green-location" : document.getElementById("34").className;
+            document.getElementById("35").className = document.getElementById("35").className == "red-location" ? "green-location" : document.getElementById("35").className;
+            document.getElementById("37").className = document.getElementById("37").className == "red-location" ? "green-location" : document.getElementById("37").className;
+            document.getElementById("38").className = document.getElementById("38").className == "red-location" ? "green-location" : document.getElementById("38").className;
+            document.getElementById("39").className = document.getElementById("39").className == "red-location" ? "green-location" : document.getElementById("39").className;
+            document.getElementById("41").className = document.getElementById("41").className == "red-location" ? "green-location" : document.getElementById("41").className;
+            document.getElementById("42").className = document.getElementById("42").className == "red-location" ? "green-location" : document.getElementById("42").className;
+            document.getElementById("43").className = document.getElementById("43").className == "red-location" ? "green-location" : document.getElementById("43").className;
+            document.getElementById("44").className = document.getElementById("44").className == "red-location" ? "green-location" : document.getElementById("44").className;
+            document.getElementById("46").className = document.getElementById("46").className == "red-location" ? "green-location" : document.getElementById("46").className;
+            document.getElementById("47").className = document.getElementById("47").className == "red-location" ? "green-location" : document.getElementById("47").className;
+            document.getElementById("48").className = document.getElementById("48").className == "red-location" ? "green-location" : document.getElementById("48").className;
+            shopHints(9);
+        } else if (soKeys >= 24) {
+            document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
+            document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
+            document.getElementById("3").className = document.getElementById("3").className == "red-location" ? "green-location" : document.getElementById("3").className;
+            document.getElementById("4").className = document.getElementById("4").className == "red-location" ? "green-location" : document.getElementById("4").className;
+            document.getElementById("5").className = document.getElementById("5").className == "red-location" ? "green-location" : document.getElementById("5").className;
+            document.getElementById("6").className = document.getElementById("6").className == "red-location" ? "green-location" : document.getElementById("6").className;
+            document.getElementById("7").className = document.getElementById("7").className == "red-location" ? "green-location" : document.getElementById("7").className;
+            document.getElementById("8").className = document.getElementById("8").className == "red-location" ? "green-location" : document.getElementById("8").className;
+            document.getElementById("9").className = document.getElementById("9").className == "red-location" ? "green-location" : document.getElementById("9").className;
+            document.getElementById("10").className = document.getElementById("10").className == "red-location" ? "green-location" : document.getElementById("10").className;
+            document.getElementById("11").className = document.getElementById("11").className == "red-location" ? "green-location" : document.getElementById("11").className;
+            document.getElementById("12").className = document.getElementById("12").className == "red-location" ? "green-location" : document.getElementById("12").className;
+            document.getElementById("13").className = document.getElementById("13").className == "red-location" ? "green-location" : document.getElementById("13").className;
+            document.getElementById("14").className = document.getElementById("14").className == "red-location" ? "green-location" : document.getElementById("14").className;
+            document.getElementById("15").className = document.getElementById("15").className == "red-location" ? "green-location" : document.getElementById("15").className;
+            document.getElementById("19").className = document.getElementById("19").className == "red-location" ? "green-location" : document.getElementById("19").className;
+            document.getElementById("20").className = document.getElementById("20").className == "red-location" ? "green-location" : document.getElementById("20").className;
+            document.getElementById("21").className = document.getElementById("21").className == "red-location" ? "green-location" : document.getElementById("21").className;
+            document.getElementById("22").className = document.getElementById("22").className == "red-location" ? "green-location" : document.getElementById("22").className;
+            document.getElementById("24").className = document.getElementById("24").className == "red-location" ? "green-location" : document.getElementById("24").className;
+            document.getElementById("25").className = document.getElementById("25").className == "red-location" ? "green-location" : document.getElementById("25").className;
+            document.getElementById("26").className = document.getElementById("26").className == "red-location" ? "green-location" : document.getElementById("26").className;
+            document.getElementById("27").className = document.getElementById("27").className == "red-location" ? "green-location" : document.getElementById("27").className;
+            document.getElementById("31").className = document.getElementById("31").className == "red-location" ? "green-location" : document.getElementById("31").className;
+            document.getElementById("32").className = document.getElementById("32").className == "red-location" ? "green-location" : document.getElementById("32").className;
+            document.getElementById("33").className = document.getElementById("33").className == "red-location" ? "green-location" : document.getElementById("33").className;
+            document.getElementById("34").className = document.getElementById("34").className == "red-location" ? "green-location" : document.getElementById("34").className;
+            document.getElementById("35").className = document.getElementById("35").className == "red-location" ? "green-location" : document.getElementById("35").className;
+            document.getElementById("37").className = document.getElementById("37").className == "red-location" ? "green-location" : document.getElementById("37").className;
+            document.getElementById("38").className = document.getElementById("38").className == "red-location" ? "green-location" : document.getElementById("38").className;
+            document.getElementById("39").className = document.getElementById("39").className == "red-location" ? "green-location" : document.getElementById("39").className;
+            document.getElementById("41").className = document.getElementById("41").className == "red-location" ? "green-location" : document.getElementById("41").className;
+            document.getElementById("42").className = document.getElementById("42").className == "red-location" ? "green-location" : document.getElementById("42").className;
+            document.getElementById("43").className = document.getElementById("43").className == "red-location" ? "green-location" : document.getElementById("43").className;
+            document.getElementById("44").className = document.getElementById("44").className == "red-location" ? "green-location" : document.getElementById("44").className;
+            document.getElementById("46").className = document.getElementById("46").className == "red-location" ? "green-location" : document.getElementById("46").className;
+            document.getElementById("47").className = document.getElementById("47").className == "red-location" ? "green-location" : document.getElementById("47").className;
+            document.getElementById("48").className = document.getElementById("48").className == "red-location" ? "green-location" : document.getElementById("48").className;
+            shopHints(8);
+        } else if (soKeys >= 21) {
+            document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
+            document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
+            document.getElementById("3").className = document.getElementById("3").className == "red-location" ? "green-location" : document.getElementById("3").className;
+            document.getElementById("4").className = document.getElementById("4").className == "red-location" ? "green-location" : document.getElementById("4").className;
+            document.getElementById("5").className = document.getElementById("5").className == "red-location" ? "green-location" : document.getElementById("5").className;
+            document.getElementById("6").className = document.getElementById("6").className == "red-location" ? "green-location" : document.getElementById("6").className;
+            document.getElementById("7").className = document.getElementById("7").className == "red-location" ? "green-location" : document.getElementById("7").className;
+            document.getElementById("8").className = document.getElementById("8").className == "red-location" ? "green-location" : document.getElementById("8").className;
+            document.getElementById("9").className = document.getElementById("9").className == "red-location" ? "green-location" : document.getElementById("9").className;
+            document.getElementById("10").className = document.getElementById("10").className == "red-location" ? "green-location" : document.getElementById("10").className;
+            document.getElementById("11").className = document.getElementById("11").className == "red-location" ? "green-location" : document.getElementById("11").className;
+            document.getElementById("12").className = document.getElementById("12").className == "red-location" ? "green-location" : document.getElementById("12").className;
+            document.getElementById("13").className = document.getElementById("13").className == "red-location" ? "green-location" : document.getElementById("13").className;
+            document.getElementById("14").className = document.getElementById("14").className == "red-location" ? "green-location" : document.getElementById("14").className;
+            document.getElementById("15").className = document.getElementById("15").className == "red-location" ? "green-location" : document.getElementById("15").className;
+            document.getElementById("19").className = document.getElementById("19").className == "red-location" ? "green-location" : document.getElementById("19").className;
+            document.getElementById("20").className = document.getElementById("20").className == "red-location" ? "green-location" : document.getElementById("20").className;
+            document.getElementById("21").className = document.getElementById("21").className == "red-location" ? "green-location" : document.getElementById("21").className;
+            document.getElementById("24").className = document.getElementById("24").className == "red-location" ? "green-location" : document.getElementById("24").className;
+            document.getElementById("25").className = document.getElementById("25").className == "red-location" ? "green-location" : document.getElementById("25").className;
+            document.getElementById("26").className = document.getElementById("26").className == "red-location" ? "green-location" : document.getElementById("26").className;
+            document.getElementById("27").className = document.getElementById("27").className == "red-location" ? "green-location" : document.getElementById("27").className;
+            document.getElementById("31").className = document.getElementById("31").className == "red-location" ? "green-location" : document.getElementById("31").className;
+            document.getElementById("32").className = document.getElementById("32").className == "red-location" ? "green-location" : document.getElementById("32").className;
+            document.getElementById("33").className = document.getElementById("33").className == "red-location" ? "green-location" : document.getElementById("33").className;
+            document.getElementById("34").className = document.getElementById("34").className == "red-location" ? "green-location" : document.getElementById("34").className;
+            document.getElementById("35").className = document.getElementById("35").className == "red-location" ? "green-location" : document.getElementById("35").className;
+            document.getElementById("37").className = document.getElementById("37").className == "red-location" ? "green-location" : document.getElementById("37").className;
+            document.getElementById("38").className = document.getElementById("38").className == "red-location" ? "green-location" : document.getElementById("38").className;
+            document.getElementById("39").className = document.getElementById("39").className == "red-location" ? "green-location" : document.getElementById("39").className;
+            document.getElementById("41").className = document.getElementById("41").className == "red-location" ? "green-location" : document.getElementById("41").className;
+            document.getElementById("42").className = document.getElementById("42").className == "red-location" ? "green-location" : document.getElementById("42").className;
+            document.getElementById("43").className = document.getElementById("43").className == "red-location" ? "green-location" : document.getElementById("43").className;
+            document.getElementById("44").className = document.getElementById("44").className == "red-location" ? "green-location" : document.getElementById("44").className;
+            document.getElementById("46").className = document.getElementById("46").className == "red-location" ? "green-location" : document.getElementById("46").className;
+            document.getElementById("47").className = document.getElementById("47").className == "red-location" ? "green-location" : document.getElementById("47").className;
+            shopHints(7);
+        } else if (soKeys >= 18) {
+            document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
+            document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
+            document.getElementById("3").className = document.getElementById("3").className == "red-location" ? "green-location" : document.getElementById("3").className;
+            document.getElementById("4").className = document.getElementById("4").className == "red-location" ? "green-location" : document.getElementById("4").className;
+            document.getElementById("5").className = document.getElementById("5").className == "red-location" ? "green-location" : document.getElementById("5").className;
+            document.getElementById("6").className = document.getElementById("6").className == "red-location" ? "green-location" : document.getElementById("6").className;
+            document.getElementById("7").className = document.getElementById("7").className == "red-location" ? "green-location" : document.getElementById("7").className;
+            document.getElementById("8").className = document.getElementById("8").className == "red-location" ? "green-location" : document.getElementById("8").className;
+            document.getElementById("9").className = document.getElementById("9").className == "red-location" ? "green-location" : document.getElementById("9").className;
+            document.getElementById("10").className = document.getElementById("10").className == "red-location" ? "green-location" : document.getElementById("10").className;
+            document.getElementById("11").className = document.getElementById("11").className == "red-location" ? "green-location" : document.getElementById("11").className;
+            document.getElementById("12").className = document.getElementById("12").className == "red-location" ? "green-location" : document.getElementById("12").className;
+            document.getElementById("13").className = document.getElementById("13").className == "red-location" ? "green-location" : document.getElementById("13").className;
+            document.getElementById("14").className = document.getElementById("14").className == "red-location" ? "green-location" : document.getElementById("14").className;
+            document.getElementById("15").className = document.getElementById("15").className == "red-location" ? "green-location" : document.getElementById("15").className;
+            document.getElementById("19").className = document.getElementById("19").className == "red-location" ? "green-location" : document.getElementById("19").className;
+            document.getElementById("20").className = document.getElementById("20").className == "red-location" ? "green-location" : document.getElementById("20").className;
+            document.getElementById("24").className = document.getElementById("24").className == "red-location" ? "green-location" : document.getElementById("24").className;
+            document.getElementById("25").className = document.getElementById("25").className == "red-location" ? "green-location" : document.getElementById("25").className;
+            document.getElementById("26").className = document.getElementById("26").className == "red-location" ? "green-location" : document.getElementById("26").className;
+            document.getElementById("27").className = document.getElementById("27").className == "red-location" ? "green-location" : document.getElementById("27").className;
+            document.getElementById("31").className = document.getElementById("31").className == "red-location" ? "green-location" : document.getElementById("31").className;
+            document.getElementById("32").className = document.getElementById("32").className == "red-location" ? "green-location" : document.getElementById("32").className;
+            document.getElementById("33").className = document.getElementById("33").className == "red-location" ? "green-location" : document.getElementById("33").className;
+            document.getElementById("34").className = document.getElementById("34").className == "red-location" ? "green-location" : document.getElementById("34").className;
+            document.getElementById("35").className = document.getElementById("35").className == "red-location" ? "green-location" : document.getElementById("35").className;
+            document.getElementById("37").className = document.getElementById("37").className == "red-location" ? "green-location" : document.getElementById("37").className;
+            document.getElementById("38").className = document.getElementById("38").className == "red-location" ? "green-location" : document.getElementById("38").className;
+            document.getElementById("39").className = document.getElementById("39").className == "red-location" ? "green-location" : document.getElementById("39").className;
+            document.getElementById("41").className = document.getElementById("41").className == "red-location" ? "green-location" : document.getElementById("41").className;
+            document.getElementById("42").className = document.getElementById("42").className == "red-location" ? "green-location" : document.getElementById("42").className;
+            document.getElementById("43").className = document.getElementById("43").className == "red-location" ? "green-location" : document.getElementById("43").className;
+            document.getElementById("46").className = document.getElementById("46").className == "red-location" ? "green-location" : document.getElementById("46").className;
+            document.getElementById("47").className = document.getElementById("47").className == "red-location" ? "green-location" : document.getElementById("47").className;
+            shopHints(6);
+        } else if (soKeys >= 15) {
+            document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
+            document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
+            document.getElementById("3").className = document.getElementById("3").className == "red-location" ? "green-location" : document.getElementById("3").className;
+            document.getElementById("4").className = document.getElementById("4").className == "red-location" ? "green-location" : document.getElementById("4").className;
+            document.getElementById("5").className = document.getElementById("5").className == "red-location" ? "green-location" : document.getElementById("5").className;
+            document.getElementById("6").className = document.getElementById("6").className == "red-location" ? "green-location" : document.getElementById("6").className;
+            document.getElementById("7").className = document.getElementById("7").className == "red-location" ? "green-location" : document.getElementById("7").className;
+            document.getElementById("8").className = document.getElementById("8").className == "red-location" ? "green-location" : document.getElementById("8").className;
+            document.getElementById("9").className = document.getElementById("9").className == "red-location" ? "green-location" : document.getElementById("9").className;
+            document.getElementById("10").className = document.getElementById("10").className == "red-location" ? "green-location" : document.getElementById("10").className;
+            document.getElementById("11").className = document.getElementById("11").className == "red-location" ? "green-location" : document.getElementById("11").className;
+            document.getElementById("12").className = document.getElementById("12").className == "red-location" ? "green-location" : document.getElementById("12").className;
+            document.getElementById("19").className = document.getElementById("19").className == "red-location" ? "green-location" : document.getElementById("19").className;
+            document.getElementById("20").className = document.getElementById("20").className == "red-location" ? "green-location" : document.getElementById("20").className;
+            document.getElementById("24").className = document.getElementById("24").className == "red-location" ? "green-location" : document.getElementById("24").className;
+            document.getElementById("25").className = document.getElementById("25").className == "red-location" ? "green-location" : document.getElementById("25").className;
+            document.getElementById("26").className = document.getElementById("26").className == "red-location" ? "green-location" : document.getElementById("26").className;
+            document.getElementById("27").className = document.getElementById("27").className == "red-location" ? "green-location" : document.getElementById("27").className;
+            document.getElementById("31").className = document.getElementById("31").className == "red-location" ? "green-location" : document.getElementById("31").className;
+            document.getElementById("32").className = document.getElementById("32").className == "red-location" ? "green-location" : document.getElementById("32").className;
+            document.getElementById("34").className = document.getElementById("34").className == "red-location" ? "green-location" : document.getElementById("34").className;
+            document.getElementById("35").className = document.getElementById("35").className == "red-location" ? "green-location" : document.getElementById("35").className;
+            document.getElementById("37").className = document.getElementById("37").className == "red-location" ? "green-location" : document.getElementById("37").className;
+            document.getElementById("41").className = document.getElementById("41").className == "red-location" ? "green-location" : document.getElementById("41").className;
+            document.getElementById("42").className = document.getElementById("42").className == "red-location" ? "green-location" : document.getElementById("42").className;
+            document.getElementById("43").className = document.getElementById("43").className == "red-location" ? "green-location" : document.getElementById("43").className;
+            document.getElementById("46").className = document.getElementById("46").className == "red-location" ? "green-location" : document.getElementById("46").className;
+            document.getElementById("47").className = document.getElementById("47").className == "red-location" ? "green-location" : document.getElementById("47").className;
+            shopHints(5);
+        } else if (soKeys >= 12) {
+            document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
+            document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
+            document.getElementById("3").className = document.getElementById("3").className == "red-location" ? "green-location" : document.getElementById("3").className;
+            document.getElementById("4").className = document.getElementById("4").className == "red-location" ? "green-location" : document.getElementById("4").className;
+            document.getElementById("5").className = document.getElementById("5").className == "red-location" ? "green-location" : document.getElementById("5").className;
+            document.getElementById("6").className = document.getElementById("6").className == "red-location" ? "green-location" : document.getElementById("6").className;
+            document.getElementById("7").className = document.getElementById("7").className == "red-location" ? "green-location" : document.getElementById("7").className;
+            document.getElementById("8").className = document.getElementById("8").className == "red-location" ? "green-location" : document.getElementById("8").className;
+            document.getElementById("9").className = document.getElementById("9").className == "red-location" ? "green-location" : document.getElementById("9").className;
+            document.getElementById("10").className = document.getElementById("10").className == "red-location" ? "green-location" : document.getElementById("10").className;
+            document.getElementById("11").className = document.getElementById("11").className == "red-location" ? "green-location" : document.getElementById("11").className;
+            document.getElementById("12").className = document.getElementById("12").className == "red-location" ? "green-location" : document.getElementById("12").className;
+            document.getElementById("19").className = document.getElementById("19").className == "red-location" ? "green-location" : document.getElementById("19").className;
+            document.getElementById("24").className = document.getElementById("24").className == "red-location" ? "green-location" : document.getElementById("24").className;
+            document.getElementById("25").className = document.getElementById("25").className == "red-location" ? "green-location" : document.getElementById("25").className;
+            document.getElementById("26").className = document.getElementById("26").className == "red-location" ? "green-location" : document.getElementById("26").className;
+            document.getElementById("27").className = document.getElementById("27").className == "red-location" ? "green-location" : document.getElementById("27").className;
+            document.getElementById("31").className = document.getElementById("31").className == "red-location" ? "green-location" : document.getElementById("31").className;
+            document.getElementById("32").className = document.getElementById("32").className == "red-location" ? "green-location" : document.getElementById("32").className;
+            document.getElementById("34").className = document.getElementById("34").className == "red-location" ? "green-location" : document.getElementById("34").className;
+            document.getElementById("35").className = document.getElementById("35").className == "red-location" ? "green-location" : document.getElementById("35").className;
+            document.getElementById("37").className = document.getElementById("37").className == "red-location" ? "green-location" : document.getElementById("37").className;
+            document.getElementById("41").className = document.getElementById("41").className == "red-location" ? "green-location" : document.getElementById("41").className;
+            document.getElementById("42").className = document.getElementById("42").className == "red-location" ? "green-location" : document.getElementById("42").className;
+            document.getElementById("43").className = document.getElementById("43").className == "red-location" ? "green-location" : document.getElementById("43").className;
+            document.getElementById("46").className = document.getElementById("46").className == "red-location" ? "green-location" : document.getElementById("46").className;
+            shopHints(4);
+        } else if (soKeys >= 9) {
+            document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
+            document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
+            document.getElementById("3").className = document.getElementById("3").className == "red-location" ? "green-location" : document.getElementById("3").className;
+            document.getElementById("4").className = document.getElementById("4").className == "red-location" ? "green-location" : document.getElementById("4").className;
+            document.getElementById("5").className = document.getElementById("5").className == "red-location" ? "green-location" : document.getElementById("5").className;
+            document.getElementById("6").className = document.getElementById("6").className == "red-location" ? "green-location" : document.getElementById("6").className;
+            document.getElementById("7").className = document.getElementById("7").className == "red-location" ? "green-location" : document.getElementById("7").className;
+            document.getElementById("8").className = document.getElementById("8").className == "red-location" ? "green-location" : document.getElementById("8").className;
+            document.getElementById("19").className = document.getElementById("19").className == "red-location" ? "green-location" : document.getElementById("19").className;
+            document.getElementById("24").className = document.getElementById("24").className == "red-location" ? "green-location" : document.getElementById("24").className;
+            document.getElementById("25").className = document.getElementById("25").className == "red-location" ? "green-location" : document.getElementById("25").className;
+            document.getElementById("32").className = document.getElementById("32").className == "red-location" ? "green-location" : document.getElementById("32").className;
+            document.getElementById("35").className = document.getElementById("35").className == "red-location" ? "green-location" : document.getElementById("35").className;
+            document.getElementById("41").className = document.getElementById("41").className == "red-location" ? "green-location" : document.getElementById("41").className;
+            document.getElementById("42").className = document.getElementById("42").className == "red-location" ? "green-location" : document.getElementById("42").className;
+            document.getElementById("43").className = document.getElementById("43").className == "red-location" ? "green-location" : document.getElementById("43").className;
+            document.getElementById("46").className = document.getElementById("46").className == "red-location" ? "green-location" : document.getElementById("46").className;
+            shopHints(3);
+        } else if (soKeys >= 6) {
+            document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
+            document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
+            document.getElementById("3").className = document.getElementById("3").className == "red-location" ? "green-location" : document.getElementById("3").className;
+            document.getElementById("4").className = document.getElementById("4").className == "red-location" ? "green-location" : document.getElementById("4").className;
+            document.getElementById("5").className = document.getElementById("5").className == "red-location" ? "green-location" : document.getElementById("5").className;
+            document.getElementById("6").className = document.getElementById("6").className == "red-location" ? "green-location" : document.getElementById("6").className;
+            document.getElementById("7").className = document.getElementById("7").className == "red-location" ? "green-location" : document.getElementById("7").className;
+            document.getElementById("8").className = document.getElementById("8").className == "red-location" ? "green-location" : document.getElementById("8").className;
+            document.getElementById("24").className = document.getElementById("24").className == "red-location" ? "green-location" : document.getElementById("24").className;
+            document.getElementById("25").className = document.getElementById("25").className == "red-location" ? "green-location" : document.getElementById("25").className;
+            document.getElementById("32").className = document.getElementById("32").className == "red-location" ? "green-location" : document.getElementById("32").className;
+            document.getElementById("35").className = document.getElementById("35").className == "red-location" ? "green-location" : document.getElementById("35").className;
+            document.getElementById("41").className = document.getElementById("41").className == "red-location" ? "green-location" : document.getElementById("41").className;
+            document.getElementById("42").className = document.getElementById("42").className == "red-location" ? "green-location" : document.getElementById("42").className;
+            shopHints(2);
+        } else if (soKeys >= 3) {
+            document.getElementById("1").className = document.getElementById("1").className == "red-location" ? "green-location" : document.getElementById("1").className;
+            document.getElementById("2").className = document.getElementById("2").className == "red-location" ? "green-location" : document.getElementById("2").className;
+            document.getElementById("3").className = document.getElementById("3").className == "red-location" ? "green-location" : document.getElementById("3").className;
+            document.getElementById("4").className = document.getElementById("4").className == "red-location" ? "green-location" : document.getElementById("4").className;
+            document.getElementById("25").className = document.getElementById("25").className == "red-location" ? "green-location" : document.getElementById("25").className;
+            document.getElementById("32").className = document.getElementById("32").className == "red-location" ? "green-location" : document.getElementById("32").className;
+            document.getElementById("41").className = document.getElementById("41").className == "red-location" ? "green-location" : document.getElementById("41").className;
+            document.getElementById("42").className = document.getElementById("42").className == "red-location" ? "green-location" : document.getElementById("42").className;
+            shopHints(1);
+        }
+    } else if (type == "palette") {
+        if (soPalettes >= 11) {
+            document.getElementById("210").className = document.getElementById("210").className == "red-location" ? "green-location" : document.getElementById("210").className;
+            document.getElementById("220").className = document.getElementById("220").className == "red-location" ? "green-location" : document.getElementById("220").className;
+            document.getElementById("230").className = document.getElementById("230").className == "red-location" ? "green-location" : document.getElementById("230").className;
+            document.getElementById("310").className = document.getElementById("310").className == "red-location" ? "green-location" : document.getElementById("310").className;
+            document.getElementById("320").className = document.getElementById("320").className == "red-location" ? "green-location" : document.getElementById("320").className;
+            document.getElementById("330").className = document.getElementById("330").className == "red-location" ? "green-location" : document.getElementById("330").className;
+            document.getElementById("410").className = document.getElementById("410").className == "red-location" ? "green-location" : document.getElementById("410").className;
+            document.getElementById("420").className = document.getElementById("420").className == "red-location" ? "green-location" : document.getElementById("420").className;
+            document.getElementById("430").className = document.getElementById("430").className == "red-location" ? "green-location" : document.getElementById("430").className;
+            document.getElementById("510").className = document.getElementById("510").className == "red-location" ? "green-location" : document.getElementById("510").className;
+            document.getElementById("520").className = document.getElementById("520").className == "red-location" ? "green-location" : document.getElementById("520").className;
+            document.getElementById("530").className = document.getElementById("530").className == "red-location" ? "green-location" : document.getElementById("530").className;
+            document.getElementById("610").className = document.getElementById("610").className == "red-location" ? "green-location" : document.getElementById("610").className;
+            document.getElementById("620").className = document.getElementById("620").className == "red-location" ? "green-location" : document.getElementById("620").className;
+            document.getElementById("630").className = document.getElementById("630").className == "red-location" ? "green-location" : document.getElementById("630").className;
+            document.getElementById("710").className = document.getElementById("710").className == "red-location" ? "green-location" : document.getElementById("710").className;
+            document.getElementById("720").className = document.getElementById("720").className == "red-location" ? "green-location" : document.getElementById("720").className;
+            document.getElementById("730").className = document.getElementById("730").className == "red-location" ? "green-location" : document.getElementById("730").className;
+            document.getElementById("810").className = document.getElementById("810").className == "red-location" ? "green-location" : document.getElementById("810").className;
+            document.getElementById("820").className = document.getElementById("820").className == "red-location" ? "green-location" : document.getElementById("820").className;
+            document.getElementById("830").className = document.getElementById("830").className == "red-location" ? "green-location" : document.getElementById("830").className;
+            document.getElementById("910").className = document.getElementById("910").className == "red-location" ? "green-location" : document.getElementById("910").className;
+            document.getElementById("920").className = document.getElementById("920").className == "red-location" ? "green-location" : document.getElementById("920").className;
+            document.getElementById("930").className = document.getElementById("930").className == "red-location" ? "green-location" : document.getElementById("930").className;
+            document.getElementById("1010").className = document.getElementById("1010").className == "red-location" ? "green-location" : document.getElementById("1010").className;
+            document.getElementById("1020").className = document.getElementById("1020").className == "red-location" ? "green-location" : document.getElementById("1020").className;
+            document.getElementById("1030").className = document.getElementById("1030").className == "red-location" ? "green-location" : document.getElementById("1030").className;
+            document.getElementById("1110").className = document.getElementById("1110").className == "red-location" ? "green-location" : document.getElementById("1110").className;
+            document.getElementById("1120").className = document.getElementById("1120").className == "red-location" ? "green-location" : document.getElementById("1120").className;
+            document.getElementById("1130").className = document.getElementById("1130").className == "red-location" ? "green-location" : document.getElementById("1130").className;
+            document.getElementById("1210").className = document.getElementById("1210").className == "red-location" ? "green-location" : document.getElementById("1210").className;
+            document.getElementById("1220").className = document.getElementById("1220").className == "red-location" ? "green-location" : document.getElementById("1220").className;
+            document.getElementById("1230").className = document.getElementById("1230").className == "red-location" ? "green-location" : document.getElementById("1230").className;
+        } else if (soPalettes >= 10) {
+            document.getElementById("210").className = document.getElementById("210").className == "red-location" ? "green-location" : document.getElementById("210").className;
+            document.getElementById("220").className = document.getElementById("220").className == "red-location" ? "green-location" : document.getElementById("220").className;
+            document.getElementById("230").className = document.getElementById("230").className == "red-location" ? "green-location" : document.getElementById("230").className;
+            document.getElementById("310").className = document.getElementById("310").className == "red-location" ? "green-location" : document.getElementById("310").className;
+            document.getElementById("320").className = document.getElementById("320").className == "red-location" ? "green-location" : document.getElementById("320").className;
+            document.getElementById("330").className = document.getElementById("330").className == "red-location" ? "green-location" : document.getElementById("330").className;
+            document.getElementById("410").className = document.getElementById("410").className == "red-location" ? "green-location" : document.getElementById("410").className;
+            document.getElementById("420").className = document.getElementById("420").className == "red-location" ? "green-location" : document.getElementById("420").className;
+            document.getElementById("430").className = document.getElementById("430").className == "red-location" ? "green-location" : document.getElementById("430").className;
+            document.getElementById("510").className = document.getElementById("510").className == "red-location" ? "green-location" : document.getElementById("510").className;
+            document.getElementById("520").className = document.getElementById("520").className == "red-location" ? "green-location" : document.getElementById("520").className;
+            document.getElementById("530").className = document.getElementById("530").className == "red-location" ? "green-location" : document.getElementById("530").className;
+            document.getElementById("610").className = document.getElementById("610").className == "red-location" ? "green-location" : document.getElementById("610").className;
+            document.getElementById("620").className = document.getElementById("620").className == "red-location" ? "green-location" : document.getElementById("620").className;
+            document.getElementById("630").className = document.getElementById("630").className == "red-location" ? "green-location" : document.getElementById("630").className;
+            document.getElementById("710").className = document.getElementById("710").className == "red-location" ? "green-location" : document.getElementById("710").className;
+            document.getElementById("720").className = document.getElementById("720").className == "red-location" ? "green-location" : document.getElementById("720").className;
+            document.getElementById("730").className = document.getElementById("730").className == "red-location" ? "green-location" : document.getElementById("730").className;
+            document.getElementById("810").className = document.getElementById("810").className == "red-location" ? "green-location" : document.getElementById("810").className;
+            document.getElementById("820").className = document.getElementById("820").className == "red-location" ? "green-location" : document.getElementById("820").className;
+            document.getElementById("830").className = document.getElementById("830").className == "red-location" ? "green-location" : document.getElementById("830").className;
+            document.getElementById("910").className = document.getElementById("910").className == "red-location" ? "green-location" : document.getElementById("910").className;
+            document.getElementById("920").className = document.getElementById("920").className == "red-location" ? "green-location" : document.getElementById("920").className;
+            document.getElementById("930").className = document.getElementById("930").className == "red-location" ? "green-location" : document.getElementById("930").className;
+            document.getElementById("1010").className = document.getElementById("1010").className == "red-location" ? "green-location" : document.getElementById("1010").className;
+            document.getElementById("1020").className = document.getElementById("1020").className == "red-location" ? "green-location" : document.getElementById("1020").className;
+            document.getElementById("1030").className = document.getElementById("1030").className == "red-location" ? "green-location" : document.getElementById("1030").className;
+            document.getElementById("1110").className = document.getElementById("1110").className == "red-location" ? "green-location" : document.getElementById("1110").className;
+            document.getElementById("1120").className = document.getElementById("1120").className == "red-location" ? "green-location" : document.getElementById("1120").className;
+            document.getElementById("1130").className = document.getElementById("1130").className == "red-location" ? "green-location" : document.getElementById("1130").className;
+        } else if (soPalettes >= 9) {
+            document.getElementById("210").className = document.getElementById("210").className == "red-location" ? "green-location" : document.getElementById("210").className;
+            document.getElementById("220").className = document.getElementById("220").className == "red-location" ? "green-location" : document.getElementById("220").className;
+            document.getElementById("230").className = document.getElementById("230").className == "red-location" ? "green-location" : document.getElementById("230").className;
+            document.getElementById("310").className = document.getElementById("310").className == "red-location" ? "green-location" : document.getElementById("310").className;
+            document.getElementById("320").className = document.getElementById("320").className == "red-location" ? "green-location" : document.getElementById("320").className;
+            document.getElementById("330").className = document.getElementById("330").className == "red-location" ? "green-location" : document.getElementById("330").className;
+            document.getElementById("410").className = document.getElementById("410").className == "red-location" ? "green-location" : document.getElementById("410").className;
+            document.getElementById("420").className = document.getElementById("420").className == "red-location" ? "green-location" : document.getElementById("420").className;
+            document.getElementById("430").className = document.getElementById("430").className == "red-location" ? "green-location" : document.getElementById("430").className;
+            document.getElementById("510").className = document.getElementById("510").className == "red-location" ? "green-location" : document.getElementById("510").className;
+            document.getElementById("520").className = document.getElementById("520").className == "red-location" ? "green-location" : document.getElementById("520").className;
+            document.getElementById("530").className = document.getElementById("530").className == "red-location" ? "green-location" : document.getElementById("530").className;
+            document.getElementById("610").className = document.getElementById("610").className == "red-location" ? "green-location" : document.getElementById("610").className;
+            document.getElementById("620").className = document.getElementById("620").className == "red-location" ? "green-location" : document.getElementById("620").className;
+            document.getElementById("630").className = document.getElementById("630").className == "red-location" ? "green-location" : document.getElementById("630").className;
+            document.getElementById("710").className = document.getElementById("710").className == "red-location" ? "green-location" : document.getElementById("710").className;
+            document.getElementById("720").className = document.getElementById("720").className == "red-location" ? "green-location" : document.getElementById("720").className;
+            document.getElementById("730").className = document.getElementById("730").className == "red-location" ? "green-location" : document.getElementById("730").className;
+            document.getElementById("810").className = document.getElementById("810").className == "red-location" ? "green-location" : document.getElementById("810").className;
+            document.getElementById("820").className = document.getElementById("820").className == "red-location" ? "green-location" : document.getElementById("820").className;
+            document.getElementById("830").className = document.getElementById("830").className == "red-location" ? "green-location" : document.getElementById("830").className;
+            document.getElementById("910").className = document.getElementById("910").className == "red-location" ? "green-location" : document.getElementById("910").className;
+            document.getElementById("920").className = document.getElementById("920").className == "red-location" ? "green-location" : document.getElementById("920").className;
+            document.getElementById("930").className = document.getElementById("930").className == "red-location" ? "green-location" : document.getElementById("930").className;
+            document.getElementById("1010").className = document.getElementById("1010").className == "red-location" ? "green-location" : document.getElementById("1010").className;
+            document.getElementById("1020").className = document.getElementById("1020").className == "red-location" ? "green-location" : document.getElementById("1020").className;
+            document.getElementById("1030").className = document.getElementById("1030").className == "red-location" ? "green-location" : document.getElementById("1030").className;
+        } else if (soPalettes >= 8) {
+            document.getElementById("210").className = document.getElementById("210").className == "red-location" ? "green-location" : document.getElementById("210").className;
+            document.getElementById("220").className = document.getElementById("220").className == "red-location" ? "green-location" : document.getElementById("220").className;
+            document.getElementById("230").className = document.getElementById("230").className == "red-location" ? "green-location" : document.getElementById("230").className;
+            document.getElementById("310").className = document.getElementById("310").className == "red-location" ? "green-location" : document.getElementById("310").className;
+            document.getElementById("320").className = document.getElementById("320").className == "red-location" ? "green-location" : document.getElementById("320").className;
+            document.getElementById("330").className = document.getElementById("330").className == "red-location" ? "green-location" : document.getElementById("330").className;
+            document.getElementById("410").className = document.getElementById("410").className == "red-location" ? "green-location" : document.getElementById("410").className;
+            document.getElementById("420").className = document.getElementById("420").className == "red-location" ? "green-location" : document.getElementById("420").className;
+            document.getElementById("430").className = document.getElementById("430").className == "red-location" ? "green-location" : document.getElementById("430").className;
+            document.getElementById("510").className = document.getElementById("510").className == "red-location" ? "green-location" : document.getElementById("510").className;
+            document.getElementById("520").className = document.getElementById("520").className == "red-location" ? "green-location" : document.getElementById("520").className;
+            document.getElementById("530").className = document.getElementById("530").className == "red-location" ? "green-location" : document.getElementById("530").className;
+            document.getElementById("610").className = document.getElementById("610").className == "red-location" ? "green-location" : document.getElementById("610").className;
+            document.getElementById("620").className = document.getElementById("620").className == "red-location" ? "green-location" : document.getElementById("620").className;
+            document.getElementById("630").className = document.getElementById("630").className == "red-location" ? "green-location" : document.getElementById("630").className;
+            document.getElementById("710").className = document.getElementById("710").className == "red-location" ? "green-location" : document.getElementById("710").className;
+            document.getElementById("720").className = document.getElementById("720").className == "red-location" ? "green-location" : document.getElementById("720").className;
+            document.getElementById("730").className = document.getElementById("730").className == "red-location" ? "green-location" : document.getElementById("730").className;
+            document.getElementById("810").className = document.getElementById("810").className == "red-location" ? "green-location" : document.getElementById("810").className;
+            document.getElementById("820").className = document.getElementById("820").className == "red-location" ? "green-location" : document.getElementById("820").className;
+            document.getElementById("830").className = document.getElementById("830").className == "red-location" ? "green-location" : document.getElementById("830").className;
+            document.getElementById("910").className = document.getElementById("910").className == "red-location" ? "green-location" : document.getElementById("910").className;
+            document.getElementById("920").className = document.getElementById("920").className == "red-location" ? "green-location" : document.getElementById("920").className;
+            document.getElementById("930").className = document.getElementById("930").className == "red-location" ? "green-location" : document.getElementById("930").className;
+        } else if (soPalettes >= 7) {
+            document.getElementById("210").className = document.getElementById("210").className == "red-location" ? "green-location" : document.getElementById("210").className;
+            document.getElementById("220").className = document.getElementById("220").className == "red-location" ? "green-location" : document.getElementById("220").className;
+            document.getElementById("230").className = document.getElementById("230").className == "red-location" ? "green-location" : document.getElementById("230").className;
+            document.getElementById("310").className = document.getElementById("310").className == "red-location" ? "green-location" : document.getElementById("310").className;
+            document.getElementById("320").className = document.getElementById("320").className == "red-location" ? "green-location" : document.getElementById("320").className;
+            document.getElementById("330").className = document.getElementById("330").className == "red-location" ? "green-location" : document.getElementById("330").className;
+            document.getElementById("410").className = document.getElementById("410").className == "red-location" ? "green-location" : document.getElementById("410").className;
+            document.getElementById("420").className = document.getElementById("420").className == "red-location" ? "green-location" : document.getElementById("420").className;
+            document.getElementById("430").className = document.getElementById("430").className == "red-location" ? "green-location" : document.getElementById("430").className;
+            document.getElementById("510").className = document.getElementById("510").className == "red-location" ? "green-location" : document.getElementById("510").className;
+            document.getElementById("520").className = document.getElementById("520").className == "red-location" ? "green-location" : document.getElementById("520").className;
+            document.getElementById("530").className = document.getElementById("530").className == "red-location" ? "green-location" : document.getElementById("530").className;
+            document.getElementById("610").className = document.getElementById("610").className == "red-location" ? "green-location" : document.getElementById("610").className;
+            document.getElementById("620").className = document.getElementById("620").className == "red-location" ? "green-location" : document.getElementById("620").className;
+            document.getElementById("630").className = document.getElementById("630").className == "red-location" ? "green-location" : document.getElementById("630").className;
+            document.getElementById("710").className = document.getElementById("710").className == "red-location" ? "green-location" : document.getElementById("710").className;
+            document.getElementById("720").className = document.getElementById("720").className == "red-location" ? "green-location" : document.getElementById("720").className;
+            document.getElementById("730").className = document.getElementById("730").className == "red-location" ? "green-location" : document.getElementById("730").className;
+            document.getElementById("810").className = document.getElementById("810").className == "red-location" ? "green-location" : document.getElementById("810").className;
+            document.getElementById("820").className = document.getElementById("820").className == "red-location" ? "green-location" : document.getElementById("820").className;
+            document.getElementById("830").className = document.getElementById("830").className == "red-location" ? "green-location" : document.getElementById("830").className;
+        } else if (soPalettes >= 6) {
+            document.getElementById("210").className = document.getElementById("210").className == "red-location" ? "green-location" : document.getElementById("210").className;
+            document.getElementById("220").className = document.getElementById("220").className == "red-location" ? "green-location" : document.getElementById("220").className;
+            document.getElementById("230").className = document.getElementById("230").className == "red-location" ? "green-location" : document.getElementById("230").className;
+            document.getElementById("310").className = document.getElementById("310").className == "red-location" ? "green-location" : document.getElementById("310").className;
+            document.getElementById("320").className = document.getElementById("320").className == "red-location" ? "green-location" : document.getElementById("320").className;
+            document.getElementById("330").className = document.getElementById("330").className == "red-location" ? "green-location" : document.getElementById("330").className;
+            document.getElementById("410").className = document.getElementById("410").className == "red-location" ? "green-location" : document.getElementById("410").className;
+            document.getElementById("420").className = document.getElementById("420").className == "red-location" ? "green-location" : document.getElementById("420").className;
+            document.getElementById("430").className = document.getElementById("430").className == "red-location" ? "green-location" : document.getElementById("430").className;
+            document.getElementById("510").className = document.getElementById("510").className == "red-location" ? "green-location" : document.getElementById("510").className;
+            document.getElementById("520").className = document.getElementById("520").className == "red-location" ? "green-location" : document.getElementById("520").className;
+            document.getElementById("530").className = document.getElementById("530").className == "red-location" ? "green-location" : document.getElementById("530").className;
+            document.getElementById("610").className = document.getElementById("610").className == "red-location" ? "green-location" : document.getElementById("610").className;
+            document.getElementById("620").className = document.getElementById("620").className == "red-location" ? "green-location" : document.getElementById("620").className;
+            document.getElementById("630").className = document.getElementById("630").className == "red-location" ? "green-location" : document.getElementById("630").className;
+            document.getElementById("710").className = document.getElementById("710").className == "red-location" ? "green-location" : document.getElementById("710").className;
+            document.getElementById("720").className = document.getElementById("720").className == "red-location" ? "green-location" : document.getElementById("720").className;
+            document.getElementById("730").className = document.getElementById("730").className == "red-location" ? "green-location" : document.getElementById("730").className;
+        } else if (soPalettes >= 5) {
+            document.getElementById("210").className = document.getElementById("210").className == "red-location" ? "green-location" : document.getElementById("210").className;
+            document.getElementById("220").className = document.getElementById("220").className == "red-location" ? "green-location" : document.getElementById("220").className;
+            document.getElementById("230").className = document.getElementById("230").className == "red-location" ? "green-location" : document.getElementById("230").className;
+            document.getElementById("310").className = document.getElementById("310").className == "red-location" ? "green-location" : document.getElementById("310").className;
+            document.getElementById("320").className = document.getElementById("320").className == "red-location" ? "green-location" : document.getElementById("320").className;
+            document.getElementById("330").className = document.getElementById("330").className == "red-location" ? "green-location" : document.getElementById("330").className;
+            document.getElementById("410").className = document.getElementById("410").className == "red-location" ? "green-location" : document.getElementById("410").className;
+            document.getElementById("420").className = document.getElementById("420").className == "red-location" ? "green-location" : document.getElementById("420").className;
+            document.getElementById("430").className = document.getElementById("430").className == "red-location" ? "green-location" : document.getElementById("430").className;
+            document.getElementById("510").className = document.getElementById("510").className == "red-location" ? "green-location" : document.getElementById("510").className;
+            document.getElementById("520").className = document.getElementById("520").className == "red-location" ? "green-location" : document.getElementById("520").className;
+            document.getElementById("530").className = document.getElementById("530").className == "red-location" ? "green-location" : document.getElementById("530").className;
+            document.getElementById("610").className = document.getElementById("610").className == "red-location" ? "green-location" : document.getElementById("610").className;
+            document.getElementById("620").className = document.getElementById("620").className == "red-location" ? "green-location" : document.getElementById("620").className;
+            document.getElementById("630").className = document.getElementById("630").className == "red-location" ? "green-location" : document.getElementById("630").className;
+        } else if (soPalettes >= 4) {
+            document.getElementById("210").className = document.getElementById("210").className == "red-location" ? "green-location" : document.getElementById("210").className;
+            document.getElementById("220").className = document.getElementById("220").className == "red-location" ? "green-location" : document.getElementById("220").className;
+            document.getElementById("230").className = document.getElementById("230").className == "red-location" ? "green-location" : document.getElementById("230").className;
+            document.getElementById("310").className = document.getElementById("310").className == "red-location" ? "green-location" : document.getElementById("310").className;
+            document.getElementById("320").className = document.getElementById("320").className == "red-location" ? "green-location" : document.getElementById("320").className;
+            document.getElementById("330").className = document.getElementById("330").className == "red-location" ? "green-location" : document.getElementById("330").className;
+            document.getElementById("410").className = document.getElementById("410").className == "red-location" ? "green-location" : document.getElementById("410").className;
+            document.getElementById("420").className = document.getElementById("420").className == "red-location" ? "green-location" : document.getElementById("420").className;
+            document.getElementById("430").className = document.getElementById("430").className == "red-location" ? "green-location" : document.getElementById("430").className;
+            document.getElementById("510").className = document.getElementById("510").className == "red-location" ? "green-location" : document.getElementById("510").className;
+            document.getElementById("520").className = document.getElementById("520").className == "red-location" ? "green-location" : document.getElementById("520").className;
+            document.getElementById("530").className = document.getElementById("530").className == "red-location" ? "green-location" : document.getElementById("530").className;
+        } else if (soPalettes >= 3) {
+            document.getElementById("210").className = document.getElementById("210").className == "red-location" ? "green-location" : document.getElementById("210").className;
+            document.getElementById("220").className = document.getElementById("220").className == "red-location" ? "green-location" : document.getElementById("220").className;
+            document.getElementById("230").className = document.getElementById("230").className == "red-location" ? "green-location" : document.getElementById("230").className;
+            document.getElementById("310").className = document.getElementById("310").className == "red-location" ? "green-location" : document.getElementById("310").className;
+            document.getElementById("320").className = document.getElementById("320").className == "red-location" ? "green-location" : document.getElementById("320").className;
+            document.getElementById("330").className = document.getElementById("330").className == "red-location" ? "green-location" : document.getElementById("330").className;
+            document.getElementById("410").className = document.getElementById("410").className == "red-location" ? "green-location" : document.getElementById("410").className;
+            document.getElementById("420").className = document.getElementById("420").className == "red-location" ? "green-location" : document.getElementById("420").className;
+            document.getElementById("430").className = document.getElementById("430").className == "red-location" ? "green-location" : document.getElementById("430").className;
+        } else if (soPalettes >= 2) {
+            document.getElementById("210").className = document.getElementById("210").className == "red-location" ? "green-location" : document.getElementById("210").className;
+            document.getElementById("220").className = document.getElementById("220").className == "red-location" ? "green-location" : document.getElementById("220").className;
+            document.getElementById("230").className = document.getElementById("230").className == "red-location" ? "green-location" : document.getElementById("230").className;
+            document.getElementById("310").className = document.getElementById("310").className == "red-location" ? "green-location" : document.getElementById("310").className;
+            document.getElementById("320").className = document.getElementById("320").className == "red-location" ? "green-location" : document.getElementById("320").className;
+            document.getElementById("330").className = document.getElementById("330").className == "red-location" ? "green-location" : document.getElementById("330").className;
+        } else if (soPalettes >= 1) {
+            document.getElementById("210").className = document.getElementById("210").className == "red-location" ? "green-location" : document.getElementById("210").className;
+            document.getElementById("220").className = document.getElementById("220").className == "red-location" ? "green-location" : document.getElementById("220").className;
+            document.getElementById("230").className = document.getElementById("230").className == "red-location" ? "green-location" : document.getElementById("230").className;
+        }
+    } else if (type == "soFiller") {
+        document.getElementById("retryTokens").textContent = soFiller[0];
+        document.getElementById("soStickTrap").textContent = soFiller[1];
+        document.getElementById("difficultyTrap").textContent = soFiller[2];
+        document.getElementById("invertedColorsTrap").textContent = soFiller[3];
     }
-
 }
-
+let hint1sent = false;
+let hint2sent = false;
+let hint3sent = false;
+let hint4sent = false;
+let hint5sent = false;
+let hint6sent = false;
+let hint7sent = false;
+let hint8sent = false;
+let hint9sent = false;
+let hint10sent = false;
+function shopHints(level) {
+    let sItems = -1;
+    switch(level){
+        case 1:
+            if (hint1sent) break;
+            sItems = [1,2,3,4,25,32,41,42];
+            hint1sent = true;
+            break;
+        case 2:
+            if (hint2sent) break;
+            sItems = [5,6,7,8,24,35];
+            hint2sent = true;
+            break;
+        case 3:
+            if (hint3sent) break;
+            sItems = [19,43,46];
+            hint3sent = true;
+            break;
+        case 4:
+            if (hint4sent) break;
+            sItems = [9,10,11,12,26,27,31,34,37];
+            hint4sent = true;
+            break;
+        case 5:
+            if (hint5sent) break;
+            sItems = [20,47];
+            hint5sent = true;
+            break;
+        case 6:
+            if (hint6sent) break;
+            sItems = [13,14,15,33,38,39];
+            hint6sent = true;
+            break;
+        case 7:
+            if (hint7sent) break;
+            sItems = [21,44];
+            hint7sent = true;
+            break;
+        case 8:
+            if (hint8sent) break;
+            sItems = [22,48];
+            hint8sent = true;
+            break;
+        case 9:
+            if (hint9sent) break;
+            sItems = [16,17,18,28,29,30];
+            hint9sent = true;
+            break;
+        case 10:
+            if (hint10sent) break;
+            sItems = [23,36,40,45,49];
+            hint10sent = true;
+            break;
+    }
+    if (sItems != -1) {
+        client.scout(sItems,2).then(function (result){
+            for (let i = 0; i < result.length; i++) {
+                const l = result[i];
+                document.getElementById(sItems[i]+"h").textContent = l.name;
+                console.log(l);
+            }
+        });
+    }
+}
 function loadSave() {
     const itemsList = items.received;
     const locationList = room.checkedLocations
@@ -2042,12 +2784,12 @@ function loadSave() {
     }
     }
     if (so) {
-        for (let i = 0; i < itemsList.length; i++) {
-            if (itemsList[i].locationGame != "Splatoon 3: Side Order") {
-                return;
+        for (let i = 0; i < locationList.length; i++) {
+            document.getElementById(locationList[i]).setAttribute("disabled", true);
+            document.getElementById(locationList[i]).className = "gray-location";
+            if ((locationList[i] - 100) > 0) {
+                soKeys++;
             }
-            const apID = itemsList[i].locationId;
-            document.getElementById(apID).className = "gray-location";
         }
     }
     if (so) {
@@ -2056,11 +2798,12 @@ function loadSave() {
                 return;
             }
             const apID = itemsList[i].id;
+            soReceiveItem(apID);
         }
     }
 }
 
-function rotmReceiveItem(type, id) {
+function rotmReceiveItem(type) {
     if (type == "mapAccess") {
         mapAccess[0]++;
         rotmDropdownUpdate("areas");
@@ -2076,6 +2819,118 @@ function rotmReceiveItem(type, id) {
     if (type == "afterAlternaAccess") {
         mapAccess[3]++;
         trackerUpdate("afterAlterna");
+    }
+}
+function soReceiveItem(id) {
+    switch (id) {
+        case 1 :
+            soPalettes ++;
+        break;
+        case 101 :
+            soFloorOptions[0]++;
+        break;
+        case 102 :
+            soFloorOptions[1]++;
+            break;
+        case 201 :
+            soFloorOptions[2]++;
+            break;
+        case 202 :
+            soFloorOptions[3]++;
+            break;
+        case 301 :
+            soFloorOptions[4]++;
+            break;
+        case 302 :
+            soFloorOptions[5]++;
+            break;
+        case 1001 :
+            soHacks[0]++;
+            break;
+        case 1002 :
+            soHacks[1]++;
+            break;
+        case 1003 :
+            soHacks[2]++;
+            break;
+        case 1004 :
+            soHacks[3]++;
+            break;
+        case 1005 :
+            soHacks[4]++;
+            break;
+        case 1006 :
+            soHacks[5]++;
+            break;
+        case 1007 :
+            soHacks[6]++;
+            break;
+        case 1008 :
+            soHacks[7]++;
+            break;
+        case 2001 :
+            soHacks[8]++;
+            break;
+        case 2002 :
+            soHacks[9]++;
+            break;
+        case 2003 :
+            soHacks[10]++;
+            break;
+        case 3001 :
+            soHacks[11]++;
+            break;
+        case 3002 :
+            soHacks[12]++;
+            break;
+        case 3003 :
+            soHacks[13]++;
+            break;
+        case 3004 :
+            soHacks[14]++;
+            break;
+        case 3005 :
+            soHacks[15]++;
+            break;
+        case 3006 :
+            soHacks[16]++;
+            break;
+        case 3007 :
+            soHacks[17]++;
+            break;
+        case 3008 :
+            soHacks[18]++;
+            break;
+        case 4001 :
+            soHacks[19]++;
+            break;
+        case 4002 :
+            soHacks[20]++;
+            break;
+        case 4003 :
+            soHacks[21]++;
+            break;
+        case 5001 :
+            soHacks[22]++;
+            break;
+        case 5002 :
+            soHacks[23]++;
+            break;
+        case 5003 :
+            soHacks[24]++;
+            break;
+        case 5004 :
+            soHacks[25]++;
+            break;
+        case 6001 :
+            soHacks[26]++;
+            break;
+        case 6002 :
+            soHacks[27]++;
+            break;
+        case 10001 :
+            soFiller[0]++;
+            break;
     }
 }
 function whereIsLucy(type) {

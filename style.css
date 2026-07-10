@@ -249,6 +249,7 @@ button:hover {
     padding: 15px;
     display: flex;
     flex-direction: column;
+    text-align: left;
     gap: 8px;
     scroll-behavior: smooth; /* Smooth scroll when new items are added */
 }
@@ -274,6 +275,10 @@ button:hover {
 .hash-unavailable {
     font-size: 14px;
     color: #ff0066;
+}
+.order-floor {
+    font-size: 14px;
+    color: #fffbc6;
 }
 .select-container-yuh {
     width: 100%;            /* Full width on smaller screens */
