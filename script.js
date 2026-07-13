@@ -792,6 +792,7 @@ items.on("itemsReceived", (content) => {
     if (connected && so) {
         for (let i = 0; i < content.length; i++) {
             if (content[i].locationGame != "Splatoon 3: Side Order") {
+                console.log(":(")
                 return;
             }
             const apID = content[i].locationId;
@@ -799,6 +800,7 @@ items.on("itemsReceived", (content) => {
         }
         for (let i = 0; i < content.length; i++) {
             if (content[i].game != "Splatoon 3: Side Order") {
+                console.log(">:(")
                 return;
             }
             const id = content[i].id;
@@ -2844,6 +2846,11 @@ function loadSave() {
             }
             const apID = itemsList[i].id;
             soReceiveItem(apID);
+            switch(apID){
+                case 10001 :
+                    soFiller[0]++;
+                    break;
+            }
         }
     }
 }
@@ -2869,7 +2876,7 @@ function rotmReceiveItem(type) {
 function soReceiveItem(id) {
     switch (id) {
         case 1 :
-            soPalettes ++;
+            soPalettes++;
         break;
         case 101 :
             soFloorOptions[0]++;
@@ -2972,9 +2979,6 @@ function soReceiveItem(id) {
             break;
         case 6002 :
             soHacks[27]++;
-            break;
-        case 10001 :
-            soFiller[0]++;
             break;
     }
 }
